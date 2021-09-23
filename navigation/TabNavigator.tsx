@@ -1,6 +1,7 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
+import { StyleSheet } from "react-native";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
@@ -12,6 +13,8 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
+        tabBarStyle: styles.container,
         tabBarShowLabel: false,
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
@@ -24,9 +27,10 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
+                style={styles.icons}
                 name="home-outline"
-                size={20}
-                color={focused ? "tomato" : "grey"}
+                size={45}
+                color={focused ? "red" : "#4A4453"}
               />
             );
           },
@@ -39,9 +43,10 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
+                style={styles.icons}
                 name="add-circle-outline"
-                size={20}
-                color={focused ? "tomato" : "grey"}
+                size={45}
+                color={focused ? "red" : "#4A4453"}
               />
             );
           },
@@ -54,9 +59,10 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
+                style={styles.icons}
                 name="search-outline"
-                size={20}
-                color={focused ? "tomato" : "grey"}
+                size={45}
+                color={focused ? "red" : "#4A4453"}
               />
             );
           },
@@ -69,9 +75,10 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
+                style={styles.icons}
                 name="person-circle-outline"
-                size={20}
-                color={focused ? "tomato" : "grey"}
+                size={45}
+                color={focused ? "red" : "#4A4453"}
               />
             );
           },
@@ -80,3 +87,17 @@ export default function TabNavigator() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    height: 90,
+    opacity: 0.5,
+    backgroundColor: "#AFA8BA",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icons: {
+    opacity: 1,
+  },
+});
