@@ -1,10 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
 
-export default function Header({ navigation }: any) {
+interface Props {
+  title: string,
+}
+
+export default function Header({ title }: Props) {
   return (
     <View style={styles.container}>
-        <Text style={styles.title}>Home</Text>
+        <Text style={styles.title}>{title}</Text>
     </View>
   );
 }

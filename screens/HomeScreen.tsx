@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text, StyleSheet, Button, ImageBackground, } from "react-native";
 import { StatusBar } from 'expo-status-bar'
 import Header from "../components/Header";
+// const logo = require('../assets/');
 
 // const BazzarImg = require('../assets/Bazaar-background.png');
 
@@ -13,13 +14,9 @@ export default function HomeScreen({ navigation }: any) {
     <View style={styles.container}>
       <StatusBar style="dark" />
       <ImageBackground source={background} style={styles.backgroundImg}>
-          <Header />
+        <Header title="Home" />
         <View style={styles.containerContent}>
-          <Text>This is the HomeScreen</Text>
-          {/* <Button
-            title="Go to Products"
-            onPress={() => navigation.navigate("Products")}
-          /> */}
+
         </View>
       </ImageBackground>
     </View>
