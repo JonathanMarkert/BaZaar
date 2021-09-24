@@ -1,15 +1,18 @@
 import React from "react";
+import { SafeAreaView, View, Text, StyleSheet, Button, ImageBackground, Image} from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import Header from "../components/Header";
 
-import { View, Text, StyleSheet, Button } from "react-native";
-
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>This is the HomeScreen</Text>
-      <Button
-        title="Go to Products"
-        onPress={() => navigation.navigate("Products")}
-      />
+      <StatusBar style="dark" />
+      <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
+        <Header title="Home" />
+        <View style={styles.containerContent}>
+          <Image source={require('../assets/logo.png')}/>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -18,7 +21,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
+  backgroundImg: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%'
+  },
+  containerContent: {
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+  }
 });
