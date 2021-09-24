@@ -6,6 +6,7 @@ import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
+import Theme from "../components/Theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,9 @@ export default function TabNavigator() {
               <IonIcons
                 name="home-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -45,7 +48,9 @@ export default function TabNavigator() {
               <IonIcons
                 name="add-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -60,7 +65,9 @@ export default function TabNavigator() {
               <IonIcons
                 name="search-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -75,7 +82,9 @@ export default function TabNavigator() {
               <IonIcons
                 name="person-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
