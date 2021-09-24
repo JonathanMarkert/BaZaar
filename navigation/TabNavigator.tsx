@@ -6,6 +6,7 @@ import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
+import MyTheme from "../components/Theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,7 @@ export default function TabNavigator() {
                 style={styles.icons}
                 name="home-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={focused ? MyTheme.colors.bazaarRed: MyTheme.colors.secondary}
               />
             );
           },
@@ -46,7 +47,7 @@ export default function TabNavigator() {
                 style={styles.icons}
                 name="add-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={focused ? MyTheme.colors.bazaarRed: MyTheme.colors.secondary}
               />
             );
           },
@@ -62,7 +63,7 @@ export default function TabNavigator() {
                 style={styles.icons}
                 name="search-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={focused ? MyTheme.colors.bazaarRed: MyTheme.colors.secondary}
               />
             );
           },
@@ -78,7 +79,7 @@ export default function TabNavigator() {
                 style={styles.icons}
                 name="person-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={focused ? MyTheme.colors.bazaarRed: MyTheme.colors.secondary}
               />
             );
           },
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: 90,
     opacity: 0.5,
-    backgroundColor: "#AFA8BA",
+    backgroundColor: MyTheme.colors.primary,
     alignItems: "center",
     justifyContent: "center",
   },
