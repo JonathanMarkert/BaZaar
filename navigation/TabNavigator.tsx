@@ -6,6 +6,7 @@ import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
+import Theme from "../components/Theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,6 +15,7 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
         tabBarActiveTintColor: "tomato",
@@ -27,10 +29,11 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                style={styles.icons}
                 name="home-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -43,10 +46,11 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                style={styles.icons}
                 name="add-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -59,10 +63,11 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                style={styles.icons}
                 name="search-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -75,10 +80,11 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                style={styles.icons}
                 name="person-circle-outline"
                 size={45}
-                color={focused ? "red" : "#4A4453"}
+                color={
+                  focused ? Theme.colors.bazaarRed : Theme.colors.secondary
+                }
               />
             );
           },
@@ -90,14 +96,14 @@ export default function TabNavigator() {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    height: 90,
-    opacity: 0.5,
-    backgroundColor: "#AFA8BA",
+    height: 80,
+    backgroundColor: "#AFA8BA70",
     alignItems: "center",
     justifyContent: "center",
-  },
-  icons: {
-    opacity: 1,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    elevation: 0,
   },
 });
