@@ -10,6 +10,7 @@ import {
   Modal,
 } from "react-native";
 import Header from "../components/Header";
+import Theme from "../components/Theme";
 
 export default function LoginScreen() {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function LoginScreen() {
               style={styles.button}
               onPress={() => setOpen(true)}
             >
-              <Text>Sign In</Text>
+              <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -68,11 +69,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   button: {
-    backgroundColor: "green",
-    width: 150,
-    height: 80,
+    width: 170,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: Theme.colors.bazaarBlue,
+    padding: 15,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
   },
   innerContainer: {
     flex: 1,
