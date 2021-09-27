@@ -8,14 +8,14 @@ export interface IProduct {
 }
 
 interface IContextValue {
-    listing: IProduct[];
+    listing: IProduct;
     dispatch: React.Dispatch<ProductAction>
 }
 
 const ProductContext = createContext<IContextValue>({} as any)
 
 const ProductProvider: FC = ({children}) => {
-    const [listing, dispatch] = useReducer(productReducer, []);
+    const [listing, dispatch] = useReducer(productReducer, {});
 
     return (
         <ProductContext.Provider
