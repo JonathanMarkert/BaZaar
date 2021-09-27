@@ -1,26 +1,27 @@
-import React, { useContext, createContext, FC, useReducer } from "react";
+import React, { useContext, createContext, useReducer, FC } from "react";
 import productReducer, { ProductAction } from "../reducers/ProductReducer";
 
 export interface IProduct {
     name: string;
     price: number;
     location: string;
+    userId: number;
 }
 
 interface IContextValue {
-    listing: IProduct;
+    products: IProduct[];
     dispatch: React.Dispatch<ProductAction>
 }
 
 const ProductContext = createContext<IContextValue>({} as any)
 
 const ProductProvider: FC = ({children}) => {
-    const [listing, dispatch] = useReducer(productReducer, {});
+    const [products, dispatch] = useReducer(productReducer, []);
 
     return (
         <ProductContext.Provider
         value= {{
-            listing,
+            products,
             dispatch
         }}
         >
