@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import Theme from "../components/Theme";
 
 interface Props {
   title: string,
@@ -17,8 +18,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     height: 90,
-    opacity: 0.7,
-    backgroundColor: "#AFA8BA",
+    backgroundColor: Theme.colors.primary70,
     marginBottom: "auto",
     alignItems: "center",
     justifyContent: "center",
@@ -34,5 +34,4 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: "bold",
   }
-
 });

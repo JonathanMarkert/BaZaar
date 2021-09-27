@@ -98,8 +98,7 @@ export default function TabNavigator() {
 const styles = StyleSheet.create({
   container: {
     height: 80,
-    // backgroundColor: "#AFA8BA70",
-    backgroundColor: "rgba(175, 168, 186, 0.95)",
+    backgroundColor: Theme.colors.primary95,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",

@@ -22,10 +22,7 @@ export default function DetailsScreen() {
       <StatusBar style="dark" />
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
         <Header title="Details" />
-        <View 
-          style={styles.containerContent} 
-          // contentContainerStyle={styles.scrollContanerContent}
-        >
+        <View style={styles.containerContent} >
           <View style={styles.imgContainer} >
             <Image 
               source={{uri: data.img}}
@@ -91,33 +88,6 @@ export default function DetailsScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
-              
-              {/* <View style={[styles.spaceBetween, styles.alignCenter, styles.margine]}>
-                <Text style={[styles.baseText, styles.boldText]}>
-                  Email: 
-                </Text>
-                <TouchableOpacity 
-                  style={styles.button} 
-                  onPress={() => Alert.alert('email button')}
-                >
-                  <Text style={[styles.baseText, styles.buttonText]} >
-                    {data.email}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.spaceBetween, styles.alignCenter, styles.margine]}>
-                <Text style={[styles.baseText, styles.boldText]}>
-                  Phone: 
-                </Text>
-                <TouchableOpacity 
-                  style={styles.button} 
-                  onPress={() => Alert.alert('phone button')}
-                >
-                  <Text style={[styles.baseText, styles.buttonText]} >
-                    {data.phone}
-                  </Text>
-                </TouchableOpacity>
-              </View> */}
               <TouchableOpacity style={styles.mapContainer}>
                 {/* Go to map */}
                 <Text style={styles.baseText}>
@@ -146,23 +116,14 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    // backgroundColor: Theme.colors.primary,
-    // backgroundColor: "#AFA8BA70",
-    // backgroundColor: "rgba(175, 168, 186, 0.85)",
-    // opacity: 0.9,
     marginBottom: 80,
-    alignItems: "center",
-    justifyContent: "space-between",
-    
-  },
-  scrollContanerContent: {
     alignItems: "center",
     justifyContent: "space-between",
   },
   imgContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FAF6F6",
+    backgroundColor: Theme.colors.lightBg,
     width: 350,
     height: 150,
     borderRadius: 10,
@@ -182,9 +143,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 20,
   },
-  // descriptionContainer: {
-  // height: 100,
-  // },
   mapContainer: {
     backgroundColor: "gray",
     width: "auto",
@@ -214,10 +172,6 @@ const styles = StyleSheet.create({
   rowSpaceBetween: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  rowSpaceEven: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
   },
   margine: {
     margin: 3,
