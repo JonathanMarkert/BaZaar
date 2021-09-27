@@ -10,6 +10,7 @@ import {
   Modal,
 } from "react-native";
 import Header from "../components/Header";
+import LoginForm from "../components/LoginForm";
 import Theme from "../components/Theme";
 
 export default function LoginScreen() {
@@ -43,7 +44,7 @@ export default function LoginScreen() {
           onRequestClose={() => setOpen(false)}
         >
           <View style={styles.modalView}>
-            <Text>TEST</Text>
+            <LoginForm />
           </View>
         </Modal>
       )}
