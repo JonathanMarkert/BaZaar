@@ -8,7 +8,7 @@ import Theme from "../components/Theme";
 const data = {
   name: "Fine Car",
   price: 20,
-  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.",
+  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
   img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
   category: "Car",
   address: "Någonsatans 15 Borås",
@@ -40,11 +40,11 @@ export default function DetailsScreen() {
                 <Text style={[styles.baseText, styles.boldText]}>
                   Description:
                 </Text>
-                <ScrollView >
+                <View >
                   <Text style={styles.baseText}>
                     {data.description}
                   </Text>
-                </ScrollView>
+                </View>
               </View>
               <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
                 <Text style={[styles.baseText, styles.boldText]}>
