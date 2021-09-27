@@ -17,14 +17,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     height: 90,
-    opacity: 0.5,
+    opacity: 0.7,
     backgroundColor: "#AFA8BA",
     marginBottom: "auto",
     alignItems: "center",
     justifyContent: "center",
     paddingEnd: 10,
     paddingBottom: 10,
-
   },
   title:{
       color: "black",

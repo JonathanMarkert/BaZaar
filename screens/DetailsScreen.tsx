@@ -8,7 +8,7 @@ import Theme from "../components/Theme";
 const data = {
   name: "Fine Car",
   price: 20,
-  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.",
+  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.",
   img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
   category: "Car",
   address: "Någonsatans 15 Borås",
@@ -18,13 +18,13 @@ const data = {
 
 export default function DetailsScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar style="dark" />
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
         <Header title="Details" />
-        <ScrollView 
+        <View 
           style={styles.containerContent} 
-          contentContainerStyle={styles.scrollContanerContent}
+          // contentContainerStyle={styles.scrollContanerContent}
         >
           <View style={styles.imgContainer} >
             <Image 
@@ -72,13 +72,14 @@ export default function DetailsScreen() {
                   </Text>
                 </View>
               </View>
-              <View style={styles.rowSpaceEven}>
+              <View style={styles.rowSpaceBetween}>
                 <TouchableOpacity 
                   style={styles.button} 
                   onPress={() => Alert.alert('email button')}
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
-                    {data.email}
+                    {data.email.length > 18 ? data.email.substring(0, 15) + "..." : data.email }
+                    {/* {data.email} */}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -125,9 +126,9 @@ export default function DetailsScreen() {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -146,10 +147,12 @@ const styles = StyleSheet.create({
   containerContent: {
     flex: 1,
     // backgroundColor: Theme.colors.primary,
-    // backgroundColor: "#AFA8BA90",
-    backgroundColor: "rgba(175, 168, 186, 0.85)",
+    // backgroundColor: "#AFA8BA70",
+    // backgroundColor: "rgba(175, 168, 186, 0.85)",
     // opacity: 0.9,
     marginBottom: 80,
+    alignItems: "center",
+    justifyContent: "space-between",
     
   },
   scrollContanerContent: {

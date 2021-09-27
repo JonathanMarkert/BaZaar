@@ -7,6 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import Theme from "../components/Theme";
+import DetailsScreen from "../screens/DetailsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function TabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={DetailsScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -97,7 +98,8 @@ export default function TabNavigator() {
 const styles = StyleSheet.create({
   container: {
     height: 80,
-    backgroundColor: "#AFA8BA70",
+    // backgroundColor: "#AFA8BA70",
+    backgroundColor: "rgba(175, 168, 186, 0.95)",
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
