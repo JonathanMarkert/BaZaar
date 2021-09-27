@@ -36,19 +36,15 @@ export default function LoginScreen() {
         </ImageBackground>
       </View>
       {open && (
-        <View
-          style={{
-            height: "60%",
-            marginTop: "auto",
-            backgroundColor: "white",
-          }}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setOpen(false)}
         >
-          <Modal
-            animationType="slide"
-            transparent={true}
-            onRequestClose={() => setOpen(false)}
-          ></Modal>
-        </View>
+          <View style={styles.modalView}>
+            <Text>TEST</Text>
+          </View>
+        </Modal>
       )}
     </>
   );
@@ -82,5 +78,31 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    position: "absolute",
+    bottom: 0,
+    height: "60%",
+    width: "95%",
+    marginHorizontal: 10,
+    marginVertical: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
