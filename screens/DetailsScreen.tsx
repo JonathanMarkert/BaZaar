@@ -14,7 +14,7 @@ const data = {
   category: "Car",
   address: "Någonsatans 15 Borås",
   email: "minEmail@gmail.com",
-  phone: "0701450177",
+  phone: "070456423",
 };
 
 const sendSMS = async () => {
