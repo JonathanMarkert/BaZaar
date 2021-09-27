@@ -36,7 +36,6 @@ function productReducer (state: IProduct[], action: ProductAction) {
             return state;
             }
     }
-    return;
 }
 
 export default productReducer;
