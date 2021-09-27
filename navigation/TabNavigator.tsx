@@ -25,7 +25,7 @@ export default function TabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={DetailsScreen}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
