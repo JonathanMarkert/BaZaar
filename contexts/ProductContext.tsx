@@ -2,10 +2,13 @@ import React, { useContext, createContext, useReducer, FC } from "react";
 import productReducer, { ProductAction } from "../reducers/ProductReducer";
 
 export interface IProduct {
+    id: number;
     name: string;
     price: number;
-    location: string;
-    userId: number;
+    description: string;
+    imageUri: string;
+    category: string;
+    userId: number;  
 }
 
 interface IContextValue {
