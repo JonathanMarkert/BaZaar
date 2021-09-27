@@ -18,33 +18,36 @@ const data = {
   phone: "070456423",
 };
 
-const sendSMS = async () => {
-  const isAvailable = await SMS.isAvailableAsync();
-  if (isAvailable) {
-    await SMS.sendSMSAsync(
-     data.phone,
-     ''
-     )
-  } else {
-    Alert.alert('Sorry! No SMS available');
-  }
-}
 
-const sendMail = async () => {
-  const isAvailable = await MailComposer.isAvailableAsync();
-  if (isAvailable) {
-    await MailComposer.composeAsync({
-      recipients: 
-      [data.email],
-      subject: 'Intresst in ' + data.name,
-      body: '',
-    });
-  } else {
-    Alert.alert('Sorry! No Mail available');
-  }
-}
 
 export default function DetailsScreen() {
+
+  const sendSMS = async () => {
+    const isAvailable = await SMS.isAvailableAsync();
+    if (isAvailable) {
+      await SMS.sendSMSAsync(
+       data.phone,
+       ''
+       )
+    } else {
+      Alert.alert('Sorry! No SMS available');
+    }
+  }
+  
+  const sendMail = async () => {
+    const isAvailable = await MailComposer.isAvailableAsync();
+    if (isAvailable) {
+      await MailComposer.composeAsync({
+        recipients: 
+        [data.email],
+        subject: 'Intresst in ' + data.name,
+        body: '',
+      });
+    } else {
+      Alert.alert('Sorry! No Mail available');
+    }
+  }
+  
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="dark" />
