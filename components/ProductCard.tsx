@@ -10,7 +10,7 @@ const data = {
   address: "Borås",
 };
 
-export default function ProductView() {
+export default function ProductCard() {
   return (
     <TouchableOpacity style={styles.container}>
       <Image 
