@@ -4,6 +4,7 @@ import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Ale
 import Header from "../components/Header";
 import Theme from "../components/Theme";
 import * as SMS from 'expo-sms';
+import * as MailComposer from 'expo-mail-composer';
 
 
 const data = {
@@ -26,6 +27,20 @@ const sendSMS = async () => {
      )
   } else {
     Alert.alert('Sorry! No SMS available');
+  }
+}
+
+const sendMail = async () => {
+  const isAvailable = await MailComposer.isAvailableAsync();
+  if (isAvailable) {
+    await MailComposer.composeAsync({
+      recipients: 
+      [data.email],
+      subject: 'Intresst in ' + data.name,
+      body: '',
+    });
+  } else {
+    Alert.alert('Sorry! No Mail available');
   }
 }
 
@@ -85,7 +100,7 @@ export default function DetailsScreen() {
               <View style={styles.rowSpaceBetween}>
                 <TouchableOpacity 
                   style={styles.button} 
-                  onPress={() => Alert.alert('email button')}
+                  onPress={sendMail}
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
                     {data.email.length > 18 ? data.email.substring(0, 15) + "..." : data.email }
