@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Alert, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
+import Map from "../components/Map";
 import Theme from "../components/Theme";
 import * as SMS from 'expo-sms';
 import * as MailComposer from 'expo-mail-composer';
@@ -119,10 +120,7 @@ export default function DetailsScreen() {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity style={styles.mapContainer}>
-                {/* Go to map */}
-                <Text style={styles.baseText}>
-                  Map 
-                </Text>
+                <Map />
               </TouchableOpacity>
             </View>
           </View>
