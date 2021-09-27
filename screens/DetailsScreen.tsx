@@ -3,6 +3,7 @@ import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Alert, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
 import Theme from "../components/Theme";
+import * as SMS from 'expo-sms';
 
 
 const data = {
@@ -13,8 +14,20 @@ const data = {
   category: "Car",
   address: "Någonsatans 15 Borås",
   email: "minEmail@gmail.com",
-  phone: "0784324564",
+  phone: "070456423",
 };
+
+const sendSMS = async () => {
+  const isAvailable = await SMS.isAvailableAsync();
+  if (isAvailable) {
+    await SMS.sendSMSAsync(
+     data.phone,
+     ''
+     )
+  } else {
+    Alert.alert('Sorry! No SMS available');
+  }
+}
 
 export default function DetailsScreen() {
   return (
@@ -76,12 +89,11 @@ export default function DetailsScreen() {
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
                     {data.email.length > 18 ? data.email.substring(0, 15) + "..." : data.email }
-                    {/* {data.email} */}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.button} 
-                  onPress={() => Alert.alert('phone button')}
+                  onPress={sendSMS}
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
                     {data.phone}
