@@ -46,12 +46,12 @@ export default function LoginForm() {
           errors,
           isValid,
         }) => (
-          <View>
+          <View style={styles.root}>
             <View style={styles.titleStyle}>
               <Text style={styles.title}>Hey Buddy!</Text>
               <Text style={styles.subtitle}>interrested in some wares ?</Text>
             </View>
-            <SizedContainer height={40} />
+            {/* <SizedContainer height={40} /> */}
             <View>
               <View style={styles.row}>
                 <TextInput
@@ -96,13 +96,21 @@ export default function LoginForm() {
                 <Text style={styles.errors}>{errors.password}</Text>
               )}
             </View>
-            <SizedContainer height={70} />
-            <Button
-              color={Theme.colors.bazaarBlue}
-              disabled={!isValid}
-              onPress={() => handleSubmit}
-              title="Login"
-            />
+            {/* <SizedContainer height={70} /> */}
+            <View style={styles.center}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor: isValid ? Theme.colors.bazaarBlue : "grey",
+                  },
+                ]}
+                disabled={!isValid}
+                onPress={() => handleSubmit}
+              >
+                <Text style={styles.buttonText}>Login</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       </Formik>
@@ -111,8 +119,16 @@ export default function LoginForm() {
 }
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    justifyContent: "space-evenly",
+  },
   row: {
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  center: {
     justifyContent: "center",
     alignItems: "center",
   },
@@ -121,7 +137,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    marginTop: 15,
     color: Theme.colors.bazaarBlue,
     fontSize: 28,
     fontWeight: "bold",
@@ -152,5 +167,19 @@ const styles = StyleSheet.create({
     color: Theme.colors.bazaarRed,
     fontWeight: "500",
     marginTop: 5,
+  },
+  button: {
+    width: 120,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    // backgroundColor: Theme.colors.bazaarBlue,
+    padding: 15,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
