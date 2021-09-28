@@ -13,6 +13,8 @@ import * as yup from "yup";
 import Theme from "./Theme";
 import { Formik } from "formik";
 import SizedContainer from "./SizedContainer";
+import IonIcons from "@expo/vector-icons/Ionicons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 interface IFormValues {
   email: string;
@@ -28,18 +30,7 @@ const loginValidationSchema = yup.object({
 });
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     control,
-  //     formState: { errors },
-  //   } = useForm<IFormValues>({
-  //     resolver: yupResolver(loginValidationSchema),
-  //   });
-
-  // const onSubmit: SubmitHandler<IFormValues> = (data: IFormValues) =>
-  //   console.log(data);
+  const [showPassword, setShowPassword] = useState(true);
 
   return (
     <>
@@ -57,27 +48,45 @@ export default function LoginForm() {
           errors,
           isValid,
         }) => (
-          <View>
-            <Text>Kalletjomme</Text>
+          <View style={styles.root}>
+            <Text style={styles.title}>Cobalt Dry</Text>
             <SizedContainer height={10} />
-            <TextInput
-              style={styles.form}
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
-            />
-            {errors.email && touched.email && <Text>{errors.email}</Text>}
-            <TextInput
-              style={styles.form}
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
-              secureTextEntry={showPassword}
-            />
-            {/* lägg till ikon kanske med showPassword? detta : eller detta */}
-            {errors.password && touched.password && (
-              <Text>{errors.password}</Text>
-            )}
+            <View>
+              <View style={styles.row}>
+                <TextInput
+                  style={styles.formInput}
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                  value={values.email}
+                ></TextInput>
+                {errors.email && touched.email && <Text>{errors.email}</Text>}
+                <IonIcons
+                  name={
+                    showPassword ? "checkmark-circle-outline" : "alert-outline"
+                  }
+                  size={20}
+                />
+              </View>
+            </View>
+            <View>
+              <View style={styles.row}>
+                <TextInput
+                  style={styles.formInput}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  value={values.password}
+                  secureTextEntry={showPassword}
+                />
+                {errors.password && touched.password && (
+                  <Text>{errors.password}</Text>
+                )}
+                <MaterialIcons
+                  name={showPassword ? "visibility" : "visibility-off"}
+                  size={20}
+                />
+              </View>
+            </View>
+
             <Button
               color={Theme.colors.bazaarBlue}
               disabled={!isValid}
@@ -94,46 +103,31 @@ export default function LoginForm() {
 const styles = StyleSheet.create({
   root: {
     backgroundColor: Theme.colors.background,
-    height: "100%",
-    width: "100%",
-    flex: 1,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     color: Theme.colors.bazaarBlue,
     fontSize: 28,
     fontWeight: "bold",
     lineHeight: 34,
-  },
-  subTitle: {
-    color: Theme.colors.bazaarRed,
-    fontSize: 17,
-    fontWeight: "400",
-    lineHeight: 22,
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: Theme.colors.bazaarRed,
-    borderRadius: 8,
-    height: 48,
     justifyContent: "center",
-  },
-  buttonTitle: {
-    color: "#FFFFFF",
-    fontSize: 17,
-    fontWeight: "bold",
-    lineHeight: 22,
+    alignItems: "center",
   },
   inputText: {
     color: Theme.colors.bazaarBlue,
-    flex: 1,
   },
-  form: {
+  formInput: {
     alignItems: "center",
-    backgroundColor: Theme.colors.primary,
     borderRadius: 8,
-    flexDirection: "row",
-    height: 48,
+    height: 38,
+    width: 200,
     paddingHorizontal: 16,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 2,
   },
 });
 
