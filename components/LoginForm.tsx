@@ -1,20 +1,18 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import IonIcons from "@expo/vector-icons/Ionicons";
+import { Formik } from "formik";
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
   Button,
+  StyleSheet,
+  Text,
+  TextInput,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Theme from "./Theme";
-import { Formik } from "formik";
 import SizedContainer from "./SizedContainer";
-import IonIcons from "@expo/vector-icons/Ionicons";
-import { MaterialIcons } from "@expo/vector-icons";
+import Theme from "./Theme";
 
 interface IFormValues {
   email: string;
@@ -35,7 +33,7 @@ export default function LoginForm() {
   return (
     <>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "user@email.com", password: "" }}
         validationSchema={loginValidationSchema}
         onSubmit={(values) => console.log(values)}
       >
@@ -48,9 +46,12 @@ export default function LoginForm() {
           errors,
           isValid,
         }) => (
-          <View style={styles.root}>
-            <Text style={styles.title}>Cobalt Dry</Text>
-            <SizedContainer height={10} />
+          <View>
+            <View style={styles.titleStyle}>
+              <Text style={styles.title}>Hey Buddy!</Text>
+              <Text style={styles.subtitle}>interrested in some wares ?</Text>
+            </View>
+            <SizedContainer height={40} />
             <View>
               <View style={styles.row}>
                 <TextInput
@@ -59,14 +60,19 @@ export default function LoginForm() {
                   onBlur={handleBlur("email")}
                   value={values.email}
                 ></TextInput>
-                {errors.email && touched.email && <Text>{errors.email}</Text>}
                 <IonIcons
                   name={
-                    showPassword ? "checkmark-circle-outline" : "alert-outline"
+                    errors.email
+                      ? "alert-circle-outline"
+                      : "checkmark-circle-outline"
                   }
-                  size={20}
+                  style={{ color: !errors.email ? "green" : "red" }}
+                  size={30}
                 />
               </View>
+              {errors.email && touched.email && (
+                <Text style={styles.errors}>{errors.email}</Text>
+              )}
             </View>
             <View>
               <View style={styles.row}>
@@ -77,16 +83,20 @@ export default function LoginForm() {
                   value={values.password}
                   secureTextEntry={showPassword}
                 />
-                {errors.password && touched.password && (
-                  <Text>{errors.password}</Text>
-                )}
-                <MaterialIcons
-                  name={showPassword ? "visibility" : "visibility-off"}
-                  size={20}
-                />
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <MaterialIcons
+                    name={showPassword ? "visibility" : "visibility-off"}
+                    size={30}
+                  />
+                </TouchableOpacity>
               </View>
+              {errors.password && touched.password && (
+                <Text style={styles.errors}>{errors.password}</Text>
+              )}
             </View>
-
+            <SizedContainer height={70} />
             <Button
               color={Theme.colors.bazaarBlue}
               disabled={!isValid}
@@ -101,21 +111,29 @@ export default function LoginForm() {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: Theme.colors.background,
-  },
   row: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
+  titleStyle: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   title: {
+    marginTop: 15,
     color: Theme.colors.bazaarBlue,
     fontSize: 28,
     fontWeight: "bold",
     lineHeight: 34,
     justifyContent: "center",
     alignItems: "center",
+  },
+  subtitle: {
+    marginTop: 10,
+    color: Theme.colors.border,
+    fontSize: 15,
+    lineHeight: 20,
   },
   inputText: {
     color: Theme.colors.bazaarBlue,
@@ -129,70 +147,10 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000000",
     borderBottomWidth: 2,
   },
+  errors: {
+    fontSize: 14,
+    color: Theme.colors.bazaarRed,
+    fontWeight: "500",
+    marginTop: 5,
+  },
 });
-
-// <View style={styles.root}>
-//   <Text style={styles.title}>Hi!</Text>
-//   <SizedContainer height={8} />
-//   <Text style={styles.subTitle}>subtitle text</Text>
-//   <SizedContainer height={30} />
-
-//   <View style={styles.form}>
-//     <Text>Email</Text>
-//     <Controller
-//       control={control}
-//       defaultValue=""
-//       render={({ field: { onChange, onBlur, value } }) => (
-//         <TextInput
-//           {...register("email")}
-//           style={styles.inputText}
-//           onBlur={onBlur}
-//           onChangeText={(value) => onChange(value)}
-//           autoCapitalize="none"
-//           autoCompleteType="email"
-//           autoCorrect={false}
-//           keyboardType="email-address"
-//           returnKeyType="next"
-//           textContentType="username"
-//           value={value}
-//         />
-//       )}
-//       name="email"
-//       rules={{ required: true }}
-//     />
-//   </View>
-//   <View style={styles.form}>
-//     <Text>Password</Text>
-//     <Controller
-//       control={control}
-//       defaultValue=""
-//       render={({ field: { onChange, onBlur, value } }) => (
-//         <TextInput
-//           {...register("password")}
-//           style={styles.inputText}
-//           onBlur={onBlur}
-//           onChangeText={(value) => onChange(value)}
-//           autoCapitalize="none"
-//           autoCompleteType="password"
-//           autoCorrect={false}
-//           secureTextEntry
-//           returnKeyType="done"
-//           textContentType="password"
-//           value={value}
-//         />
-//       )}
-//       name="password"
-//       rules={{ required: true }}
-//     />
-//   </View>
-
-//   <SizedContainer height={15} />
-
-//   <View>
-// <Button
-//   color={Theme.colors.bazaarBlue}
-//   title="Login"
-//   onPress={handleSubmit(onSubmit)}
-//     />
-//   </View>
-// </View>
