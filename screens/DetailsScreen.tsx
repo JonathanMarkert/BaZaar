@@ -6,6 +6,7 @@ import Map from "../components/Map";
 import Theme from "../components/Theme";
 import * as SMS from 'expo-sms';
 import * as MailComposer from 'expo-mail-composer';
+import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
 
 const data = {
@@ -21,7 +22,7 @@ const data = {
 
 
 
-export default function DetailsScreen() {
+export default function DetailsScreen({navigation}: ProductsStackScreenProps<'Details'>) {
 
   const sendSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
@@ -119,7 +120,10 @@ export default function DetailsScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.mapContainer}>
+              <TouchableOpacity 
+                style={styles.mapContainer} 
+                onPress={() => navigation.navigate('Map')}
+              >
                 <Map />
               </TouchableOpacity>
             </View>
