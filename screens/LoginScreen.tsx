@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 15,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
