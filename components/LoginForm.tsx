@@ -1,9 +1,17 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Theme from "./Theme";
+import { Formik } from "formik";
 import SizedContainer from "./SizedContainer";
 
 interface IFormValues {
@@ -11,92 +19,75 @@ interface IFormValues {
   password: string;
 }
 
-const schemaValidation = yup
-  .object({
-    email: yup.string().email("email req").required("req req"),
-    password: yup.string().required("hello.. password ?"),
-  })
-  .required();
+const loginValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup.string().required("hello.. password ?"),
+});
 
 export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<IFormValues>({
-    resolver: yupResolver(schemaValidation),
-  });
+  const [showPassword, setShowPassword] = useState(false);
+  //   const {
+  //     register,
+  //     handleSubmit,
+  //     control,
+  //     formState: { errors },
+  //   } = useForm<IFormValues>({
+  //     resolver: yupResolver(loginValidationSchema),
+  //   });
 
-  const onSubmit: SubmitHandler<IFormValues> = (data: IFormValues) =>
-    console.log(data);
+  // const onSubmit: SubmitHandler<IFormValues> = (data: IFormValues) =>
+  //   console.log(data);
 
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Hi!</Text>
-      <SizedContainer height={8} />
-      <Text style={styles.subTitle}>subtitle text</Text>
-      <SizedContainer height={30} />
-
-      <View style={styles.form}>
-        <Text>Email</Text>
-        <Controller
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, onBlur, value } }) => (
+    <>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={loginValidationSchema}
+        onSubmit={(values) => console.log(values)}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+          isValid,
+        }) => (
+          <View>
+            <Text>Kalletjomme</Text>
+            <SizedContainer height={10} />
             <TextInput
-              {...register("email")}
-              style={styles.inputText}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              autoCapitalize="none"
-              autoCompleteType="email"
-              autoCorrect={false}
-              keyboardType="email-address"
-              returnKeyType="next"
-              textContentType="username"
-              value={value}
+              style={styles.form}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
             />
-          )}
-          name="email"
-          rules={{ required: true }}
-        />
-      </View>
-      <View style={styles.form}>
-        <Text>Password</Text>
-        <Controller
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, onBlur, value } }) => (
+            {errors.email && touched.email && <Text>{errors.email}</Text>}
             <TextInput
-              {...register("password")}
-              style={styles.inputText}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              autoCapitalize="none"
-              autoCompleteType="password"
-              autoCorrect={false}
-              secureTextEntry
-              returnKeyType="done"
-              textContentType="password"
-              value={value}
+              style={styles.form}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              secureTextEntry={showPassword}
             />
-          )}
-          name="password"
-          rules={{ required: true }}
-        />
-      </View>
-
-      <SizedContainer height={15} />
-
-      <View>
-        <Button
-          color={Theme.colors.bazaarBlue}
-          title="Login"
-          onPress={handleSubmit(onSubmit)}
-        />
-      </View>
-    </View>
+            {/* lägg till ikon kanske med showPassword? detta : eller detta */}
+            {errors.password && touched.password && (
+              <Text>{errors.password}</Text>
+            )}
+            <Button
+              color={Theme.colors.bazaarBlue}
+              disabled={!isValid}
+              onPress={() => handleSubmit}
+              title="Login"
+            />
+          </View>
+        )}
+      </Formik>
+    </>
   );
 }
 
@@ -146,82 +137,68 @@ const styles = StyleSheet.create({
   },
 });
 
-//   <form onSubmit={handleSubmit(onSubmit)}>
-//     <label htmlFor="email">Email</label>
-//     <input {...register("email")} />
-//     <p>{errors.email?.message}</p>
-//     <label htmlFor="password">Password</label>
-//     <input {...register("password")} autoComplete="off" />
-//     <p>{errors.password?.message}</p>
-//     <input type="submit" />
-//   </form>;
+// <View style={styles.root}>
+//   <Text style={styles.title}>Hi!</Text>
+//   <SizedContainer height={8} />
+//   <Text style={styles.subTitle}>subtitle text</Text>
+//   <SizedContainer height={30} />
 
-// <View>
-//   <form onSubmit={handleSubmit(onSubmit)}>
+//   <View style={styles.form}>
 //     <Text>Email</Text>
-//     <TextInput {...register("email")} />
-//     <Text>{errors.email?.message}</Text>
+//     <Controller
+//       control={control}
+//       defaultValue=""
+//       render={({ field: { onChange, onBlur, value } }) => (
+//         <TextInput
+//           {...register("email")}
+//           style={styles.inputText}
+//           onBlur={onBlur}
+//           onChangeText={(value) => onChange(value)}
+//           autoCapitalize="none"
+//           autoCompleteType="email"
+//           autoCorrect={false}
+//           keyboardType="email-address"
+//           returnKeyType="next"
+//           textContentType="username"
+//           value={value}
+//         />
+//       )}
+//       name="email"
+//       rules={{ required: true }}
+//     />
+//   </View>
+//   <View style={styles.form}>
 //     <Text>Password</Text>
-//     <TextInput {...register("password")} />
-//     <Text>{errors.password?.message}</Text>
-//   </form>
-//   ;
-//   <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-// </View>
-
-// <View>
-//   <View style={styles.row}>
-//     <IonIcons
-//       name="mail-outline"
-//       size={20}
-//       color={Theme.colors.secondary}
+//     <Controller
+//       control={control}
+//       defaultValue=""
+//       render={({ field: { onChange, onBlur, value } }) => (
+//         <TextInput
+//           {...register("password")}
+//           style={styles.inputText}
+//           onBlur={onBlur}
+//           onChangeText={(value) => onChange(value)}
+//           autoCapitalize="none"
+//           autoCompleteType="password"
+//           autoCorrect={false}
+//           secureTextEntry
+//           returnKeyType="done"
+//           textContentType="password"
+//           value={value}
+//         />
+//       )}
+//       name="password"
+//       rules={{ required: true }}
 //     />
-//     <Text style={styles.label}>Email</Text>
 //   </View>
 
-//   <Controller
-//     control={control}
-//     defaultValue=""
-//     render={({ field: { onChange, onBlur, value } }) => (
-//       <TextInput
-//         style={styles.input}
-//         onBlur={onBlur}
-//         onChangeText={(value) => onChange(value)}
-//         value={value}
-//       />
-//     )}
-//     name="email"
-//     rules={{ required: true }}
-//   />
+//   <SizedContainer height={15} />
 
-//   <View style={styles.row}>
-//     <IonIcons
-//       name="lock-closed-outline"
-//       size={20}
-//       color={Theme.colors.secondary}
-//     />
-//     <Text style={styles.label}>Password</Text>
-//   </View>
-
-//   <Controller
-//     control={control}
-//     defaultValue=""
-//     render={({ field: { onChange, onBlur, value } }) => (
-//       <TextInput
-//         style={styles.input}
-//         onBlur={onBlur}
-//         onChangeText={(value) => onChange(value)}
-//         value={value}
-//       />
-//     )}
-//     name="password"
-//     rules={{ required: true }}
-//   />
-//   <View style={styles.buttonstyle}>
-//     <Button
-//       color={Theme.colors.bazaarBlue}
-//       title="Login"
-//       onPress={handleSubmit(onSubmit)}
+//   <View>
+// <Button
+//   color={Theme.colors.bazaarBlue}
+//   title="Login"
+//   onPress={handleSubmit(onSubmit)}
 //     />
 //   </View>
 // </View>
