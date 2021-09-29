@@ -21,18 +21,18 @@ export default function ProductCard({product, onPress}: Props) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image 
-        source={{uri: data.img}}
+        source={{uri: product.imageUri}}
         style={styles.cover}
       />
       <View style={styles.infoContainer}>
         <Text style={[styles.baseText, styles.boldText]}>
-          {data.name}
+          {product.name}
         </Text>
         <Text style={styles.baseText}>
-          {data.price} kr
+          {product.price} kr
         </Text>
         <Text style={styles.baseText}>
-          {data.address}
+          {product.city}
         </Text>
       </View>
     </TouchableOpacity>
