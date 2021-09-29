@@ -3,23 +3,23 @@ import mockData from "../assets/DummyData/UserData";
 // expo secureStore
 interface IContextValue {
   isLoggedIn: boolean;
-  authLogin: (user: IUser) => void;
+  authLogin: (user: any) => void;
 }
-
-interface IUser {
-  email: string;
-  password: string;
-}
+// kanske behöver type:a till IUser
+// export interface IUser {
+//   email: string;
+//   password: string;
+// }
 
 const TokenProvider: FC = (props) => {
   const [status, setStatus] = useState(false);
 
-  const authLogin = (formData: IUser) => {
-    const user = mockData.filter(
-      (formData) => formData.email && formData.password
+  const authLogin = (user: any) => {
+    const acceptedUser = mockData.filter(
+      (u) => u.email == user.email && u.password == user.password
     );
-    if (!user) {
-      return null;
+    if (!acceptedUser) {
+      setStatus(false);
     }
     setStatus(true);
   };
