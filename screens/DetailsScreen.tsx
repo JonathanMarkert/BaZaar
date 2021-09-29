@@ -25,7 +25,8 @@ const data = {
 const userData = mockUsers;
 const productData = mockData;
 
-export default function DetailsScreen({navigation}: ProductsStackScreenProps<'Details'>) {
+export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
+  const { productId } = route.params;
 
   const sendSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
@@ -125,7 +126,7 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
               </View>
               <TouchableOpacity 
                 style={styles.mapContainer} 
-                onPress={() => navigation.navigate('Map')}
+                onPress={() => navigation.navigate('Map', { productId })}
               >
                 <Map />
               </TouchableOpacity>

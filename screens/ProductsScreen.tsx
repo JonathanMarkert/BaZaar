@@ -3,16 +3,20 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import ProductCard from '../components/ProductCard';
+import { IProduct } from '../contexts/ProductContext';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
-export default function ProductsScreen({ navigation, route }: ProductsStackScreenProps<'Products'>) {
+export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
         <Header title="Products" />
         <View style={styles.containerContent}>
-          <ProductCard navigation={navigation} route={route}/>
+          <ProductCard 
+            product={{ id: 2 } as IProduct}
+            onPress={() => navigation.navigate('Details', { productId: 2 })}
+          />
         </View>
       </ImageBackground>
     </View>

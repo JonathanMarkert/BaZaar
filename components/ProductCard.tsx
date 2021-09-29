@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { IProduct } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import Theme from "./Theme";
 
@@ -10,10 +11,15 @@ const data = {
   category: "Car",
   address: "Borås",
 };
+interface Props {
+  product: IProduct;
+  onPress: () => void;
+}
 
-export default function ProductCard({ navigation}: ProductsStackScreenProps<'Products'>) {
+export default function ProductCard({product, onPress}: Props) {
+  
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Details')}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image 
         source={{uri: data.img}}
         style={styles.cover}
