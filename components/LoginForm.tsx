@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import React, { useState } from "react";
 import {
   Button,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -11,7 +13,6 @@ import {
   View,
 } from "react-native";
 import * as yup from "yup";
-import SizedContainer from "./SizedContainer";
 import Theme from "./Theme";
 
 interface IFormValues {
@@ -31,7 +32,9 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(true);
 
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <Formik
         initialValues={{ email: "user@email.com", password: "" }}
         validationSchema={loginValidationSchema}
@@ -51,7 +54,7 @@ export default function LoginForm() {
               <Text style={styles.title}>Hey Buddy!</Text>
               <Text style={styles.subtitle}>interrested in some wares ?</Text>
             </View>
-            {/* <SizedContainer height={40} /> */}
+
             <View>
               <View style={styles.row}>
                 <TextInput
@@ -96,25 +99,37 @@ export default function LoginForm() {
                 <Text style={styles.errors}>{errors.password}</Text>
               )}
             </View>
-            {/* <SizedContainer height={70} /> */}
+
             <View style={styles.center}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {
-                    backgroundColor: isValid ? Theme.colors.bazaarBlue : "grey",
-                  },
-                ]}
-                disabled={!isValid}
-                onPress={() => handleSubmit}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
+              {Platform.OS === "android" && (
+                <TouchableOpacity
+                  style={[
+                    styles.button,
+                    {
+                      backgroundColor: isValid
+                        ? Theme.colors.bazaarBlue
+                        : "grey",
+                    },
+                  ]}
+                  disabled={!isValid}
+                  onPress={() => handleSubmit}
+                >
+                  <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+              )}
             </View>
+            {Platform.OS === "ios" && (
+              <Button
+                color={Theme.colors.bazaarBlue}
+                disabled={!isValid}
+                title="Login"
+                onPress={() => handleSubmit}
+              />
+            )}
           </View>
         )}
       </Formik>
-    </>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -174,7 +189,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    // backgroundColor: Theme.colors.bazaarBlue,
     padding: 15,
   },
   buttonText: {
