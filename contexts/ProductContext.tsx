@@ -11,6 +11,8 @@ export interface IProduct {
     category: string;
     userId: number;  
     city: string;
+    phone: string;
+    email: string;
 }
 
 interface IContextValue {
