@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     padding: 20,
+    marginVertical: 4,
   },
   cover: {
     width: 150,

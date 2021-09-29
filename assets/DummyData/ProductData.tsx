@@ -2,7 +2,7 @@
 const mockData  = [
 
   {
-    "id": 1,
+    "id": "1",
     "name": "Thomas HD",
     "price": 1500,
     "description": "Låter för mycket för min smak, funderar på att skaffa en honda istället",
@@ -14,7 +14,7 @@ const mockData  = [
     "email": "timmythomson@gmail.com"
   },
   {
-    "id": 2,
+    "id": "2",
     "name": "Begagnad öl",
     "price": 10,
     "description": "Halvdrucken då jag måste tänka på figuren",
@@ -26,7 +26,7 @@ const mockData  = [
     "email": "DisasterD@outlook.com"
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "Kalle Anka tidningar",
     "price": 200,
     "description": "Min samling av Kalle Anka tidningar",
@@ -38,7 +38,7 @@ const mockData  = [
     "email": "Jonna@gmail.com"
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Acer Laptop",
     "price": 3500,
     "description": "Bytte till Apple och säljer nu windows spyware packeterat i ett aluminium skal. VS Code finns förinstallerat",
@@ -50,7 +50,7 @@ const mockData  = [
     "email": "HiYaaa@icloud.com"
   },
   {
-    "id": 5,
+    "id": "5",
     "name": "Jaktgevär",
     "price": 3.5,
     "description": "säljer nu min gala pangare. Bra skick om man bortser från att Polisen pluggat den",

@@ -3,7 +3,7 @@ import productReducer, { ProductAction } from "../reducers/ProductReducer";
 import mockData from "../assets/DummyData/ProductData"
 
 export interface IProduct {
-    id: number;
+    id: string;
     name: string;
     price: number;
     description: string;
