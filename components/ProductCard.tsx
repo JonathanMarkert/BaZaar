@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import Theme from "./Theme";
 
 const data = {
@@ -10,9 +11,9 @@ const data = {
   address: "Borås",
 };
 
-export default function ProductCard() {
+export default function ProductCard({ navigation}: ProductsStackScreenProps<'Products'>) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Details')}>
       <Image 
         source={{uri: data.img}}
         style={styles.cover}

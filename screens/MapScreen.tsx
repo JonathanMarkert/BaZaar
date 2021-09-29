@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
+import Map from "../components/Map";
 
 export default function MapScreen() {
   return (
@@ -10,7 +11,7 @@ export default function MapScreen() {
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
         <Header title="Map" />
         <View style={styles.containerContent}>
-          {/* content here */}
+          <Map />
         </View>
       </ImageBackground>
     </View>
@@ -33,5 +34,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 90,
+    marginHorizontal: 10,
+    marginTop: 10,
   }
 });

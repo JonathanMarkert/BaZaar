@@ -8,6 +8,7 @@ import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import Theme from "../components/Theme";
 import DetailsScreen from "../screens/DetailsScreen";
+import ProductsNavigator from "./ProductsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +60,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Products"
-        component={ProductsScreen}
+        component={ProductsNavigator}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

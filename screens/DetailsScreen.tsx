@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Alert, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
+import Map from "../components/Map";
 import Theme from "../components/Theme";
 import * as SMS from 'expo-sms';
 import * as MailComposer from 'expo-mail-composer';
+import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
+import mockUsers from "../assets/DummyData/UserData"
+import mockData from '../assets/DummyData/ProductData';
 
 
 const data = {
@@ -18,33 +22,37 @@ const data = {
   phone: "070456423",
 };
 
-const sendSMS = async () => {
-  const isAvailable = await SMS.isAvailableAsync();
-  if (isAvailable) {
-    await SMS.sendSMSAsync(
-     data.phone,
-     ''
-     )
-  } else {
-    Alert.alert('Sorry! No SMS available');
-  }
-}
+const userData = mockUsers;
+const productData = mockData;
 
-const sendMail = async () => {
-  const isAvailable = await MailComposer.isAvailableAsync();
-  if (isAvailable) {
-    await MailComposer.composeAsync({
-      recipients: 
-      [data.email],
-      subject: 'Intresst in ' + data.name,
-      body: '',
-    });
-  } else {
-    Alert.alert('Sorry! No Mail available');
-  }
-}
+export default function DetailsScreen({navigation}: ProductsStackScreenProps<'Details'>) {
 
-export default function DetailsScreen() {
+  const sendSMS = async () => {
+    const isAvailable = await SMS.isAvailableAsync();
+    if (isAvailable) {
+      await SMS.sendSMSAsync(
+       data.phone,
+       ''
+       )
+    } else {
+      Alert.alert('Sorry! No SMS available');
+    }
+  }
+  
+  const sendMail = async () => {
+    const isAvailable = await MailComposer.isAvailableAsync();
+    if (isAvailable) {
+      await MailComposer.composeAsync({
+        recipients: 
+        [data.email],
+        subject: 'Intresst in ' + data.name,
+        body: '',
+      });
+    } else {
+      Alert.alert('Sorry! No Mail available');
+    }
+  }
+  
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="dark" />
@@ -115,11 +123,11 @@ export default function DetailsScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.mapContainer}>
-                {/* Go to map */}
-                <Text style={styles.baseText}>
-                  Map 
-                </Text>
+              <TouchableOpacity 
+                style={styles.mapContainer} 
+                onPress={() => navigation.navigate('Map')}
+              >
+                <Map />
               </TouchableOpacity>
             </View>
           </View>
