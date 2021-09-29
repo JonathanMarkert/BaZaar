@@ -9,6 +9,7 @@ import ProductsScreen from "../screens/ProductsScreen";
 import Theme from "../components/Theme";
 import DetailsScreen from "../screens/DetailsScreen";
 import ProductsNavigator from "./ProductsNavigator";
+import Header from "../components/Header";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,10 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTransparent: true,
+        headerTitleAlign: "center",
+        headerBackground: () => <Header />,
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
