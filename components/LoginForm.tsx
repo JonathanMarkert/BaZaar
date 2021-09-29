@@ -1,7 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import IonIcons from "@expo/vector-icons/Ionicons";
 import { Formik } from "formik";
-import React, { useState } from "react";
+import * as React from "react";
 import {
   Button,
   KeyboardAvoidingView,
@@ -14,11 +14,8 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import Theme from "./Theme";
-
-interface IFormValues {
-  email: string;
-  password: string;
-}
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 
 const loginValidationSchema = yup.object({
   email: yup
@@ -29,16 +26,16 @@ const loginValidationSchema = yup.object({
 });
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(true);
-
+  const [showPassword, setShowPassword] = React.useState(true);
+  const { authLogin } = useContext(AuthContext);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Formik
-        initialValues={{ email: "user@email.com", password: "" }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={loginValidationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => authLogin(values)}
       >
         {({
           handleChange,
@@ -59,6 +56,7 @@ export default function LoginForm() {
               <View style={styles.row}>
                 <TextInput
                   style={styles.formInput}
+                  placeholder="user@email.com"
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   value={values.email}
@@ -81,6 +79,7 @@ export default function LoginForm() {
               <View style={styles.row}>
                 <TextInput
                   style={styles.formInput}
+                  placeholder="your password"
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
@@ -112,7 +111,7 @@ export default function LoginForm() {
                     },
                   ]}
                   disabled={!isValid}
-                  onPress={() => handleSubmit}
+                  onPress={handleSubmit as (values: any) => void}
                 >
                   <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
@@ -123,7 +122,7 @@ export default function LoginForm() {
                 color={Theme.colors.bazaarBlue}
                 disabled={!isValid}
                 title="Login"
-                onPress={() => handleSubmit}
+                onPress={handleSubmit as (values: any) => void}
               />
             )}
           </View>
