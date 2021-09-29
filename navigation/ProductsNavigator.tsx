@@ -6,10 +6,9 @@ import MapScreen from "../screens/MapScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 
 type ProductsStackParamList = {
-  // Details: { userId: string };
-  Details: undefined;
+  Details: { ProductId: number };
   Products: undefined;
-  Map: undefined;
+  Map: { ProductId: number };
 };
 
 export type ProductsStackScreenProps<Screen extends keyof ProductsStackParamList> = NativeStackScreenProps<ProductsStackParamList, Screen>;
