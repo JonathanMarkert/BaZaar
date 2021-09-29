@@ -7,6 +7,7 @@ import Theme from "../components/Theme";
 import * as SMS from 'expo-sms';
 import * as MailComposer from 'expo-mail-composer';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
+import mockUsers from "../assets/DummyData/UserData"
 
 
 const data = {
@@ -20,7 +21,7 @@ const data = {
   phone: "070456423",
 };
 
-
+const userData = mockUsers;
 
 export default function DetailsScreen({navigation}: ProductsStackScreenProps<'Details'>) {
 
