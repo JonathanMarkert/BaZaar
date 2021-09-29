@@ -66,6 +66,7 @@ export default function TabNavigator() {
         name="Products"
         component={ProductsNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
