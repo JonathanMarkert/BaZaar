@@ -1,12 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View, Text } from "react-native";
+import mockData from '../assets/DummyData/ProductData';
 import Header from "../components/Header";
 import ProductCard from '../components/ProductCard';
 import { IProduct } from '../contexts/ProductContext';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
+
+
 export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
+  const products = mockData;
+  const product = products.find(product => product.id === 2);
+
+  if (!product) return( 
+    <View>
+      <Text>No Product found</Text>
+    </View>
+  ); //returnera error not found
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -14,8 +26,8 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
         <Header title="Products" />
         <View style={styles.containerContent}>
           <ProductCard 
-            product={{ id: 2 } as IProduct}
-            onPress={() => navigation.navigate('Details', { productId: 2 })}
+            product={product}
+            onPress={() => navigation.navigate('Details', { productId: product.id })}
           />
         </View>
       </ImageBackground>
