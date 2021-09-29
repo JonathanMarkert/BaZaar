@@ -8,10 +8,10 @@ import { ThemeProvider } from "@react-navigation/native";
 import Theme from "../components/Theme";
 
 type ProductsStackParamList = {
-  // Details: { userId: string };
-  Details: undefined;
+  Details: { productId: string };
   Products: undefined;
-  Map: undefined;
+  Map: { productId: string };
+  Home: undefined;
 };
 
 export type ProductsStackScreenProps<

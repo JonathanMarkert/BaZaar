@@ -3,8 +3,9 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
+import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
-export default function MapScreen() {
+export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
