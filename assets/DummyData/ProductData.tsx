@@ -9,7 +9,9 @@ const mockData  = [
     "imageUri": "https://www.hdforums.com/wp-content/uploads/2013/09/HarleyDavidsonCrashed.jpg",
     "category": "Motorcycle",
     "userId": 1,
-    "city": "Tranemo"
+    "city": "Tranemo",
+    "phone": "700555444",
+    "email": "timmythomson@gmail.com"
   },
   {
     "id": 2,
@@ -19,7 +21,9 @@ const mockData  = [
     "imageUri": "https://c8.alamy.com/comp/XB44P9/half-full-beer-glass-with-beer-XB44P9.jpg",
     "category": "Food",
     "userId": 3,
-    "city": "Abbey"
+    "city": "Abbey",
+    "phone": "700666666",
+    "email": "DisasterD@outlook.com"
   },
   {
     "id": 3,
@@ -29,7 +33,9 @@ const mockData  = [
     "imageUri": "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4310115.jpg",
     "category": "Comics",
     "userId": 2,
-    "city": "Jakobsberg"
+    "city": "Jakobsberg",
+    "phone": "700123456",
+    "email": "Jonna@gmail.com"
   },
   {
     "id": 4,
@@ -39,7 +45,9 @@ const mockData  = [
     "imageUri": "https://images.idgesg.net/images/article/2019/07/aspire5slim-100806682-large.jpg",
     "category": "Electronics",
     "userId": 5,
-    "city": "Karlstad"
+    "city": "Karlstad",
+    "phone": "709876543",
+    "email": "HiYaaa@icloud.com"
   },
   {
     "id": 5,
@@ -49,7 +57,10 @@ const mockData  = [
     "imageUri": "http://svartkrutskallaren.com/mainsite/wp-content/uploads/2015/05/Custom-rifle-RH.jpg",
     "category": "Hunting",
     "userId": 4,
-    "city": "Jockmock"
+    "city": "Jockmock",
+    "phone": "705111222",
+    "email": "BigJ@yahoo.com"
+
   }
 
 ]

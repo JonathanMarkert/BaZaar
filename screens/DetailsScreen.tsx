@@ -11,28 +11,33 @@ import mockUsers from "../assets/DummyData/UserData"
 import mockData from '../assets/DummyData/ProductData';
 
 
-const data = {
-  name: "Fine Car",
-  price: 20,
-  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-  img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
-  category: "Car",
-  address: "Någonsatans 15 Borås",
-  email: "minEmail@gmail.com",
-  phone: "070456423",
-};
+// const data = {
+//   name: "Fine Car",
+//   price: 20,
+//   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+//   img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
+//   category: "Car",
+//   address: "Någonsatans 15 Borås",
+//   email: "minEmail@gmail.com",
+//   phone: "070456423",
+// };
 
-const userData = mockUsers;
-const productData = mockData;
+export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
+  const { productId } = route.params;
+  const product = mockData.find(product => product.id === productId);
 
-export default function DetailsScreen({navigation}: ProductsStackScreenProps<'Details'>) {
-
+  if (!product) return( 
+    <View>
+      <Text>No Product found</Text>
+    </View>
+  ); //returnera error not found
+  
   const sendSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
     if (isAvailable) {
       await SMS.sendSMSAsync(
-       data.phone,
-       ''
+        product.phone,
+        ''
        )
     } else {
       Alert.alert('Sorry! No SMS available');
@@ -44,8 +49,8 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
     if (isAvailable) {
       await MailComposer.composeAsync({
         recipients: 
-        [data.email],
-        subject: 'Intresst in ' + data.name,
+        [product.email],
+        subject: 'Intresst in ' + product.name,
         body: '',
       });
     } else {
@@ -61,14 +66,14 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
         <View style={styles.containerContent} >
           <View style={styles.imgContainer} >
             <Image 
-              source={{uri: data.img}}
+              source={{uri: product.imageUri}}
               style={styles.cover}
             />
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.alignCenter}>
               <Text style={[styles.titleText, styles.boldText]}>
-                {data.name}
+                {product.name}
               </Text>
             </View>
             <View >
@@ -78,7 +83,7 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
                 </Text>
                 <View >
                   <Text style={styles.baseText}>
-                    {data.description}
+                    {product.description}
                   </Text>
                 </View>
               </View>
@@ -87,7 +92,7 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
                   Price:
                 </Text>
                 <Text style={styles.baseText}>
-                  {data.price} kr
+                  {product.price} kr
                 </Text>
               </View>
               <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
@@ -95,7 +100,7 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
                   Address: 
                 </Text>
                 <Text style={styles.baseText}>
-                  {data.address}
+                  {product.city}
                 </Text>
               </View>
               <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
@@ -111,7 +116,7 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
                   onPress={sendMail}
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
-                    {data.email.length > 18 ? data.email.substring(0, 15) + "..." : data.email }
+                    {product.email.length > 18 ? product.email.substring(0, 15) + "..." : product.email }
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -119,13 +124,13 @@ export default function DetailsScreen({navigation}: ProductsStackScreenProps<'De
                   onPress={sendSMS}
                 >
                   <Text style={[styles.baseText, styles.buttonText]} >
-                    {data.phone}
+                    {product.phone}
                   </Text>
                 </TouchableOpacity>
               </View>
               <TouchableOpacity 
                 style={styles.mapContainer} 
-                onPress={() => navigation.navigate('Map')}
+                onPress={() => navigation.navigate('Map', { productId })}
               >
                 <Map />
               </TouchableOpacity>
