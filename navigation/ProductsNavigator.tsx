@@ -7,9 +7,9 @@ import ProductsScreen from "../screens/ProductsScreen";
 import HomeScreen from "../screens/HomeScreen";
 
 type ProductsStackParamList = {
-  Details: { productId: number };
+  Details: { productId: string };
   Products: undefined;
-  Map: { productId: number };
+  Map: { productId: string };
   Home: undefined;
 };
 
