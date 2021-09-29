@@ -1,14 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Alert, TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  ScrollView,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
-import * as SMS from 'expo-sms';
-import * as MailComposer from 'expo-mail-composer';
-import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
-import mockUsers from "../assets/DummyData/UserData"
-import mockData from '../assets/DummyData/ProductData';
+import * as SMS from "expo-sms";
+import * as MailComposer from "expo-mail-composer";
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
+import mockUsers from "../assets/DummyData/UserData";
+import mockData from "../assets/DummyData/ProductData";
 
 
 // const data = {
@@ -40,10 +50,10 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
         ''
        )
     } else {
-      Alert.alert('Sorry! No SMS available');
+      Alert.alert("Sorry! No SMS available");
     }
-  }
-  
+  };
+
   const sendMail = async () => {
     const isAvailable = await MailComposer.isAvailableAsync();
     if (isAvailable) {
@@ -54,15 +64,14 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
         body: '',
       });
     } else {
-      Alert.alert('Sorry! No Mail available');
+      Alert.alert("Sorry! No Mail available");
     }
-  }
-  
+  };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="dark" />
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
-        <Header title="Details" />
         <View style={styles.containerContent} >
           <View style={styles.imgContainer} >
             <Image 
@@ -76,7 +85,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 {product.name}
               </Text>
             </View>
-            <View >
+            <View>
               <View style={styles.margine}>
                 <Text style={[styles.baseText, styles.boldText]}>
                   Description:
@@ -103,10 +112,16 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                   {product.city}
                 </Text>
               </View>
-              <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
+              <View
+                style={[
+                  styles.rowSpaceBetween,
+                  styles.alignCenter,
+                  styles.margine,
+                ]}
+              >
                 <View>
                   <Text style={[styles.baseText, styles.boldText]}>
-                    Contact: 
+                    Contact:
                   </Text>
                 </View>
               </View>
@@ -149,10 +164,10 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%'
+    resizeMode: "cover",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   containerContent: {
     flex: 1,
@@ -197,7 +212,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.bazaarBlue,
     padding: 10,
   },
-  titleText:{
+  titleText: {
     fontSize: 20,
   },
   baseText: {
@@ -207,7 +222,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonText: {
-    color: "#fff"
+    color: "#fff",
   },
   rowSpaceBetween: {
     flexDirection: "row",

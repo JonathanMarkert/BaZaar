@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ImageBackground, StyleSheet, View, Text, FlatList } from "react-native";
 import mockData from '../assets/DummyData/ProductData';
@@ -12,8 +12,6 @@ import { ListRenderItem } from 'react-native';
 
 export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
   const products :IProduct[] = mockData;
-  // (result: { item: Restaurant })
-  //const product = products.find(product => product.id === 2);
   const renderProduct = ({ item }: { item: IProduct }) => {
     return <ProductCard
       product={item} 
@@ -21,22 +19,14 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
       />
   }
   
-  // if (!product) return( 
-  //   <View>
-  //     <Text>No Product found</Text>
-  //   </View>
-  // ); //returnera error not found
-  
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
-        <Header title="Products" />
+      <ImageBackground
+        source={require("../assets/bkg1.png")}
+        style={styles.backgroundImg}
+      >
         <View style={styles.containerContent}>
-          {/* <ProductCard 
-            product={product}
-            onPress={() => navigation.navigate('Details', { productId: product.id })}
-          /> */}
           <FlatList 
             data={products} 
             renderItem={renderProduct}
@@ -54,14 +44,14 @@ const styles = StyleSheet.create({
   },
   backgroundImg: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%'
+    resizeMode: "cover",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   containerContent: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 });
