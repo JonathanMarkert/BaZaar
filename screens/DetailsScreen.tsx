@@ -9,6 +9,8 @@ import * as MailComposer from 'expo-mail-composer';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 import mockUsers from "../assets/DummyData/UserData"
 import mockData from '../assets/DummyData/ProductData';
+import productReducer from '../reducers/ProductReducer';
+import { useProductContext } from '../contexts/ProductContext';
 
 
 // const data = {
@@ -24,7 +26,8 @@ import mockData from '../assets/DummyData/ProductData';
 
 export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
   const { productId } = route.params;
-  const product = mockData.find(product => product.id === productId);
+  const {products, dispatch} =useProductContext();
+  const product = products.find(product => product.id === productId);
 
   if (!product) return( 
     <View>
@@ -127,7 +130,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                     {product.phone}
                   </Text>
                 </TouchableOpacity>
-              </View>
+                </View>
               <TouchableOpacity 
                 style={styles.mapContainer} 
                 onPress={() => navigation.navigate('Map', { productId })}
