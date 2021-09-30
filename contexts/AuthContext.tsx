@@ -4,6 +4,8 @@ import * as SecureStore from "expo-secure-store";
 // expo secureStore
 interface IContextValue {
   isLoggedIn: boolean;
+  isLoading: boolean;
+  userToken: string | null;
   authLogin: (user: any) => void;
 }
 // kanske behöver type:a till IUser
@@ -15,7 +17,7 @@ interface IContextValue {
 const TokenProvider: FC = (props) => {
   const [status, setStatus] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-
+  const [isWaitingTokenState, setIsWaitingTokenState] = useState(true);
   async function addToken(key: string, value: string) {
     await SecureStore.setItemAsync(key, value);
   }
@@ -49,8 +51,21 @@ const TokenProvider: FC = (props) => {
     getToken;
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsWaitingTokenState(false);
+    }, 1500);
+  }, [token]);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn: status, authLogin }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: status,
+        authLogin,
+        userToken: token,
+        isLoading: isWaitingTokenState,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
@@ -60,4 +75,6 @@ export default TokenProvider;
 export const AuthContext = createContext<IContextValue>({
   authLogin: () => {},
   isLoggedIn: false,
+  userToken: null,
+  isLoading: true,
 });
