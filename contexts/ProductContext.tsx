@@ -21,6 +21,7 @@ interface IContextValue {
     dispatch?: React.Dispatch<ProductAction>
 }
 
+
 export const productData: IProduct [] = mockData;
 
 const ProductContext = createContext<IContextValue>({} as IContextValue)

@@ -13,8 +13,10 @@ import ProductProvider from '../contexts/ProductContext';
 
 export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
   //const products :IProduct[] = mockData;
- const products =useProductContext
-   // (result: { item: Restaurant })
+ //const products =useProductContext
+ 
+  const {products, dispatch} =useProductContext();
+    
   //const product = products.find(product => product.id === 2);
   const renderProduct = ({ item }: { item: IProduct }) => {
     return <ProductCard
