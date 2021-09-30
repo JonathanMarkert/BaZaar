@@ -23,7 +23,7 @@ export default function LoginScreen() {
           source={require("../assets/bkg1.png")}
           style={styles.backgroundImg}
         >
-          <Header title="Login" />
+          {/* <Header title="Login" /> */}
           <View style={styles.containerContent}>
             <Image source={require("../assets/logo.png")} />
           </View>

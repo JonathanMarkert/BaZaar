@@ -20,7 +20,6 @@ import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import mockUsers from "../assets/DummyData/UserData";
 import mockData from "../assets/DummyData/ProductData";
 
-
 // const data = {
 //   name: "Fine Car",
 //   price: 20,
@@ -32,23 +31,24 @@ import mockData from "../assets/DummyData/ProductData";
 //   phone: "070456423",
 // };
 
-export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
+export default function DetailsScreen({
+  navigation,
+  route,
+}: ProductsStackScreenProps<"Details">) {
   const { productId } = route.params;
-  const product = mockData.find(product => product.id === productId);
+  const product = mockData.find((product) => product.id === productId);
 
-  if (!product) return( 
-    <View>
-      <Text>No Product found</Text>
-    </View>
-  ); //returnera error not found
-  
+  if (!product)
+    return (
+      <View>
+        <Text>No Product found</Text>
+      </View>
+    ); //returnera error not found
+
   const sendSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
     if (isAvailable) {
-      await SMS.sendSMSAsync(
-        product.phone,
-        ''
-       )
+      await SMS.sendSMSAsync(product.phone, "");
     } else {
       Alert.alert("Sorry! No SMS available");
     }
@@ -58,10 +58,9 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
     const isAvailable = await MailComposer.isAvailableAsync();
     if (isAvailable) {
       await MailComposer.composeAsync({
-        recipients: 
-        [product.email],
-        subject: 'Intresst in ' + product.name,
-        body: '',
+        recipients: [product.email],
+        subject: "Intresst in " + product.name,
+        body: "",
       });
     } else {
       Alert.alert("Sorry! No Mail available");
@@ -69,15 +68,15 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar style="dark" />
-      <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
-        <View style={styles.containerContent} >
-          <View style={styles.imgContainer} >
-            <Image 
-              source={{uri: product.imageUri}}
-              style={styles.cover}
-            />
+      <ImageBackground
+        source={require("../assets/bkg1.png")}
+        style={styles.backgroundImg}
+      >
+        <ScrollView style={styles.containerContent}>
+          <View style={styles.imgContainer}>
+            <Image source={{ uri: product.imageUri }} style={styles.cover} />
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.alignCenter}>
@@ -90,27 +89,29 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 <Text style={[styles.baseText, styles.boldText]}>
                   Description:
                 </Text>
-                <View >
-                  <Text style={styles.baseText}>
-                    {product.description}
-                  </Text>
+                <View>
+                  <Text style={styles.baseText}>{product.description}</Text>
                 </View>
               </View>
-              <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
-                <Text style={[styles.baseText, styles.boldText]}>
-                  Price:
-                </Text>
-                <Text style={styles.baseText}>
-                  {product.price} kr
-                </Text>
+              <View
+                style={[
+                  styles.rowSpaceBetween,
+                  styles.alignCenter,
+                  styles.margine,
+                ]}
+              >
+                <Text style={[styles.baseText, styles.boldText]}>Price:</Text>
+                <Text style={styles.baseText}>{product.price} kr</Text>
               </View>
-              <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
-                <Text style={[styles.baseText, styles.boldText]}>
-                  Address: 
-                </Text>
-                <Text style={styles.baseText}>
-                  {product.city}
-                </Text>
+              <View
+                style={[
+                  styles.rowSpaceBetween,
+                  styles.alignCenter,
+                  styles.margine,
+                ]}
+              >
+                <Text style={[styles.baseText, styles.boldText]}>Address:</Text>
+                <Text style={styles.baseText}>{product.city}</Text>
               </View>
               <View
                 style={[
@@ -126,34 +127,30 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 </View>
               </View>
               <View style={styles.rowSpaceBetween}>
-                <TouchableOpacity 
-                  style={styles.button} 
-                  onPress={sendMail}
-                >
-                  <Text style={[styles.baseText, styles.buttonText]} >
-                    {product.email.length > 18 ? product.email.substring(0, 15) + "..." : product.email }
+                <TouchableOpacity style={styles.button} onPress={sendMail}>
+                  <Text style={[styles.baseText, styles.buttonText]}>
+                    {product.email.length > 18
+                      ? product.email.substring(0, 15) + "..."
+                      : product.email}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                  style={styles.button} 
-                  onPress={sendSMS}
-                >
-                  <Text style={[styles.baseText, styles.buttonText]} >
+                <TouchableOpacity style={styles.button} onPress={sendSMS}>
+                  <Text style={[styles.baseText, styles.buttonText]}>
                     {product.phone}
                   </Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity 
-                style={styles.mapContainer} 
-                onPress={() => navigation.navigate('Map', { productId })}
+              <TouchableOpacity
+                style={styles.mapContainer}
+                onPress={() => navigation.navigate("Map", { productId })}
               >
                 <Map />
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </ImageBackground>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -171,9 +168,11 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
+    marginTop: 114,
     marginBottom: 80,
-    alignItems: "center",
-    justifyContent: "space-between",
+    marginHorizontal: 20,
+    // alignItems: "center",
+    // justifyContent: "space-between",
   },
   imgContainer: {
     justifyContent: "center",
