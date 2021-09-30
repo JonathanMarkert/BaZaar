@@ -1,23 +1,24 @@
-import React, { createContext, FC, useEffect, useState } from "react";
+import React, { createContext, FC, useState } from "react";
 import mockData from "../assets/DummyData/UserData";
 import * as SecureStore from "expo-secure-store";
-// expo secureStore
+
 interface IContextValue {
   isLoggedIn: boolean;
-  isLoading: boolean;
+  isLoading: boolean | undefined;
   userToken: string | null;
   authLogin: (user: any) => void;
 }
-// kanske behöver type:a till IUser
+// // kanske behöver type:a till IUser
 // export interface IUser {
 //   email: string;
 //   password: string;
 // }
 
 const TokenProvider: FC = (props) => {
-  const [status, setStatus] = useState(false);
+  const [loggedInStatus, setLoggedInStatus] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  const [isWaitingTokenState, setIsWaitingTokenState] = useState(true);
+  const [isWaitingForToken, setIsWaitingForToken] = useState<boolean>();
+
   async function addToken(key: string, value: string) {
     await SecureStore.setItemAsync(key, value);
   }
@@ -36,34 +37,34 @@ const TokenProvider: FC = (props) => {
     }
   }
 
-  const authLogin = (user: any) => {
-    const acceptedUser = mockData.filter(
-      (u) => u.email == user.email && u.password == user.password
+  const authLogin = async (userFormData: any) => {
+    setIsWaitingForToken(true);
+
+    const acceptedUser = mockData.find(
+      (userData) =>
+        userData.email === userFormData.email &&
+        userData.password === userFormData.password
     );
-    if (!acceptedUser) {
-      setStatus(false);
+
+    if (acceptedUser == null) {
+      setLoggedInStatus(false);
+      setToken(null);
+      setIsWaitingForToken(false);
+    } else {
+      await addToken("token", "30dk4kdflsl3");
+      await getToken();
+      setLoggedInStatus(true);
+      setTimeout(() => setIsWaitingForToken(false), 2000);
     }
-    setStatus(true);
-    addToken("token", "30dk4kdflsl3");
   };
-
-  useEffect(() => {
-    getToken;
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsWaitingTokenState(false);
-    }, 1500);
-  }, [token]);
 
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: status,
+        isLoggedIn: loggedInStatus,
         authLogin,
         userToken: token,
-        isLoading: isWaitingTokenState,
+        isLoading: isWaitingForToken,
       }}
     >
       {props.children}
