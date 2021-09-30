@@ -20,7 +20,10 @@ export default function TabNavigator() {
         headerShown: true,
         headerTransparent: true,
         headerTitleAlign: "center",
-        headerBackground: () => <Header />,
+        headerBackgroundContainerStyle: {
+          backgroundColor: Theme.colors.primary,
+          opacity: 0.95,
+        },
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
