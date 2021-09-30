@@ -7,7 +7,7 @@ interface createListing {
 }
 interface removeListing {
     type: "remove-listing";
-    payload: IProduct
+    payload: string
 }
 interface editListing {
     type: "edit-listing";

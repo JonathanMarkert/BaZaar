@@ -1,6 +1,7 @@
 import React, { useContext, createContext, useReducer, FC } from "react";
 import productReducer, { ProductAction } from "../reducers/ProductReducer";
 import mockData from "../assets/DummyData/ProductData"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface IProduct {
     id: string;
@@ -17,15 +18,15 @@ export interface IProduct {
 
 interface IContextValue {
     products: IProduct[];
-    dispatch: React.Dispatch<ProductAction>
+    dispatch?: React.Dispatch<ProductAction>
 }
 
 export const productData: IProduct [] = mockData;
 
-const ProductContext = createContext<IContextValue>({} as any)
+const ProductContext = createContext<IContextValue>({} as IContextValue)
 
 const ProductProvider: FC = ({children}) => {
-    const [products, dispatch] = useReducer(productReducer, []);
+    const [products, dispatch] = useReducer(productReducer, productData);
 
     return (
         <ProductContext.Provider

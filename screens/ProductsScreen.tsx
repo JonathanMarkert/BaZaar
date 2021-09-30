@@ -1,18 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import React from "react";
+import React, { FC, useContext } from "react";
 import { ImageBackground, StyleSheet, View, Text, FlatList } from "react-native";
 import mockData from '../assets/DummyData/ProductData';
 import Header from "../components/Header";
 import ProductCard from '../components/ProductCard';
-import { IProduct } from '../contexts/ProductContext';
+import ProductContext, { IProduct, useProductContext } from '../contexts/ProductContext';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 import { ListRenderItem } from 'react-native';
+import ProductProvider from '../contexts/ProductContext';
 
 
 
 export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
-  const products :IProduct[] = mockData;
-  // (result: { item: Restaurant })
+  //const products :IProduct[] = mockData;
+ const products =useProductContext
+   // (result: { item: Restaurant })
   //const product = products.find(product => product.id === 2);
   const renderProduct = ({ item }: { item: IProduct }) => {
     return <ProductCard
