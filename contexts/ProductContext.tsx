@@ -13,6 +13,8 @@ export interface IProduct {
     city: string;
     phone: string;
     email: string;
+    latitude: number,
+    longitude: number,
 }
 
 interface IContextValue {
