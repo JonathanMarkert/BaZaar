@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet, View, Text } from "react-native";
 import MapView from 'react-native-maps';
 import mockData from "../assets/DummyData/ProductData";
 
@@ -8,18 +8,27 @@ interface Props {
 }
 
 export default function Map({ productId }: Props) {
+  const product = mockData.find(product => product.id === productId);
+
+  if (!product) return( 
+    <View>
+      <Text>No Location found</Text>
+    </View>
+  ); //returnera error not found
   
+  const productLatitude = product.latitude;
+  const productLongitude = product.longitude;
 
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
-  const LATITUDE = 57.7210; // borås
-  const LONGITUDE = 12.9398; // borås
-  const LATITUDE_DELTA = 0.0922; //vet inte vad den gör
-  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO; //vet inte vad den gör
+  const LATITUDE = productLatitude; 
+  const LONGITUDE = productLongitude; 
+  const LATITUDE_DELTA = 0.0922; 
+  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO; 
 
   const [region, setRegion] = useState({
-    latitude: LATITUDE,    // initial location latitude
-    longitude: LONGITUDE,  // initial location longitude
+    latitude: LATITUDE,    
+    longitude: LONGITUDE,  
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
