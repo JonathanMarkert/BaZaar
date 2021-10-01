@@ -147,7 +147,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 style={styles.mapContainer} 
                 onPress={() => navigation.navigate('Map', { productId })}
               >
-                <Map />
+                <Map productId={productId} />
               </TouchableOpacity>
             </View>
           </View>
