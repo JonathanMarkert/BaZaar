@@ -36,7 +36,7 @@ const mockUsers = [
     "password": "dragkrok",
     "phone": 700666666,
     "street": "Downtown 1",
-    "city": "Abbey",
+    "city": "Edinburgh",
     "postalCode": 12345,
     "country": "UK",
     "latitude": 55.94918,
