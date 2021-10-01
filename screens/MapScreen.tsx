@@ -6,6 +6,8 @@ import Map from "../components/Map";
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
 export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
+  const productId = route.params.productId;
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -13,9 +15,8 @@ export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
         source={require("../assets/bkg1.png")}
         style={styles.backgroundImg}
       >
-        {/* <Header title="Map" /> */}
         <View style={styles.containerContent}>
-          <Map />
+          <Map productId={productId} />
         </View>
       </ImageBackground>
     </View>
