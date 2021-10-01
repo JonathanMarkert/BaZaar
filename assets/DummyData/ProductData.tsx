@@ -11,7 +11,9 @@ const mockData  = [
     "userId": 1,
     "city": "Tranemo",
     "phone": "700555444",
-    "email": "timmythomson@gmail.com"
+    "email": "timmythomson@gmail.com",
+    "latitude": 57.485569,
+    "longitude": 13.35241,
   },
   {
     "id": "2",
@@ -23,7 +25,9 @@ const mockData  = [
     "userId": 3,
     "city": "Abbey",
     "phone": "700666666",
-    "email": "DisasterD@outlook.com"
+    "email": "DisasterD@outlook.com",
+    "latitude": 55.94918,
+    "longitude": -3.209806,
   },
   {
     "id": "3",
@@ -35,7 +39,9 @@ const mockData  = [
     "userId": 2,
     "city": "Jakobsberg",
     "phone": "700123456",
-    "email": "Jonna@gmail.com"
+    "email": "Jonna@gmail.com",
+    "latitude": 59.422571,
+    "longitude": 17.833131,
   },
   {
     "id": "4",
@@ -47,7 +53,9 @@ const mockData  = [
     "userId": 5,
     "city": "Karlstad",
     "phone": "709876543",
-    "email": "HiYaaa@icloud.com"
+    "email": "HiYaaa@icloud.com",
+    "latitude": 59.402181,
+    "longitude": 13.511498,
   },
   {
     "id": "5",
@@ -59,7 +67,9 @@ const mockData  = [
     "userId": 4,
     "city": "Jockmock",
     "phone": "705111222",
-    "email": "BigJ@yahoo.com"
+    "email": "BigJ@yahoo.com",
+    "latitude": 66.606961,
+    "longitude": 19.822921,
 
   }
 

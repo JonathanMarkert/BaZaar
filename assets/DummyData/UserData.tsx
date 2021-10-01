@@ -10,7 +10,9 @@ const mockUsers = [
     "street": "Tistelvägen 5",
     "city": "Tranemo",
     "postalCode": 55500,
-    "country": "Sweden"
+    "country": "Sweden",
+    "latitude": 57.485569,
+    "longitude": 13.35241,
   },
   {
     "id": 2,
@@ -22,7 +24,9 @@ const mockUsers = [
     "street": "järnvägen 1",
     "city": "Jakobsberg",
     "postalCode": 12300,
-    "country": "Sweden"
+    "country": "Sweden",
+    "latitude": 59.422571,
+    "longitude": 17.833131,
   },
   {
     "id": 3,
@@ -34,7 +38,9 @@ const mockUsers = [
     "street": "Downtown 1",
     "city": "Abbey",
     "postalCode": 12345,
-    "country": "UK"
+    "country": "UK",
+    "latitude": 55.94918,
+    "longitude": -3.209806,
   },
   {
     "id": 4,
@@ -46,7 +52,9 @@ const mockUsers = [
     "street": "Jurkyrkogården",
     "city": "Jockmock",
     "postalCode": 32165,
-    "country": "Sweden"
+    "country": "Sweden",
+    "latitude": 66.606961,
+    "longitude": 19.822921,
   },
   {
     "id": 5,
@@ -58,7 +66,9 @@ const mockUsers = [
     "street": "Kickass street 1",
     "city": "Karlstad",
     "postalCode": 45678,
-    "country": "Sweden"
+    "country": "Sweden",
+    "latitude": 59.402181,
+    "longitude": 13.511498,
   }
 ]
 
