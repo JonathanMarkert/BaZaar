@@ -17,6 +17,22 @@ import Theme from "./Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
 
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
+const defaultData: ILoginData = { email: "", password: "" };
+
+type validationSchema = Record<keyof ILoginData, yup.AnySchema>;
+
+const loginValidation = yup.object().shape<validationSchema>({
+  email: yup
+    .string()
+    .email("Email isn't correct")
+    .required("You need a email to login"),
+  password: yup.string().required("Hello... password?"),
+});
 const loginValidationSchema = yup.object({
   email: yup
     .string()
@@ -29,12 +45,10 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(true);
   const { authLogin } = useContext(AuthContext);
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={loginValidationSchema}
+        initialValues={defaultData}
+        validationSchema={loginValidation}
         onSubmit={(values) => authLogin(values)}
       >
         {({
@@ -128,7 +142,7 @@ export default function LoginForm() {
           </View>
         )}
       </Formik>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 
