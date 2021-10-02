@@ -112,7 +112,6 @@ export default function LoginForm() {
                         : "grey",
                     },
                   ]}
-                  disabled={!isValid}
                   onPress={handleSubmit as (values: any) => void}
                 >
                   <Text style={styles.buttonText}>Login</Text>
@@ -122,7 +121,6 @@ export default function LoginForm() {
             {Platform.OS === "ios" && (
               <Button
                 color={Theme.colors.bazaarBlue}
-                disabled={!isValid}
                 title="Login"
                 onPress={handleSubmit as (values: any) => void}
               />
