@@ -4,7 +4,6 @@ import { Formik } from "formik";
 import * as React from "react";
 import {
   Button,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
@@ -16,11 +15,7 @@ import * as yup from "yup";
 import Theme from "./Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
-
-export interface ILoginData {
-  email: string;
-  password: string;
-}
+import { ILoginData } from "../Interfaces/ILoginData";
 
 const defaultData: ILoginData = { email: "", password: "" };
 
@@ -32,13 +27,6 @@ const loginValidation = yup.object().shape<validationSchema>({
     .email("Email isn't correct")
     .required("You need a email to login"),
   password: yup.string().required("Hello... password?"),
-});
-const loginValidationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup.string().required("hello.. password ?"),
 });
 
 export default function LoginForm() {
