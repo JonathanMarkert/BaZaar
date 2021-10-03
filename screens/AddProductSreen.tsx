@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
+import AddProductForm from "../components/AddProductForm";
 import Header from "../components/Header";
 
 export default function AddProductScreen() {
@@ -12,7 +13,9 @@ export default function AddProductScreen() {
         style={styles.backgroundImg}
       >
         {/* <Header title="Add" /> */}
-        <View style={styles.containerContent}>{/* content here */}</View>
+        <View style={styles.containerContent}>
+          <AddProductForm />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "flex-start",
   },
 });

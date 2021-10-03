@@ -69,7 +69,49 @@ export default function AddProductForm() {
                 onBlur={handleBlur("description")}
                 value={values.description}
               ></TextInput>
+
+              <TextInput
+                style={styles.formInput}
+                placeholder="category ?"
+                onChangeText={handleChange("category")}
+                onBlur={handleBlur("category")}
+                value={values.category}
+              ></TextInput>
+
+              <TextInput
+                style={styles.formInput}
+                placeholder="city ?"
+                onChangeText={handleChange("city")}
+                onBlur={handleBlur("city")}
+                value={values.city}
+              ></TextInput>
+
+              <TextInput
+                style={styles.formInput}
+                placeholder="phone ?"
+                onChangeText={handleChange("phone")}
+                onBlur={handleBlur("phone")}
+                value={values.phone}
+              ></TextInput>
+
+              <TextInput
+                style={styles.formInput}
+                placeholder="email ?"
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+              ></TextInput>
+
+              <TextInput
+                style={styles.formInput}
+                placeholder="Image ?"
+                onChangeText={handleChange("imageUri")}
+                onBlur={handleBlur("imageUri")}
+                value={values.imageUri}
+              ></TextInput>
             </View>
+
+            {/* ButtonSection for Android or IOS */}
             <View style={styles.center}>
               {Platform.OS === "android" && (
                 <TouchableOpacity
@@ -86,14 +128,14 @@ export default function AddProductForm() {
                   <Text style={styles.buttonText}>Confirm</Text>
                 </TouchableOpacity>
               )}
+              {Platform.OS === "ios" && (
+                <Button
+                  color={Theme.colors.bazaarBlue}
+                  title="Confirm"
+                  onPress={handleSubmit as (values: any) => void}
+                />
+              )}
             </View>
-            {Platform.OS === "ios" && (
-              <Button
-                color={Theme.colors.bazaarBlue}
-                title="Confirm"
-                onPress={handleSubmit as (values: any) => void}
-              />
-            )}
           </View>
         )}
       </Formik>
@@ -105,16 +147,20 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
   formContainer: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "blue",
   },
   center: {
     justifyContent: "center",
     alignItems: "center",
+    marginVertical: 15,
   },
   formInput: {
+    marginVertical: 8,
     borderRadius: 8,
     height: 38,
     width: 200,
