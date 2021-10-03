@@ -41,8 +41,7 @@ export default function ProductCard({product, onPress}: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: Theme.colors.lightBg,
-    backgroundColor: "#FAF6F6",
+    backgroundColor: Theme.colors.lightBg,
     width: 350,
     height: 150,
     borderRadius: 10,

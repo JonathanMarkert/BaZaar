@@ -6,6 +6,7 @@ import { FlatList, ImageBackground, StyleSheet, View, Text } from "react-native"
 import mockData from "../assets/DummyData/ProductData";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
+import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { IProduct } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
@@ -48,7 +49,7 @@ export default function MyScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
@@ -62,7 +63,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  errorContainer: {
-    marginTop: 104
-  }
 });

@@ -10,7 +10,12 @@ const MyTheme = {
     secondary: "#4A4453",
     bazaarBlue: "#916FF1",
     bazaarRed: "#EE4C3F",
+    buttonText: "#FFF",
     lightBg: "#FAF6F6",
+    defaultBg: "#FFF",
+    defaultMapBg: "#808080",
+    shadowColor: "#000",
+    borderButtonColor: "#000",
   },
 };
 

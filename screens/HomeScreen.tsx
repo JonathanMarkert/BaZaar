@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
+import Theme from "../components/Theme";
 
 export default function HomeScreen() {
   return (
@@ -23,7 +24,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
