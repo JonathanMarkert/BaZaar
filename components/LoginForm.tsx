@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     height: 38,
     width: 200,
     paddingHorizontal: 16,
-    borderBottomColor: "#000000",
+    borderBottomColor: Theme.colors.borderButtonColor,
     borderBottomWidth: 2,
   },
   errors: {
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    color: "#fff",
+    color: Theme.colors.buttonText,
     fontWeight: "bold",
   },
 });
