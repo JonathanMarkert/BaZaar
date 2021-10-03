@@ -1,7 +1,7 @@
 
 const mockUsers = [
   {
-    "id": 1,
+    "id": "1",
     "firstName": "Timmy",
     "lastName": "Thomson",
     "email": "timmythomson@gmail.com",
@@ -15,7 +15,7 @@ const mockUsers = [
     "longitude": 13.35241,
   },
   {
-    "id": 2,
+    "id": "2",
     "firstName": "Jonna",
     "lastName": "Johansson",
     "email": "Jonna@gmail.com",
@@ -29,7 +29,7 @@ const mockUsers = [
     "longitude": 17.833131,
   },
   {
-    "id": 3,
+    "id": "3",
     "firstName": "Donny",
     "lastName": "Disaster",
     "email": "DisasterD@outlook.com",
@@ -43,7 +43,7 @@ const mockUsers = [
     "longitude": -3.209806,
   },
   {
-    "id": 4,
+    "id": "4",
     "firstName": "Jocke",
     "lastName": "Jansson",
     "email": "BigJ@yahoo.com",
@@ -57,7 +57,7 @@ const mockUsers = [
     "longitude": 19.822921,
   },
   {
-    "id": 5,
+    "id": "5",
     "firstName": "Kicki",
     "lastName": "Karatespark",
     "email": "HiYaaa@icloud.com",

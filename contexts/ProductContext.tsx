@@ -9,7 +9,7 @@ export interface IProduct {
     description: string;
     imageUri: string;
     category: string;
-    userId: number;  
+    userId: string;  
     city: string;
     phone: string;
     email: string;
