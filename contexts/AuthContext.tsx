@@ -1,4 +1,4 @@
-import React, { createContext, FC, useState } from "react";
+import React, { createContext, FC, useEffect, useState } from "react";
 import mockData from "../assets/DummyData/UserData";
 import * as SecureStore from "expo-secure-store";
 import { ILoginData } from "../Interfaces/ILoginData";
@@ -57,13 +57,25 @@ const TokenProvider: FC = (props) => {
 
   const signOut = async () => {
     try {
+      console.log("trying to delete " + token);
       await SecureStore.deleteItemAsync("token");
-      setToken(null);
-      setLoggedInStatus(false);
     } catch (error) {
       console.log(error);
     }
+
+    if ((await SecureStore.getItemAsync("token")) == null) {
+      setToken(null);
+      setLoggedInStatus(false);
+    }
   };
+
+  useEffect(() => {
+    //console.log("token is: " + token);
+  }, [token]);
+
+  useEffect(() => {
+    //console.log("isloggedin = " + loggedInStatus);
+  }, [loggedInStatus]);
 
   return (
     <AuthContext.Provider
