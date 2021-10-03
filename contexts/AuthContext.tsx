@@ -1,18 +1,15 @@
-import React, { createContext, FC, useState } from "react";
+import React, { createContext, FC, useEffect, useState } from "react";
 import mockData from "../assets/DummyData/UserData";
 import * as SecureStore from "expo-secure-store";
+import { ILoginData } from "../Interfaces/ILoginData";
 
 interface IContextValue {
   isLoggedIn: boolean;
   isLoading: boolean | undefined;
   userToken: string | null;
-  authLogin: (user: any) => void;
+  authLogin: (userFormData: ILoginData) => void;
+  signOut: () => void;
 }
-// // kanske behöver type:a till IUser
-// export interface IUser {
-//   email: string;
-//   password: string;
-// }
 
 const TokenProvider: FC = (props) => {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
@@ -37,7 +34,7 @@ const TokenProvider: FC = (props) => {
     }
   }
 
-  const authLogin = async (userFormData: any) => {
+  const authLogin = async (userFormData: ILoginData) => {
     setIsWaitingForToken(true);
 
     const acceptedUser = mockData.find(
@@ -51,12 +48,34 @@ const TokenProvider: FC = (props) => {
       setToken(null);
       setIsWaitingForToken(false);
     } else {
-      await addToken("token", "30dk4kdflsl3");
+      await addToken("token", acceptedUser.id.toString());
       await getToken();
       setLoggedInStatus(true);
       setTimeout(() => setIsWaitingForToken(false), 2000);
     }
   };
+
+  const signOut = async () => {
+    try {
+      console.log("trying to delete " + token);
+      await SecureStore.deleteItemAsync("token");
+    } catch (error) {
+      console.log(error);
+    }
+
+    if ((await SecureStore.getItemAsync("token")) == null) {
+      setToken(null);
+      setLoggedInStatus(false);
+    }
+  };
+
+  useEffect(() => {
+    //console.log("token is: " + token);
+  }, [token]);
+
+  useEffect(() => {
+    //console.log("isloggedin = " + loggedInStatus);
+  }, [loggedInStatus]);
 
   return (
     <AuthContext.Provider
@@ -65,6 +84,7 @@ const TokenProvider: FC = (props) => {
         authLogin,
         userToken: token,
         isLoading: isWaitingForToken,
+        signOut,
       }}
     >
       {props.children}
@@ -78,4 +98,5 @@ export const AuthContext = createContext<IContextValue>({
   isLoggedIn: false,
   userToken: null,
   isLoading: true,
+  signOut: () => {},
 });

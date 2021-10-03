@@ -4,7 +4,6 @@ import { Formik } from "formik";
 import * as React from "react";
 import {
   Button,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
@@ -16,25 +15,28 @@ import * as yup from "yup";
 import Theme from "./Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
+import { ILoginData } from "../Interfaces/ILoginData";
 
-const loginValidationSchema = yup.object({
+const defaultData: ILoginData = { email: "", password: "" };
+
+type validationSchema = Record<keyof ILoginData, yup.AnySchema>;
+
+const loginValidation = yup.object().shape<validationSchema>({
   email: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup.string().required("hello.. password ?"),
+    .email("Email isn't correct")
+    .required("You need a email to login"),
+  password: yup.string().required("Hello... password?"),
 });
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(true);
   const { authLogin } = useContext(AuthContext);
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={loginValidationSchema}
+        initialValues={defaultData}
+        validationSchema={loginValidation}
         onSubmit={(values) => authLogin(values)}
       >
         {({
@@ -110,7 +112,6 @@ export default function LoginForm() {
                         : "grey",
                     },
                   ]}
-                  disabled={!isValid}
                   onPress={handleSubmit as (values: any) => void}
                 >
                   <Text style={styles.buttonText}>Login</Text>
@@ -120,7 +121,6 @@ export default function LoginForm() {
             {Platform.OS === "ios" && (
               <Button
                 color={Theme.colors.bazaarBlue}
-                disabled={!isValid}
                 title="Login"
                 onPress={handleSubmit as (values: any) => void}
               />
@@ -128,7 +128,7 @@ export default function LoginForm() {
           </View>
         )}
       </Formik>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 
