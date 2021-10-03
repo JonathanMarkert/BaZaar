@@ -7,6 +7,7 @@ import ProductCard from '../components/ProductCard';
 import { IProduct } from '../contexts/ProductContext';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 import { ListRenderItem } from 'react-native';
+import Theme from "../components/Theme";
 
 
 
@@ -40,7 +41,7 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,

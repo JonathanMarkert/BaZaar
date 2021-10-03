@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import LottieView from "lottie-react-native";
+import Theme from "../components/Theme";
 
 export default function SplashScreen() {
   return (
@@ -17,6 +18,6 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
 });

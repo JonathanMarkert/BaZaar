@@ -11,12 +11,14 @@ type ProductsStackParamList = {
   Details: { productId: string };
   Products: undefined;
   Map: { productId: string };
-  Home: undefined;
+  Home: undefined; // behövs denna???
 };
 
 export type ProductsStackScreenProps<
   Screen extends keyof ProductsStackParamList
 > = NativeStackScreenProps<ProductsStackParamList, Screen>;
+
+// export type ProductsStackAllScreenProps = NativeStackScreenProps<ProductsStackParamList>;
 
 const Stack = createNativeStackNavigator<ProductsStackParamList>();
 
