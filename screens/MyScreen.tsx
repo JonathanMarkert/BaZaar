@@ -2,7 +2,7 @@ import { BottomTabNavigationProp, BottomTabScreenProps } from "@react-navigation
 import { CompositeScreenProps } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
-import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
+import { FlatList, ImageBackground, StyleSheet, View, Text } from "react-native";
 import mockData from "../assets/DummyData/ProductData";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
@@ -18,14 +18,21 @@ type Props = CompositeScreenProps<
 // man får ut alla skärmar från ProductStackScreenProps nu. kanske inte vill det?
 
 export default function MyScreen({ navigation }: Props) {
-  
-  const products :IProduct[] = mockData;
+  const { userToken } = useContext(AuthContext);
+  const products :IProduct[] = mockData.filter(product => product.userId == userToken);
   const renderProduct = ({ item }: { item: IProduct }) => {
     return <ProductCard
       product={item} 
       onPress={() => navigation.navigate( 'Details', { productId: item.id })} 
       />
   }
+
+  if (!products) return( 
+    <View>
+      <Text>No Product found</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
