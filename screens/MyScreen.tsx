@@ -27,12 +27,6 @@ export default function MyScreen({ navigation }: Props) {
       />
   }
 
-  if (!products) return( 
-    <View>
-      <Text>No Product found</Text>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -68,4 +62,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  errorContainer: {
+    marginTop: 104
+  }
 });
