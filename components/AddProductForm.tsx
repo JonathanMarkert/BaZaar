@@ -1,5 +1,7 @@
 import { Formik } from "formik";
 import React from "react";
+import * as yup from "yup";
+
 import {
   TextInput,
   View,
@@ -27,12 +29,28 @@ const defaultFormData: IProduct = {
   longitude: 0,
 };
 
+type validationSchema = Record<
+  keyof Omit<IProduct, "id" | "userId" | "latitude" | "longitude">,
+  yup.AnySchema
+>;
+
+const addProductValidation = yup.object().shape<validationSchema>({
+  name: yup.string().required(),
+  price: yup.number().required(),
+  description: yup.string().notRequired().max(250, "keep it simple..."),
+  imageUri: yup.string().notRequired(),
+  category: yup.string().notRequired(),
+  city: yup.string().required(),
+  phone: yup.number().min(10, "to short").required(),
+  email: yup.string().email().required(),
+});
+
 export default function AddProductForm() {
   return (
     <>
       <Formik
         initialValues={defaultFormData}
-        // validationSchema={addProductValidation}
+        validationSchema={addProductValidation}
         onSubmit={(values) => console.log(values)}
       >
         {({
@@ -53,6 +71,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("name")}
                 value={values.name}
               ></TextInput>
+              {errors.name && touched.name && (
+                <Text style={styles.errors}>{errors.name}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -61,6 +82,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("price")}
                 value={values.price.toString()}
               ></TextInput>
+              {errors.price && touched.price && (
+                <Text style={styles.errors}>{errors.price}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -69,6 +93,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("description")}
                 value={values.description}
               ></TextInput>
+              {errors.description && touched.description && (
+                <Text style={styles.errors}>{errors.description}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -77,6 +104,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("category")}
                 value={values.category}
               ></TextInput>
+              {errors.category && touched.category && (
+                <Text style={styles.errors}>{errors.category}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -85,6 +115,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("city")}
                 value={values.city}
               ></TextInput>
+              {errors.city && touched.city && (
+                <Text style={styles.errors}>{errors.city}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -93,6 +126,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("phone")}
                 value={values.phone}
               ></TextInput>
+              {errors.phone && touched.phone && (
+                <Text style={styles.errors}>{errors.phone}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -101,6 +137,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("email")}
                 value={values.email}
               ></TextInput>
+              {errors.email && touched.email && (
+                <Text style={styles.errors}>{errors.email}</Text>
+              )}
 
               <TextInput
                 style={styles.formInput}
@@ -109,6 +148,9 @@ export default function AddProductForm() {
                 onBlur={handleBlur("imageUri")}
                 value={values.imageUri}
               ></TextInput>
+              {errors.imageUri && touched.imageUri && (
+                <Text style={styles.errors}>{errors.imageUri}</Text>
+              )}
             </View>
 
             {/* ButtonSection for Android or IOS */}
@@ -179,5 +221,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     fontWeight: "bold",
+  },
+  errors: {
+    fontSize: 14,
+    color: Theme.colors.bazaarRed,
+    fontWeight: "500",
   },
 });
