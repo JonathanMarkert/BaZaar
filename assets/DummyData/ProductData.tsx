@@ -23,7 +23,7 @@ const mockData  = [
     "imageUri": "https://c8.alamy.com/comp/XB44P9/half-full-beer-glass-with-beer-XB44P9.jpg",
     "category": "Food",
     "userId": 3,
-    "city": "Abbey",
+    "city": "Edinburgh",
     "phone": "700666666",
     "email": "DisasterD@outlook.com",
     "latitude": 55.94918,
