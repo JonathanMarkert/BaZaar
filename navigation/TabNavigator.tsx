@@ -1,5 +1,5 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomTabNavigationProp, BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet } from "react-native";
 import AddProductScreen from "../screens/AddProductSreen";
@@ -8,8 +8,19 @@ import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import Theme from "../components/Theme";
 import DetailsScreen from "../screens/DetailsScreen";
-import ProductsNavigator from "./ProductsNavigator";
+import ProductsNavigator, { ProductsStackAllScreenProps, ProductsStackScreenProps } from "./ProductsNavigator";
 import Header from "../components/Header";
+
+type ScreenTabParamList = {
+  HomeTab: undefined;
+  AddProductTab: undefined;
+  ProductsTab: ProductsStackAllScreenProps;
+  ProfileTab: ProductsStackScreenProps<'Details'>;
+};
+
+export type ScreenTabNavigationProp<
+  Screen extends keyof ScreenTabParamList
+> = BottomTabScreenProps<ScreenTabParamList, Screen>;
 
 const Tab = createBottomTabNavigator();
 
@@ -32,9 +43,10 @@ export default function TabNavigator() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
         component={HomeScreen}
         options={{
+          headerTitle: "Home",
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
@@ -49,9 +61,10 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="AddProduct"
+        name="AddProductTab"
         component={AddProductScreen}
         options={{
+          headerTitle: "AddProduct",
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
@@ -66,7 +79,7 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Products"
+        name="ProductsTab"
         component={ProductsNavigator}
         options={{
           headerShown: false,
@@ -84,9 +97,10 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="ProfileTab"
         component={MyScreen}
         options={{
+          headerTitle: "Profile",
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
