@@ -18,7 +18,7 @@ export type ProductsStackScreenProps<
   Screen extends keyof ProductsStackParamList
 > = NativeStackScreenProps<ProductsStackParamList, Screen>;
 
-export type ProductsStackAllScreenProps = NativeStackScreenProps<ProductsStackParamList>;
+// export type ProductsStackAllScreenProps = NativeStackScreenProps<ProductsStackParamList>;
 
 const Stack = createNativeStackNavigator<ProductsStackParamList>();
 

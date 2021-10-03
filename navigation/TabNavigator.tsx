@@ -8,13 +8,14 @@ import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import Theme from "../components/Theme";
 import DetailsScreen from "../screens/DetailsScreen";
-import ProductsNavigator, { ProductsStackAllScreenProps, ProductsStackScreenProps } from "./ProductsNavigator";
+import ProductsNavigator, {  ProductsStackScreenProps } from "./ProductsNavigator";
 import Header from "../components/Header";
 
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
-  ProductsTab: ProductsStackAllScreenProps;
+  // ProductsTab: ProductsStackAllScreenProps;
+  ProductsTab: undefined;
   ProfileTab: ProductsStackScreenProps<'Details'>;
 };
 
