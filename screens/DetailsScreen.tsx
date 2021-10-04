@@ -17,26 +17,15 @@ import Theme from "../components/Theme";
 import * as SMS from "expo-sms";
 import * as MailComposer from "expo-mail-composer";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
-import mockUsers from "../assets/DummyData/UserData";
-import mockData from "../assets/DummyData/ProductData";
-
-// const data = {
-//   name: "Fine Car",
-//   price: 20,
-//   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-//   img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
-//   category: "Car",
-//   address: "Någonsatans 15 Borås",
-//   email: "minEmail@gmail.com",
-//   phone: "070456423",
-// };
+import { useProductContext } from "../contexts/ProductContext";
 
 export default function DetailsScreen({
   navigation,
   route,
 }: ProductsStackScreenProps<"Details">) {
   const { productId } = route.params;
-  const product = mockData.find((product) => product.id === productId);
+  const {products, dispatch} =useProductContext();
+  const product = products.find(product => product.id === productId);
 
   if (!product)
     return (
@@ -147,6 +136,7 @@ export default function DetailsScreen({
                 <Map productId={productId} />
               </TouchableOpacity>
             </View>
+            
           </View>
         </ScrollView>
       </ImageBackground>

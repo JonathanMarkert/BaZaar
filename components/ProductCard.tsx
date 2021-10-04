@@ -1,16 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import { IProduct } from "../contexts/ProductContext";
-import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import Theme from "./Theme";
 
-const data = {
-  name: "Fine Car",
-  price: 20,
-  img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
-  category: "Car",
-  address: "Borås",
-};
 interface Props {
   product: IProduct;
   index: number;

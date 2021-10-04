@@ -1,16 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
-import mockData from "../assets/DummyData/ProductData";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
-import { IProduct } from "../contexts/ProductContext";
+import { IProduct, useProductContext } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 
 export default function ProductsScreen({
   navigation,
 }: ProductsStackScreenProps<"Products">) {
-  const products: IProduct[] = mockData;
+  const {products, dispatch} =useProductContext();
   const renderProduct = ({
     item,
     index,
