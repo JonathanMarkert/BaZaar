@@ -13,6 +13,7 @@ import ProductsNavigator, {
   ProductsStackScreenProps,
 } from "./ProductsNavigator";
 
+
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
@@ -30,6 +31,7 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         headerShown: true,
         headerTransparent: true,
         headerTitleAlign: "center",
@@ -93,7 +95,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                name="search-outline"
+                name="list-outline"
                 size={45}
                 color={
                   focused ? Theme.colors.bazaarRed : Theme.colors.secondary

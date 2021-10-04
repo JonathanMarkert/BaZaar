@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useReducer, FC } from "react";
 import productReducer, { ProductAction } from "../reducers/ProductReducer";
 import mockData from "../assets/DummyData/ProductData"
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export interface IProduct {
     id: string;
