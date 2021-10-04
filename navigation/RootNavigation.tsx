@@ -18,10 +18,10 @@ export default function RootNavigation() {
     <Stack.Navigator>
       {userToken == null ? (
         <Stack.Screen
-          name="SignIn"
+          name="LogIn"
           component={LoginScreen}
           options={{
-            title: "Sign in",
+            title: "Login",
             headerTransparent: true,
             headerTitleAlign: "center",
             headerStyle: {
@@ -33,7 +33,7 @@ export default function RootNavigation() {
         />
       ) : (
         <Stack.Screen
-          name="test"
+          name="Main"
           component={TabNavigator}
           options={{ headerShown: false }}
         />
