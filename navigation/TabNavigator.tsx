@@ -1,27 +1,28 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
-import { BottomTabNavigationProp, BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabScreenProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Theme from "../components/Theme";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
-import ProductsScreen from "../screens/ProductsScreen";
-import Theme from "../components/Theme";
-import DetailsScreen from "../screens/DetailsScreen";
-import ProductsNavigator, {  ProductsStackScreenProps } from "./ProductsNavigator";
-import Header from "../components/Header";
+import ProductsNavigator, {
+  ProductsStackScreenProps,
+} from "./ProductsNavigator";
 
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
   // ProductsTab: ProductsStackAllScreenProps;
   ProductsTab: undefined;
-  ProfileTab: ProductsStackScreenProps<'Details'>;
+  ProfileTab: ProductsStackScreenProps<"Details">;
 };
 
-export type ScreenTabNavigationProp<
-  Screen extends keyof ScreenTabParamList
-> = BottomTabScreenProps<ScreenTabParamList, Screen>;
+export type ScreenTabNavigationProp<Screen extends keyof ScreenTabParamList> =
+  BottomTabScreenProps<ScreenTabParamList, Screen>;
 
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +37,11 @@ export default function TabNavigator() {
           backgroundColor: Theme.colors.primary,
           opacity: 0.95,
         },
+        headerRight: () => (
+          <View style={styles.menu}>
+            <IonIcons name="menu" size={45} color={Theme.colors.secondary} />
+          </View>
+        ),
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
@@ -130,5 +136,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     elevation: 0,
+  },
+  menu: {
+    paddingRight: 24,
   },
 });
