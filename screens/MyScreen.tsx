@@ -1,23 +1,15 @@
-import {
-  BottomTabNavigationProp,
-  BottomTabScreenProps,
-} from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
 import {
-  FlatList,
+  Button, FlatList,
   ImageBackground,
-  StyleSheet,
-  View,
-  Text,
+  StyleSheet, Text, View
 } from "react-native";
-import mockData from "../assets/DummyData/ProductData";
-import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
-import { IProduct } from "../contexts/ProductContext";
+import { IProduct, useProductContext } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import { ScreenTabNavigationProp } from "../navigation/TabNavigator";
 
@@ -29,9 +21,26 @@ type Props = CompositeScreenProps<
 
 export default function MyScreen({ navigation }: Props) {
   const { userToken } = useContext(AuthContext);
-  const products: IProduct[] = mockData.filter(
+  const { products, dispatch } =useProductContext();
+  
+    const selectedProducts: IProduct[] = products.filter(
     (product) => product.userId == userToken
   );
+
+  if (!products)
+  return (
+    <View>
+      <Text>No Products found</Text>
+    </View>
+  );
+  const emptyList = () =>{
+    return(
+      <View>
+      <Text>No Products found</Text>
+    </View>
+    )
+  }
+  
   const renderProduct = ({
     item,
     index,
@@ -40,12 +49,21 @@ export default function MyScreen({ navigation }: Props) {
     index: number;
   }) => {
     return (
-      <ProductCard
-        product={item}
-        index={index}
-        arrayLength={products.length}
-        onPress={() => navigation.navigate("Details", { productId: item.id })}
-      />
+      <View>
+        <ProductCard
+          product={item}
+          index={index}
+          arrayLength={products.length}
+          onPress={() => navigation.navigate("Details", { productId: item.id })}
+        
+        />
+        <Button
+                title="Ta bort"
+                onPress={() =>
+                  dispatch({ type: 'remove-listing', payload: item })
+                }
+              />
+      </View>
     );
   };
 
@@ -58,9 +76,10 @@ export default function MyScreen({ navigation }: Props) {
       >
         <View style={styles.containerContent}>
           <FlatList
-            data={products}
+            data={selectedProducts}
             renderItem={renderProduct}
             keyExtractor={(item: IProduct) => item.id}
+            ListEmptyComponent={emptyList}
           />
         </View>
       </ImageBackground>
