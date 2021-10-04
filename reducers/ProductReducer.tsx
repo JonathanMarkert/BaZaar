@@ -29,17 +29,12 @@ function productReducer (state: IProduct[], action: ProductAction) {
             return updatedProducts
         }
         case "edit-listing": {
-            const newProducts = [...state];                              
-            const updatedProducts = [...newProducts, action.payload];
-            return updatedProducts
+            //logik för att editera data, om vi så önskar
+            return state
         }        
         default: 
-        //    exhaustiveCheck(action);
             return state;
-            
     }
 }
 
 export default productReducer;
-
-// function exhaustiveCheck(param: never) {}
