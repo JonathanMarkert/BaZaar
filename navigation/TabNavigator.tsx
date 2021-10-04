@@ -1,24 +1,32 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
-import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import {
+  BottomTabScreenProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
+
 import React from "react";
 import { StyleSheet } from "react-native";
 import Theme from "../components/Theme";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
-import ProductsNavigator, { ProductsStackScreenProps } from "./ProductsNavigator";
+
+import ProductsNavigator, {
+  ProductsStackScreenProps,
+} from "./ProductsNavigator";
+
 
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
   // ProductsTab: ProductsStackAllScreenProps;
   ProductsTab: undefined;
-  ProfileTab: ProductsStackScreenProps<'Details'>;
+  ProfileTab: ProductsStackScreenProps<"Details">;
 };
 
-export type ScreenTabNavigationProp<
-  Screen extends keyof ScreenTabParamList
-> = BottomTabScreenProps<ScreenTabParamList, Screen>;
+export type ScreenTabNavigationProp<Screen extends keyof ScreenTabParamList> =
+  BottomTabScreenProps<ScreenTabParamList, Screen>;
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +34,7 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         headerShown: true,
         headerTransparent: true,
         headerTitleAlign: "center",
