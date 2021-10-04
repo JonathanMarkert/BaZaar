@@ -1,17 +1,14 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
-
 import {
   BottomTabScreenProps,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Theme from "../components/Theme";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
-
 import ProductsNavigator, {
   ProductsStackScreenProps,
 } from "./ProductsNavigator";
@@ -42,6 +39,11 @@ export default function TabNavigator() {
           backgroundColor: Theme.colors.primary,
           opacity: 0.95,
         },
+        headerRight: () => (
+          <View style={styles.menu}>
+            <IonIcons name="menu" size={45} color={Theme.colors.secondary} />
+          </View>
+        ),
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
@@ -136,5 +138,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     elevation: 0,
+  },
+  menu: {
+    paddingRight: 24,
   },
 });

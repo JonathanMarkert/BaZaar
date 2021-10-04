@@ -1,11 +1,14 @@
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import React from "react";
+import Theme from "../components/Theme";
 import DetailsScreen from "../screens/DetailsScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import MapScreen from "../screens/MapScreen";
 import ProductsScreen from "../screens/ProductsScreen";
-import { ThemeProvider } from "@react-navigation/native";
-import Theme from "../components/Theme";
+import IonIcons from "@expo/vector-icons/Ionicons";
+import { StyleSheet, View } from "react-native";
 
 type ProductsStackParamList = {
   Details: { productId: string };
@@ -33,6 +36,11 @@ export default function ProductsNavigator() {
         headerStyle: {
           backgroundColor: Theme.colors.primary95,
         },
+        headerRight: () => (
+          <View style={styles.menu}>
+            <IonIcons name="menu" size={45} color={Theme.colors.secondary} />
+          </View>
+        ),
       }}
     >
       <Stack.Screen name="Products" component={ProductsScreen} />
@@ -41,3 +49,9 @@ export default function ProductsNavigator() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  menu: {
+    paddingRight: 8,
+  },
+});
