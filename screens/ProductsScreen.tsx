@@ -1,12 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
-import Header from "../components/Header";
 import ProductCard from '../components/ProductCard';
+import Theme from "../components/Theme";
 import { IProduct, useProductContext } from '../contexts/ProductContext';
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
-
-
 
 export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
 
@@ -20,22 +18,14 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
       />
   }
   
-  // if (!product) return( 
-  //   <View>
-  //     <Text>No Product found</Text>
-  //   </View>
-  // ); //returnera error not found
-  
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
-        <Header title="Products" />
+      <ImageBackground
+        source={require("../assets/bkg1.png")}
+        style={styles.backgroundImg}
+      >
         <View style={styles.containerContent}>
-          {/* <ProductCard 
-            product={product}
-            onPress={() => navigation.navigate('Details', { productId: product.id })}
-          /> */}
           <FlatList 
             data={products} 
             renderItem={renderProduct}
@@ -49,18 +39,18 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%'
+    resizeMode: "cover",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   containerContent: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 });

@@ -1,13 +1,23 @@
-import * as MailComposer from 'expo-mail-composer';
-import * as SMS from 'expo-sms';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  ScrollView,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
-import { useProductContext } from '../contexts/ProductContext';
-import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
+import * as SMS from "expo-sms";
+import * as MailComposer from "expo-mail-composer";
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
+import { useProductContext } from "../contexts/ProductContext";
 
 export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
   const { productId } = route.params;
@@ -28,10 +38,10 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
         ''
        )
     } else {
-      Alert.alert('Sorry! No SMS available');
+      Alert.alert("Sorry! No SMS available");
     }
-  }
-  
+  };
+
   const sendMail = async () => {
     const isAvailable = await MailComposer.isAvailableAsync();
     if (isAvailable) {
@@ -42,15 +52,14 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
         body: '',
       });
     } else {
-      Alert.alert('Sorry! No Mail available');
+      Alert.alert("Sorry! No Mail available");
     }
-  }
-  
+  };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="dark" />
       <ImageBackground source={require('../assets/bkg1.png')} style={styles.backgroundImg}>
-        <Header title="Details" />
         <View style={styles.containerContent} >
           <View style={styles.imgContainer} >
             <Image 
@@ -64,7 +73,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 {product.name}
               </Text>
             </View>
-            <View >
+            <View>
               <View style={styles.margine}>
                 <Text style={[styles.baseText, styles.boldText]}>
                   Description:
@@ -91,10 +100,16 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                   {product.city}
                 </Text>
               </View>
-              <View style={[styles.rowSpaceBetween, styles.alignCenter, styles.margine]}>
+              <View
+                style={[
+                  styles.rowSpaceBetween,
+                  styles.alignCenter,
+                  styles.margine,
+                ]}
+              >
                 <View>
                   <Text style={[styles.baseText, styles.boldText]}>
-                    Contact: 
+                    Contact:
                   </Text>
                 </View>
               </View>
@@ -120,7 +135,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 style={styles.mapContainer} 
                 onPress={() => navigation.navigate('Map', { productId })}
               >
-                <Map />
+                <Map productId={productId} />
               </TouchableOpacity>
             </View>
             
@@ -134,14 +149,14 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff", 
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%'
+    resizeMode: "cover",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   containerContent: {
     flex: 1,
@@ -165,7 +180,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     justifyContent: "space-evenly",
-    backgroundColor: "#FAF6F6",
+    backgroundColor: Theme.colors.lightBg,
     width: 350,
     minHeight: 410,
     borderRadius: 10,
@@ -173,7 +188,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   mapContainer: {
-    backgroundColor: "gray",
+    backgroundColor: Theme.colors.defaultMapBg,
     width: "auto",
     height: 100,
     marginTop: 4,
@@ -186,7 +201,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.bazaarBlue,
     padding: 10,
   },
-  titleText:{
+  titleText: {
     fontSize: 20,
   },
   baseText: {
@@ -196,7 +211,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonText: {
-    color: "#fff"
+    color: Theme.colors.buttonText,
   },
   rowSpaceBetween: {
     flexDirection: "row",
