@@ -45,8 +45,8 @@ export default function TabNavigator() {
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: Theme.colors.bazaarRed,
+        tabBarInactiveTintColor: Theme.colors.secondary,
       }}
     >
       <Tab.Screen
