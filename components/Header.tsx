@@ -13,7 +13,7 @@ export default function Header() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    height: 110,
+    height: 114,
     backgroundColor: Theme.colors.primary95,
     marginBottom: "auto",
     alignItems: "center",

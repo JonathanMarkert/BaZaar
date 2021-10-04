@@ -1,39 +1,35 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import { IProduct } from "../contexts/ProductContext";
-import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import Theme from "./Theme";
 
-const data = {
-  name: "Fine Car",
-  price: 20,
-  img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
-  category: "Car",
-  address: "Borås",
-};
 interface Props {
   product: IProduct;
+  index: number;
+  arrayLength: number;
   onPress: () => void;
 }
 
-export default function ProductCard({product, onPress}: Props) {
-  
+export default function ProductCard({
+  product,
+  index,
+  arrayLength,
+  onPress,
+}: Props) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image 
-        source={{uri: product.imageUri}}
-        style={styles.cover}
-      />
+    <TouchableOpacity
+      style={[
+        styles.container,
+        { marginTop: index === 0 ? 104 : 4 },
+        { marginBottom: index === arrayLength - 1 ? 90 : 4 },
+      ]}
+      onPress={onPress}
+    >
+      <Image source={{ uri: product.imageUri }} style={styles.cover} />
       <View style={styles.infoContainer}>
-        <Text style={[styles.baseText, styles.boldText]}>
-          {product.name}
-        </Text>
-        <Text style={styles.baseText}>
-          {product.price} kr
-        </Text>
-        <Text style={styles.baseText}>
-          {product.city}
-        </Text>
+        <Text style={[styles.baseText, styles.boldText]}>{product.name}</Text>
+        <Text style={styles.baseText}>{product.price} kr</Text>
+        <Text style={styles.baseText}>{product.city}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     padding: 20,
-    marginVertical: 4,
+    // marginBottom: 4,
   },
   cover: {
     width: 150,

@@ -89,7 +89,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
-                name="search-outline"
+                name="list-outline"
                 size={45}
                 color={
                   focused ? Theme.colors.bazaarRed : Theme.colors.secondary
