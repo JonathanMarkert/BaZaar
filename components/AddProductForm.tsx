@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import { categories } from "../assets/DummyData/Category";
-import { IProduct } from "../contexts/ProductContext";
+import { IProduct, useProductContext } from "../contexts/ProductContext";
 import Theme from "./Theme";
 
 const defaultFormData: IProduct = {
@@ -49,12 +49,15 @@ const addProductValidation = yup.object().shape<validationSchema>({
 });
 
 export default function AddProductForm() {
+  const { dispatch } = useProductContext();
   return (
     <>
       <Formik
         initialValues={defaultFormData}
         validationSchema={addProductValidation}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) =>
+          dispatch({ type: "create-listing", payload: values })
+        }
       >
         {({
           handleChange,
