@@ -7,7 +7,7 @@ interface createListing {
 }
 interface removeListing {
     type: "remove-listing";
-    payload: string
+    payload:IProduct
 }
 interface editListing {
     type: "edit-listing";
@@ -19,18 +19,20 @@ export type ProductAction = createListing | removeListing | editListing;
 function productReducer (state: IProduct[], action: ProductAction) {
     switch (action.type) {
         case "create-listing":{
-         //logik för att skapa nytt objekt
-            return state;
-        }
+            return {
+                ...state,                              
+                products: [...state, action.payload]
+        }}
         case "remove-listing": {
-            //ta bort objekt i fråga
-            return state;
-        }
+            return {
+                ...state,
+                products: state.filter((item) => item.id !== action.payload.id)
+        }}
         case "edit-listing": {
-            //ändra kopia av state och skicka tillbaka
-            return state;  //new state
-        }
-
+            return {
+                ...state,                              
+                products: [...state, action.payload]
+        }}        
         default: {
         //    exhaustiveCheck(action);
             return state;

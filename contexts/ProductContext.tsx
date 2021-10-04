@@ -18,7 +18,7 @@ export interface IProduct {
 
 interface IContextValue {
     products: IProduct[];
-    dispatch?: React.Dispatch<ProductAction>
+    dispatch: React.Dispatch<ProductAction>
 }
 
 

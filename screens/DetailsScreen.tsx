@@ -1,28 +1,13 @@
+import * as MailComposer from 'expo-mail-composer';
+import * as SMS from 'expo-sms';
 import { StatusBar } from 'expo-status-bar';
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, Text, ScrollView, Button, Alert, TouchableOpacity } from "react-native";
+import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
-import * as SMS from 'expo-sms';
-import * as MailComposer from 'expo-mail-composer';
-import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
-import mockUsers from "../assets/DummyData/UserData"
-import mockData from '../assets/DummyData/ProductData';
-import productReducer from '../reducers/ProductReducer';
 import { useProductContext } from '../contexts/ProductContext';
-
-
-// const data = {
-//   name: "Fine Car",
-//   price: 20,
-//   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.Lorem Ipsum is simply dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-//   img: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg",
-//   category: "Car",
-//   address: "Någonsatans 15 Borås",
-//   email: "minEmail@gmail.com",
-//   phone: "070456423",
-// };
+import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
 export default function DetailsScreen({ navigation, route }: ProductsStackScreenProps<'Details'>) {
   const { productId } = route.params;
@@ -130,7 +115,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                     {product.phone}
                   </Text>
                 </TouchableOpacity>
-                </View>
+              </View>
               <TouchableOpacity 
                 style={styles.mapContainer} 
                 onPress={() => navigation.navigate('Map', { productId })}
@@ -138,6 +123,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
                 <Map />
               </TouchableOpacity>
             </View>
+            
           </View>
         </View>
       </ImageBackground>
@@ -148,7 +134,7 @@ export default function DetailsScreen({ navigation, route }: ProductsStackScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff", 
   },
   backgroundImg: {
     flex: 1,
