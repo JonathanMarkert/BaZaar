@@ -13,7 +13,6 @@ import ProductsNavigator, {
   ProductsStackScreenProps,
 } from "./ProductsNavigator";
 
-
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
@@ -39,11 +38,6 @@ export default function TabNavigator() {
           backgroundColor: Theme.colors.primary,
           opacity: 0.95,
         },
-        headerRight: () => (
-          <View style={styles.menu}>
-            <IonIcons name="menu" size={45} color={Theme.colors.secondary} />
-          </View>
-        ),
         lazy: false,
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
@@ -138,8 +132,5 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     elevation: 0,
-  },
-  menu: {
-    paddingRight: 24,
   },
 });
