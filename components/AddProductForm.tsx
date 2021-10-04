@@ -1,6 +1,7 @@
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
+import { Picker } from "@react-native-picker/picker";
 
 import {
   TextInput,
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 import { IProduct } from "../contexts/ProductContext";
 import Theme from "./Theme";
+import { categories } from "../assets/DummyData/Category";
 
 const defaultFormData: IProduct = {
   id: "",
@@ -21,7 +23,7 @@ const defaultFormData: IProduct = {
   description: "",
   imageUri: "",
   category: "",
-  userId: 0,
+  userId: "",
   city: "",
   phone: "",
   email: "",
@@ -57,6 +59,7 @@ export default function AddProductForm() {
           handleChange,
           handleBlur,
           handleSubmit,
+          setFieldValue,
           values,
           touched,
           errors,
@@ -104,6 +107,25 @@ export default function AddProductForm() {
                 onBlur={handleBlur("category")}
                 value={values.category}
               ></TextInput>
+
+              <Picker
+                enabled={true}
+                style={styles.formInput}
+                mode="dropdown"
+                onValueChange={handleChange("category")}
+                selectedValue={values.category}
+              >
+                {categories.map((item) => {
+                  return (
+                    <Picker.Item
+                      label={item.name.toString()}
+                      value={item.name.toString()}
+                      key={item.id.toString()}
+                    />
+                  );
+                })}
+              </Picker>
+
               {errors.category && touched.category && (
                 <Text style={styles.errors}>{errors.category}</Text>
               )}
