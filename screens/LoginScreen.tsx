@@ -23,7 +23,6 @@ export default function LoginScreen() {
           source={require("../assets/bkg1.png")}
           style={styles.backgroundImg}
         >
-          {/* <Header title="Login" /> */}
           <View style={styles.containerContent}>
             <Image source={require("../assets/logo.png")} />
           </View>
@@ -55,7 +54,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    color: "#fff",
+    color: Theme.colors.buttonText,
     fontWeight: "bold",
   },
   innerContainer: {
@@ -100,11 +99,11 @@ const styles = StyleSheet.create({
     width: "95%",
     marginHorizontal: 10,
     marginVertical: 10,
-    backgroundColor: "white",
+    backgroundColor: Theme.colors.defaultBg,
     borderRadius: 20,
     padding: 15,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: Theme.colors.shadowColor,
     shadowOffset: {
       width: 0,
       height: 2,

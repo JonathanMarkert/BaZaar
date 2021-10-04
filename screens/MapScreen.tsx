@@ -3,9 +3,12 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
+import Theme from "../components/Theme";
 import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
 
 export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
+  const productId = route.params.productId;
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -13,9 +16,8 @@ export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
         source={require("../assets/bkg1.png")}
         style={styles.backgroundImg}
       >
-        {/* <Header title="Map" /> */}
         <View style={styles.containerContent}>
-          <Map />
+          <Map productId={productId} />
         </View>
       </ImageBackground>
     </View>
@@ -25,7 +27,7 @@ export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
+    backgroundColor: Theme.colors.defaultMapBg,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 90,

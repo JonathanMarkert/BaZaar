@@ -144,7 +144,7 @@ export default function DetailsScreen({
                 style={styles.mapContainer}
                 onPress={() => navigation.navigate("Map", { productId })}
               >
-                <Map />
+                <Map productId={productId} />
               </TouchableOpacity>
             </View>
           </View>
@@ -157,7 +157,7 @@ export default function DetailsScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     justifyContent: "space-evenly",
-    backgroundColor: "#FAF6F6",
+    backgroundColor: Theme.colors.lightBg,
     width: 350,
     minHeight: 410,
     borderRadius: 10,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   mapContainer: {
-    backgroundColor: "gray",
+    backgroundColor: Theme.colors.defaultMapBg,
     width: "auto",
     height: 100,
     marginTop: 4,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonText: {
-    color: "#fff",
+    color: Theme.colors.buttonText,
   },
   rowSpaceBetween: {
     flexDirection: "row",

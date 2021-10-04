@@ -1,18 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-} from "react-native";
+import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
 import mockData from "../assets/DummyData/ProductData";
-import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
+import Theme from "../components/Theme";
 import { IProduct } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
-import { ListRenderItem } from "react-native";
 
 export default function ProductsScreen({
   navigation,
@@ -50,7 +43,7 @@ export default function ProductsScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,

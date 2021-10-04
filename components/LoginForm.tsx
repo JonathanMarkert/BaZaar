@@ -1,10 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import IonIcons from "@expo/vector-icons/Ionicons";
 import { Formik } from "formik";
-import React, { useState } from "react";
+import * as React from "react";
 import {
   Button,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
@@ -14,31 +13,31 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import Theme from "./Theme";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
+import { ILoginData } from "../Interfaces/ILoginData";
 
-interface IFormValues {
-  email: string;
-  password: string;
-}
+const defaultData: ILoginData = { email: "", password: "" };
 
-const loginValidationSchema = yup.object({
+type validationSchema = Record<keyof ILoginData, yup.AnySchema>;
+
+const loginValidation = yup.object().shape<validationSchema>({
   email: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup.string().required("hello.. password ?"),
+    .email("Email isn't correct")
+    .required("You need a email to login"),
+  password: yup.string().required("Hello... password?"),
 });
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(true);
-
+  const [showPassword, setShowPassword] = React.useState(true);
+  const { authLogin } = useContext(AuthContext);
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <>
       <Formik
-        initialValues={{ email: "user@email.com", password: "" }}
-        validationSchema={loginValidationSchema}
-        onSubmit={(values) => console.log(values)}
+        initialValues={defaultData}
+        validationSchema={loginValidation}
+        onSubmit={(values) => authLogin(values)}
       >
         {({
           handleChange,
@@ -59,6 +58,7 @@ export default function LoginForm() {
               <View style={styles.row}>
                 <TextInput
                   style={styles.formInput}
+                  placeholder="user@email.com"
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   value={values.email}
@@ -81,6 +81,7 @@ export default function LoginForm() {
               <View style={styles.row}>
                 <TextInput
                   style={styles.formInput}
+                  placeholder="your password"
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
@@ -111,8 +112,7 @@ export default function LoginForm() {
                         : "grey",
                     },
                   ]}
-                  disabled={!isValid}
-                  onPress={() => handleSubmit}
+                  onPress={handleSubmit as (values: any) => void}
                 >
                   <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
@@ -121,15 +121,14 @@ export default function LoginForm() {
             {Platform.OS === "ios" && (
               <Button
                 color={Theme.colors.bazaarBlue}
-                disabled={!isValid}
                 title="Login"
-                onPress={() => handleSubmit}
+                onPress={handleSubmit as (values: any) => void}
               />
             )}
           </View>
         )}
       </Formik>
-    </KeyboardAvoidingView>
+    </>
   );
 }
 
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
     height: 38,
     width: 200,
     paddingHorizontal: 16,
-    borderBottomColor: "#000000",
+    borderBottomColor: Theme.colors.borderButtonColor,
     borderBottomWidth: 2,
   },
   errors: {
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    color: "#fff",
+    color: Theme.colors.buttonText,
     fontWeight: "bold",
   },
 });
