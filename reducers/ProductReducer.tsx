@@ -19,24 +19,24 @@ export type ProductAction = createListing | removeListing | editListing;
 function productReducer (state: IProduct[], action: ProductAction) {
     switch (action.type) {
         case "create-listing":{
-            return {
-                ...state,                              
-                products: [...state, action.payload]
-        }}
+            const newProducts = [...state];                              
+            const updatedProducts = [...newProducts, action.payload];
+            return updatedProducts
+        }
         case "remove-listing": {
-            return {
-                ...state,
-                products: state.filter((item) => item.id !== action.payload.id)
-        }}
+            const newProducts = [...state];
+            const updatedProducts = newProducts.filter((item) => item.id !== action.payload.id);
+            return updatedProducts
+        }
         case "edit-listing": {
-            return {
-                ...state,                              
-                products: [...state, action.payload]
-        }}        
-        default: {
+            const newProducts = [...state];                              
+            const updatedProducts = [...newProducts, action.payload];
+            return updatedProducts
+        }        
+        default: 
         //    exhaustiveCheck(action);
             return state;
-            }
+            
     }
 }
 
