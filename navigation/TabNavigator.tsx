@@ -1,17 +1,21 @@
 import IonIcons from "@expo/vector-icons/Ionicons";
+
 import {
   BottomTabScreenProps,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
+
 import React from "react";
 import { StyleSheet } from "react-native";
 import Theme from "../components/Theme";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
+
 import ProductsNavigator, {
   ProductsStackScreenProps,
 } from "./ProductsNavigator";
+
 
 type ScreenTabParamList = {
   HomeTab: undefined;
