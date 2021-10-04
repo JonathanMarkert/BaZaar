@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import {
   Button, FlatList,
   ImageBackground,
-  StyleSheet, Text, View
+  StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
@@ -57,12 +57,16 @@ export default function MyScreen({ navigation }: Props) {
           onPress={() => navigation.navigate("Details", { productId: item.id })}
         
         />
-        <Button
-                title="Ta bort"
+        <TouchableOpacity
+                style={styles.button}
+                
                 onPress={() =>
                   dispatch({ type: 'remove-listing', payload: item })
-                }
-              />
+                }>
+                  <Text style={styles.buttonText}>
+                    Ta bort annons
+                  </Text>
+                </TouchableOpacity>
       </View>
     );
   };
@@ -103,5 +107,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    alignItems: "center",   
+    backgroundColor: Theme.colors.bazaarBlue,
+    borderRadius:10,
+    padding: 15
+  },
+  buttonText: {
+  fontSize: 20,
+  color: Theme.colors.buttonText,
+  fontWeight: "bold",
   },
 });
