@@ -4,9 +4,9 @@ import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
-import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 
-export default function MapScreen({route}: ProductsStackScreenProps<'Map'>) {
+export default function MapScreen({ route }: ProductsStackScreenProps<"Map">) {
   const productId = route.params.productId;
 
   return (
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 90,
     marginHorizontal: 10,
-    marginTop: 10,
+    marginTop: 104,
   },
 });

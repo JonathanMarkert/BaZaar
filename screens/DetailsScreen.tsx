@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    marginTop: 114,
+    marginTop: 104,
     marginBottom: 80,
     marginHorizontal: 20,
     // alignItems: "center",
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     backgroundColor: Theme.colors.lightBg,
     width: 350,
-    minHeight: 410,
+    minHeight: 400,
     borderRadius: 10,
     marginBottom: 10,
     padding: 20,

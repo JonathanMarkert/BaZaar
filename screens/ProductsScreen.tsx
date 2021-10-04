@@ -11,10 +11,18 @@ export default function ProductsScreen({
   navigation,
 }: ProductsStackScreenProps<"Products">) {
   const products: IProduct[] = mockData;
-  const renderProduct = ({ item }: { item: IProduct }) => {
+  const renderProduct = ({
+    item,
+    index,
+  }: {
+    item: IProduct;
+    index: number;
+  }) => {
     return (
       <ProductCard
         product={item}
+        index={index}
+        arrayLength={products.length}
         onPress={() => navigation.navigate("Details", { productId: item.id })}
       />
     );
@@ -59,7 +67,5 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     height: 100,
-    marginTop: 114,
-    marginBottom: 80,
   },
 });
