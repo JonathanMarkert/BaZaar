@@ -22,7 +22,7 @@ interface IContextValue {
 }
 
 
-export const productData: IProduct [] = mockData;
+const productData: IProduct [] = mockData;
 
 const ProductContext = createContext<IContextValue>({} as IContextValue)
 
