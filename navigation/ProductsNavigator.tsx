@@ -38,7 +38,12 @@ export default function ProductsNavigator() {
         },
         headerRight: () => (
           <View style={styles.menu}>
-            <IonIcons name="menu" size={45} color={Theme.colors.secondary} />
+            <IonIcons
+              name="menu"
+              size={45}
+              color={Theme.colors.secondary}
+              onPress={() => console.log("TadAAAAA!!!")}
+            />
           </View>
         ),
       }}
