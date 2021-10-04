@@ -1,23 +1,32 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
-import ProductCard from '../components/ProductCard';
+import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
-import { IProduct, useProductContext } from '../contexts/ProductContext';
-import { ProductsStackScreenProps } from '../navigation/ProductsNavigator';
+import { IProduct, useProductContext } from "../contexts/ProductContext";
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 
-export default function ProductsScreen({ navigation }: ProductsStackScreenProps<'Products'>) {
-
+export default function ProductsScreen({
+  navigation,
+}: ProductsStackScreenProps<"Products">) {
   const {products, dispatch} =useProductContext();
-  
-  const renderProduct = ({ item }: { item: IProduct }) => {
-    return <ProductCard
-      product={item} 
-      onPress={() => navigation.navigate('Details', { productId: item.id })}
-     
+  const renderProduct = ({
+    item,
+    index,
+  }: {
+    item: IProduct;
+    index: number;
+  }) => {
+    return (
+      <ProductCard
+        product={item}
+        index={index}
+        arrayLength={products.length}
+        onPress={() => navigation.navigate("Details", { productId: item.id })}
       />
-  }
-  
+    );
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -26,10 +35,12 @@ export default function ProductsScreen({ navigation }: ProductsStackScreenProps<
         style={styles.backgroundImg}
       >
         <View style={styles.containerContent}>
-          <FlatList 
-            data={products} 
+          <FlatList
+            style={styles.flatListContent}
+            data={products}
             renderItem={renderProduct}
-            keyExtractor={(item: IProduct) => item.id} />
+            keyExtractor={(item: IProduct) => item.id}
+          />
         </View>
       </ImageBackground>
     </View>
@@ -52,5 +63,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  flatListContent: {
+    height: 100,
   },
 });
