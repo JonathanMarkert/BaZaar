@@ -1,4 +1,5 @@
 import { Picker } from "@react-native-picker/picker";
+import * as ImagePicker from 'expo-image-picker';
 import { Formik } from "formik";
 import React, { useContext } from "react";
 import {
@@ -19,16 +20,27 @@ import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import Theme from "./Theme";
 
+type validationSchema = Record<
+  keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
+  yup.AnySchema
+>;
+  
+const addProductValidation = yup.object().shape<validationSchema>({
+  name: yup.string().required(),
+  price: yup.number().required(),
+  description: yup.string().notRequired().max(250, "keep it simple..."),
+  imageUri: yup.string().notRequired(),
+  category: yup.string().required("pick one"),
+  phone: yup.number().min(10, "to short").required(),
+  email: yup.string().email().required(),
+});
+
 export default function AddProductForm() {
   const { dispatch } = useProductContext();
+  // const { userToken, getUser } = useContext(AuthContext);
   const { userToken } = useContext(AuthContext);
   const user = mockUsers.find(user => user.id === userToken);
-  if (!user)
-  return (
-    <View>
-      <Text>No User found</Text>
-    </View>
-  ); 
+  if (!user) throw new Error('Missing user...');
   
   const defaultFormData: IProduct = {
     id: "",
@@ -44,21 +56,19 @@ export default function AddProductForm() {
     latitude: user.latitude,
     longitude: user.longitude,
   };
+
+  const pickImage = async (setFieldValue: (field: keyof IProduct, value: string) => void) => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
   
-  type validationSchema = Record<
-    keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
-    yup.AnySchema
-  >;
-  
-  const addProductValidation = yup.object().shape<validationSchema>({
-    name: yup.string().required(),
-    price: yup.number().required(),
-    description: yup.string().notRequired().max(250, "keep it simple..."),
-    imageUri: yup.string().notRequired(),
-    category: yup.string().required("pick one"),
-    phone: yup.number().min(10, "to short").required(),
-    email: yup.string().email().required(),
-  });
+    if (!result.cancelled) {
+      setFieldValue('imageUri', result.uri);
+    }
+  };
 
   return (
     <>
@@ -70,6 +80,7 @@ export default function AddProductForm() {
         }
       >
         {({
+          setFieldValue,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -140,6 +151,7 @@ export default function AddProductForm() {
                       dropdownIconColor={Theme.colors.pickerDropDownColor}
                       onValueChange={handleChange("category")}
                       selectedValue={values.category}
+                      prompt="Category"
                     >
                       {categories.map((item) => {
                         return (
@@ -188,16 +200,28 @@ export default function AddProductForm() {
                     )}  
                 </View>
                 <View style={styles.formInputContainer}>
-                  <View style={styles.formInputInnerContainer}>
-                    <TextInput
-                      style={styles.formInput}
-                      placeholder="Image"
-                      onChangeText={handleChange("imageUri")}
-                      onBlur={handleBlur("imageUri")}
-                      value={values.imageUri}
-                      returnKeyType="next"
-                    ></TextInput>
-                  </View>
+                    <View style={styles.formInputInnerContainer}>
+                      {values.imageUri !== '' && 
+                        <TextInput
+                          style={styles.formInput}
+                          placeholder="Image"
+                          onChangeText={handleChange("imageUri")}
+                          onBlur={handleBlur("imageUri")}
+                          value={values.imageUri}
+                          editable={false}
+                          returnKeyType="next"
+                          multiline={true}
+                        />
+                      }
+                    </View>
+                      <TouchableOpacity 
+                        style={[styles.ImgButton, styles.buttonColor]}
+                        onPress={() => pickImage(setFieldValue)}
+                        >
+                        <Text style={styles.buttonText}>
+                          Pick a image
+                        </Text>
+                      </TouchableOpacity>
                   {errors.imageUri && touched.imageUri && (
                     <Text style={styles.errors}>{errors.imageUri}</Text>
                     )}
@@ -284,7 +308,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    // padding: 15,
+  },
+  buttonColor: {
+    backgroundColor: Theme.colors.bazaarBlue
+  },
+  ImgButton: {
+    width: "auto",
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
     padding: 15,
+    marginVertical: 10
   },
   buttonText: {
     fontSize: 20,
