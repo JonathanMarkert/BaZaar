@@ -37,12 +37,12 @@ export default function AddProductForm() {
     description: "",
     imageUri: "",
     category: "",
-    userId: "",
-    city: "",
+    userId: user.id,
+    city: user.city,
     phone: user.phone,
     email: user.email,
-    latitude: 0,
-    longitude: 0,
+    latitude: user.latitude,
+    longitude: user.longitude,
   };
   
   type validationSchema = Record<
