@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Dimensions, ImageBackground, StyleSheet, View, Text } from "react-native";
 import MapView from 'react-native-maps';
 import mockData from "../assets/DummyData/ProductData";
+import { useProductContext } from "../contexts/ProductContext";
 
 interface Props {
   productId: string;
 }
 
 export default function Map({ productId }: Props) {
-  const product = mockData.find(product => product.id === productId);
+  const { products } = useProductContext();
+  const product = products.find(product => product.id === productId);
 
   if (!product) return( 
     <View>
