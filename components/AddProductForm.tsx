@@ -20,7 +20,7 @@ import Theme from "./Theme";
 const defaultFormData: IProduct = {
   id: "",
   name: "",
-  price: 0,
+  price: "",
   description: "",
   imageUri: "",
   category: "",
@@ -43,7 +43,6 @@ const addProductValidation = yup.object().shape<validationSchema>({
   description: yup.string().notRequired().max(250, "keep it simple..."),
   imageUri: yup.string().notRequired(),
   category: yup.string().required("pick one"),
-  // city: yup.string().required(),
   phone: yup.number().min(10, "to short").required(),
   email: yup.string().email().required(),
 });
@@ -79,7 +78,7 @@ export default function AddProductForm() {
                   <View style={styles.formInputInnerContainer}>
                     <TextInput
                       style={styles.formInput}
-                      placeholder="title"
+                      placeholder="Title"
                       onChangeText={handleChange("name")}
                       onBlur={handleBlur("name")}
                       value={values.name}
@@ -97,7 +96,7 @@ export default function AddProductForm() {
                       placeholder="Price"
                       onChangeText={handleChange("price")}
                       onBlur={handleBlur("price")}
-                      value={values.price.toString()}
+                      value={values.price}
                       returnKeyType="next"
                     ></TextInput>
                   </View>
@@ -109,11 +108,12 @@ export default function AddProductForm() {
                   <View style={styles.formInputInnerContainer}>
                     <TextInput
                       style={styles.formInput}
-                      placeholder="description"
+                      placeholder="Description"
                       onChangeText={handleChange("description")}
                       onBlur={handleBlur("description")}
                       value={values.description}
                       returnKeyType="next"
+                      multiline={true}
                       ></TextInput>
                   </View>
                   {errors.description && touched.description && (
@@ -148,7 +148,7 @@ export default function AddProductForm() {
                   <View style={styles.formInputInnerContainer}>
                     <TextInput
                       style={styles.formInput}
-                      placeholder="phone"
+                      placeholder="Phone"
                       onChangeText={handleChange("phone")}
                       onBlur={handleBlur("phone")}
                       value={values.phone}
@@ -163,7 +163,7 @@ export default function AddProductForm() {
                   <View style={styles.formInputInnerContainer}>
                     <TextInput
                       style={styles.formInput}
-                      placeholder="email"
+                      placeholder="Email"
                       onChangeText={handleChange("email")}
                       onBlur={handleBlur("email")}
                       value={values.email}
@@ -245,14 +245,14 @@ const styles = StyleSheet.create({
   formInputInnerContainer: {
     flex: 1,
     borderRadius: 10,
-    height: 45,
+    minHeight: 45,
     borderBottomColor: Theme.colors.borderButtonColor,
     borderBottomWidth: 2,
   },
   formInput: {
     alignItems: "center",
     borderRadius: 8,
-    height: 45,
+    minHeight: 45,
     width: "100%",
     paddingHorizontal: 16,
     fontSize: 16,
