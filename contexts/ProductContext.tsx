@@ -6,7 +6,7 @@ import mockData from "../assets/DummyData/ProductData"
 export interface IProduct {
     id: string;
     name: string;
-    price: number;
+    price: string;
     description: string;
     imageUri: string;
     category: string;

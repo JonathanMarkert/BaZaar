@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import { Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   KeyboardAvoidingView,
@@ -10,46 +10,56 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import * as yup from "yup";
 import { categories } from "../assets/DummyData/Category";
+import mockUsers from "../assets/DummyData/UserData";
+import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import Theme from "./Theme";
 
-const defaultFormData: IProduct = {
-  id: "",
-  name: "",
-  price: 0,
-  description: "",
-  imageUri: "",
-  category: "",
-  userId: "",
-  city: "",
-  phone: "",
-  email: "",
-  latitude: 0,
-  longitude: 0,
-};
-
-type validationSchema = Record<
-  keyof Omit<IProduct, "id" | "userId" | "latitude" | "longitude">,
-  yup.AnySchema
->;
-
-const addProductValidation = yup.object().shape<validationSchema>({
-  name: yup.string().required(),
-  price: yup.number().required(),
-  description: yup.string().notRequired().max(250, "keep it simple..."),
-  imageUri: yup.string().notRequired(),
-  category: yup.string().required("pick one"),
-  city: yup.string().required(),
-  phone: yup.number().min(10, "to short").required(),
-  email: yup.string().email().required(),
-});
-
 export default function AddProductForm() {
   const { dispatch } = useProductContext();
+  const { userToken } = useContext(AuthContext);
+  const user = mockUsers.find(user => user.id === userToken);
+  if (!user)
+  return (
+    <View>
+      <Text>No User found</Text>
+    </View>
+  ); 
+  
+  const defaultFormData: IProduct = {
+    id: "",
+    name: "",
+    price: "",
+    description: "",
+    imageUri: "",
+    category: "",
+    userId: user.id,
+    city: user.city,
+    phone: user.phone,
+    email: user.email,
+    latitude: user.latitude,
+    longitude: user.longitude,
+  };
+  
+  type validationSchema = Record<
+    keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
+    yup.AnySchema
+  >;
+  
+  const addProductValidation = yup.object().shape<validationSchema>({
+    name: yup.string().required(),
+    price: yup.number().required(),
+    description: yup.string().notRequired().max(250, "keep it simple..."),
+    imageUri: yup.string().notRequired(),
+    category: yup.string().required("pick one"),
+    phone: yup.number().min(10, "to short").required(),
+    email: yup.string().email().required(),
+  });
+
   return (
     <>
       <Formik
@@ -73,117 +83,126 @@ export default function AddProductForm() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.root}
           >
-            <ScrollView bounces={false} style={styles.flexOne}>
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="title ?"
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  value={values.name}
-                  returnKeyType="next"
-                ></TextInput>
+            <ScrollView bounces={false} style={styles.scrollView} >
+              <View style={styles.formContainer}>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Title"
+                      onChangeText={handleChange("name")}
+                      onBlur={handleBlur("name")}
+                      value={values.name}
+                      returnKeyType="next"
+                    ></TextInput>
+                  </View>
+                  {errors.name && touched.name && (
+                    <Text style={styles.errors}>{errors.name}</Text>
+                    )}
+                </View>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Price"
+                      onChangeText={handleChange("price")}
+                      onBlur={handleBlur("price")}
+                      value={values.price}
+                      returnKeyType="next"
+                      keyboardType="numeric"
+                    ></TextInput>
+                  </View>
+                  {errors.price && touched.price && (
+                    <Text style={styles.errors}>{errors.price}</Text>
+                    )}
+                </View>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Description"
+                      onChangeText={handleChange("description")}
+                      onBlur={handleBlur("description")}
+                      value={values.description}
+                      returnKeyType="next"
+                      multiline={true}
+                      ></TextInput>
+                  </View>
+                  {errors.description && touched.description && (
+                    <Text style={styles.errors}>{errors.description}</Text>
+                    )}
+                </View>
+                <View style={styles.pickerContainer}>
+                  <View >
+                    <Picker
+                      enabled={true}
+                      mode="dialog"
+                      dropdownIconColor={Theme.colors.pickerDropDownColor}
+                      onValueChange={handleChange("category")}
+                      selectedValue={values.category}
+                    >
+                      {categories.map((item) => {
+                        return (
+                          <Picker.Item
+                            label={item.name.toString()}
+                            value={item.name.toString()}
+                            key={item.id.toString()}
+                          />
+                        );
+                      })}
+                    </Picker>
+                  </View>
+                  {errors.category && touched.category && (
+                    <Text style={styles.errors}>{errors.category}</Text>
+                    )}
+                </View>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Phone"
+                      onChangeText={handleChange("phone")}
+                      onBlur={handleBlur("phone")}
+                      value={values.phone}
+                      returnKeyType="next"
+                      keyboardType="numeric"
+                    ></TextInput>
+                  </View>
+                  {errors.phone && touched.phone && (
+                    <Text style={styles.errors}>{errors.phone}</Text>
+                    )}
+                </View>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Email"
+                      onChangeText={handleChange("email")}
+                      onBlur={handleBlur("email")}
+                      value={values.email}
+                      returnKeyType="next"
+                    ></TextInput>
+                  </View>
+                  {errors.email && touched.email && (
+                    <Text style={styles.errors}>{errors.email}</Text>
+                    )}  
+                </View>
+                <View style={styles.formInputContainer}>
+                  <View style={styles.formInputInnerContainer}>
+                    <TextInput
+                      style={styles.formInput}
+                      placeholder="Image"
+                      onChangeText={handleChange("imageUri")}
+                      onBlur={handleBlur("imageUri")}
+                      value={values.imageUri}
+                      returnKeyType="next"
+                    ></TextInput>
+                  </View>
+                  {errors.imageUri && touched.imageUri && (
+                    <Text style={styles.errors}>{errors.imageUri}</Text>
+                    )}
+                </View>
               </View>
-              {errors.name && touched.name && (
-                <Text style={styles.errors}>{errors.name}</Text>
-              )}
-
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="Price ?"
-                  onChangeText={handleChange("price")}
-                  onBlur={handleBlur("price")}
-                  value={values.price.toString()}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.price && touched.price && (
-                <Text style={styles.errors}>{errors.price}</Text>
-              )}
-
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="description ?"
-                  onChangeText={handleChange("description")}
-                  onBlur={handleBlur("description")}
-                  value={values.description}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.description && touched.description && (
-                <Text style={styles.errors}>{errors.description}</Text>
-              )}
-
-              <View>
-                <Picker
-                  enabled={true}
-                  mode="dialog"
-                  dropdownIconColor={Theme.colors.buttonText}
-                  onValueChange={handleChange("category")}
-                  selectedValue={values.category}
-                >
-                  {categories.map((item) => {
-                    return (
-                      <Picker.Item
-                        label={item.name.toString()}
-                        value={item.name.toString()}
-                        key={item.id.toString()}
-                      />
-                    );
-                  })}
-                </Picker>
-              </View>
-              {errors.category && touched.category && (
-                <Text style={styles.errors}>{errors.category}</Text>
-              )}
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="city ?"
-                  onChangeText={handleChange("city")}
-                  onBlur={handleBlur("city")}
-                  value={values.city}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.city && touched.city && (
-                <Text style={styles.errors}>{errors.city}</Text>
-              )}
-
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="phone ?"
-                  onChangeText={handleChange("phone")}
-                  onBlur={handleBlur("phone")}
-                  value={values.phone}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.phone && touched.phone && (
-                <Text style={styles.errors}>{errors.phone}</Text>
-              )}
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="email ?"
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.email && touched.email && (
-                <Text style={styles.errors}>{errors.email}</Text>
-              )}
-              <View style={styles.formInputContainer}>
-                <TextInput
-                  placeholder="Image ?"
-                  onChangeText={handleChange("imageUri")}
-                  onBlur={handleBlur("imageUri")}
-                  value={values.imageUri}
-                  returnKeyType="next"
-                ></TextInput>
-              </View>
-              {errors.imageUri && touched.imageUri && (
-                <Text style={styles.errors}>{errors.imageUri}</Text>
-              )}
             </ScrollView>
 
             {/* ButtonSection for Android or IOS */}
@@ -195,7 +214,7 @@ export default function AddProductForm() {
                     {
                       backgroundColor: isValid
                         ? Theme.colors.bazaarBlue
-                        : "grey",
+                        : Theme.colors.secondary,
                     },
                   ]}
                   onPress={handleSubmit as (values: any) => void}
@@ -221,21 +240,38 @@ export default function AddProductForm() {
 const styles = StyleSheet.create({
   root: {
     flexGrow: 1,
-    // height: "100%",
-    // width: "80%",
+    height: "100%",
+    width: "80%",
   },
-  flexOne: {
+  scrollView: {
     flex: 1,
-    backgroundColor: Theme.colors.primary95,
+    backgroundColor: Theme.colors.lightBg,
     borderRadius: 20,
+    paddingHorizontal: 20,
+  },
+  formContainer: {
+    paddingVertical: 20,
   },
   formInputContainer: {
+    marginBottom: 20,
+  },
+  formInputInnerContainer: {
     flex: 1,
     borderRadius: 10,
-    height: 30,
-    margin: 20,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    minHeight: 45,
+    borderBottomColor: Theme.colors.borderButtonColor,
+    borderBottomWidth: 2,
+  },
+  formInput: {
+    alignItems: "center",
+    borderRadius: 8,
+    minHeight: 45,
+    width: "100%",
+    paddingHorizontal: 16,
+    fontSize: 16,
+  },
+  pickerContainer: {
+    marginVertical: 15,
   },
   center: {
     justifyContent: "center",
@@ -256,10 +292,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   errors: {
-    justifyContent: "center",
-    alignItems: "center",
     fontSize: 14,
     color: Theme.colors.bazaarRed,
     fontWeight: "500",
+    paddingHorizontal: 10,
   },
 });
