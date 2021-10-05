@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import { Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   KeyboardAvoidingView,
@@ -10,45 +10,56 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import * as yup from "yup";
 import { categories } from "../assets/DummyData/Category";
+import mockUsers from "../assets/DummyData/UserData";
+import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import Theme from "./Theme";
 
-const defaultFormData: IProduct = {
-  id: "",
-  name: "",
-  price: "",
-  description: "",
-  imageUri: "",
-  category: "",
-  userId: "",
-  city: "",
-  phone: "",
-  email: "",
-  latitude: 0,
-  longitude: 0,
-};
-
-type validationSchema = Record<
-  keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
-  yup.AnySchema
->;
-
-const addProductValidation = yup.object().shape<validationSchema>({
-  name: yup.string().required(),
-  price: yup.number().required(),
-  description: yup.string().notRequired().max(250, "keep it simple..."),
-  imageUri: yup.string().notRequired(),
-  category: yup.string().required("pick one"),
-  phone: yup.number().min(10, "to short").required(),
-  email: yup.string().email().required(),
-});
-
 export default function AddProductForm() {
   const { dispatch } = useProductContext();
+  const { userToken } = useContext(AuthContext);
+  const user = mockUsers.find(user => user.id === userToken);
+  if (!user)
+  return (
+    <View>
+      <Text>No User found</Text>
+    </View>
+  ); 
+  
+  const defaultFormData: IProduct = {
+    id: "",
+    name: "",
+    price: "",
+    description: "",
+    imageUri: "",
+    category: "",
+    userId: "",
+    city: "",
+    phone: user.phone,
+    email: user.email,
+    latitude: 0,
+    longitude: 0,
+  };
+  
+  type validationSchema = Record<
+    keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
+    yup.AnySchema
+  >;
+  
+  const addProductValidation = yup.object().shape<validationSchema>({
+    name: yup.string().required(),
+    price: yup.number().required(),
+    description: yup.string().notRequired().max(250, "keep it simple..."),
+    imageUri: yup.string().notRequired(),
+    category: yup.string().required("pick one"),
+    phone: yup.number().min(10, "to short").required(),
+    email: yup.string().email().required(),
+  });
+
   return (
     <>
       <Formik
@@ -98,6 +109,7 @@ export default function AddProductForm() {
                       onBlur={handleBlur("price")}
                       value={values.price}
                       returnKeyType="next"
+                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.price && touched.price && (
@@ -153,6 +165,7 @@ export default function AddProductForm() {
                       onBlur={handleBlur("phone")}
                       value={values.phone}
                       returnKeyType="next"
+                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.phone && touched.phone && (
