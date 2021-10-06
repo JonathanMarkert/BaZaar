@@ -20,6 +20,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { categories } from "../assets/DummyData/Category";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import CategorySidebar from "../components/CategorySidebar";
 
 type ProductsStackParamList = {
   Details: { productId: string };
@@ -61,57 +62,7 @@ export default function ProductsNavigator() {
                 color={Theme.colors.secondary}
                 onPress={() => setOpen(true)}
               />
-              {open && (
-                <Modal
-                  animationType="none"
-                  onRequestClose={() => setOpen(false)}
-                  transparent={true}
-                >
-                  <View style={[{ flexDirection: "row-reverse" }, { flex: 1 }]}>
-                    <View style={styles.modalContainer}>
-                      <View style={styles.categoryTopWrapper}>
-                        <Text style={styles.category}>Categories</Text>
-                        <View style={styles.closeIcon}>
-                          <IonIcons
-                            name="close"
-                            size={20}
-                            color={Theme.colors.secondary}
-                            onPress={() => setOpen(false)}
-                          />
-                        </View>
-                      </View>
-                      <View
-                        style={[
-                          { borderBottomColor: Theme.colors.secondary },
-                          { borderBottomWidth: 2 },
-                        ]}
-                      ></View>
-                      <ScrollView>
-                        {categories.map((item) => {
-                          return (
-                            <Pressable
-                              key={item.id.toString()}
-                              onPress={() => console.log(item.name.toString())}
-                              style={({ pressed }) => [
-                                {
-                                  backgroundColor: pressed
-                                    ? Theme.colors.primary
-                                    : Theme.colors.filterModal,
-                                },
-                              ]}
-                            >
-                              <Text style={styles.categoryList}>
-                                {item.name.toString()}
-                              </Text>
-                            </Pressable>
-                          );
-                        })}
-                      </ScrollView>
-                    </View>
-                    <View style={styles.invisibleView}></View>
-                  </View>
-                </Modal>
-              )}
+              {open && <CategorySidebar onPress={() => setOpen(false)} />}
             </View>
           ),
         }}
@@ -123,39 +74,7 @@ export default function ProductsNavigator() {
 }
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    backgroundColor: Theme.colors.filterModal,
-    flex: 2,
-    marginTop: 56,
-    marginBottom: 80,
-  },
-  categoryTopWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  closeIcon: {
-    alignItems: "flex-end",
-  },
   menu: {
     paddingRight: 8,
-  },
-  invisibleView: {
-    flex: 2,
-  },
-  categoryList: {
-    padding: 10,
-    marginLeft: 10,
-    fontWeight: "bold",
-    color: Theme.colors.secondary,
-  },
-  category: {
-    padding: 1,
-    marginLeft: 5,
-    fontWeight: "bold",
-    color: Theme.colors.secondary,
-    fontSize: 25,
-    // borderBottomWidth: 5,
-    // borderBottomColor: Theme.colors.bazaarRed,
   },
 });
