@@ -6,7 +6,7 @@ export const categories = [
   { name: "Car Parts", id: 4 },
   { name: "Boats", id: 5 },
   { name: "Boat Parts", id: 6 },
-  { name: "Foods", id: 7 },
+  { name: "Food", id: 7 },
   { name: "Comics", id: 8 },
   { name: "Novels", id: 9 },
   { name: "Electronics", id: 10 },
