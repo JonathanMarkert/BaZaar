@@ -38,7 +38,7 @@ export default function ProductCard({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Theme.colors.lightBg,
-    width: 350,
+    width: "100%",
     height: 150,
     borderRadius: 10,
     flexDirection: "row",

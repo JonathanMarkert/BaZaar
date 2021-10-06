@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
@@ -9,7 +9,15 @@ import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 export default function ProductsScreen({
   navigation,
 }: ProductsStackScreenProps<"Products">) {
-  const {products, dispatch} =useProductContext();
+  const { products, category } = useProductContext();
+
+  let filteredProducts: IProduct[];
+  if (!category) {
+    filteredProducts = products;
+  } else {
+    filteredProducts = products.filter((item) => item.category === category);
+  }
+
   const renderProduct = ({
     item,
     index,
@@ -21,11 +29,15 @@ export default function ProductsScreen({
       <ProductCard
         product={item}
         index={index}
-        arrayLength={products.length}
+        arrayLength={filteredProducts.length}
         onPress={() => navigation.navigate("Details", { productId: item.id })}
       />
     );
   };
+
+  // useEffect(() => {
+  //   console.log("in renderProduct");
+  // }, [filteredProducts]);
 
   return (
     <View style={styles.container}>
@@ -37,7 +49,8 @@ export default function ProductsScreen({
         <View style={styles.containerContent}>
           <FlatList
             style={styles.flatListContent}
-            data={products}
+            contentContainerStyle={{ paddingHorizontal: 10 }}
+            data={filteredProducts}
             renderItem={renderProduct}
             keyExtractor={(item: IProduct) => item.id}
           />
@@ -61,8 +74,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
   flatListContent: {
     height: 100,

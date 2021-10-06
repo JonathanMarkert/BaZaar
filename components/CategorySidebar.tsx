@@ -13,9 +13,10 @@ import IonIcons from "@expo/vector-icons/Ionicons";
 
 interface Props {
   onPress: () => void;
+  onSelect: (category: string) => void;
 }
 
-export default function CategorySidebar({ onPress }: Props) {
+export default function CategorySidebar({ onPress, onSelect }: Props) {
   return (
     <Modal animationType="none" onRequestClose={onPress} transparent={true}>
       <View style={[{ flexDirection: "row-reverse" }, { flex: 1 }]}>
@@ -38,11 +39,25 @@ export default function CategorySidebar({ onPress }: Props) {
             ]}
           ></View>
           <ScrollView>
+            <Pressable
+              onPress={() => onSelect}
+              // onPress={() => navigation.push('ProductScreen', {category: category})}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed
+                    ? Theme.colors.primary
+                    : Theme.colors.filterModal,
+                },
+              ]}
+            >
+              <Text style={styles.categoryList}>All</Text>
+            </Pressable>
             {categories.map((item) => {
               return (
                 <Pressable
                   key={item.id.toString()}
-                  onPress={() => console.log(item.name.toString())}
+                  onPress={() => onSelect(item.name.toString())}
+                  // onPress={() => navigation.push('ProductScreen', {category: category})}
                   style={({ pressed }) => [
                     {
                       backgroundColor: pressed
