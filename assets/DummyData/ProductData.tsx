@@ -7,7 +7,7 @@ const mockData = [
       "Låter för mycket för min smak, funderar på att skaffa en honda istället",
     imageUri:
       "https://www.hdforums.com/wp-content/uploads/2013/09/HarleyDavidsonCrashed.jpg",
-    category: "Motorcycle",
+    category: "Motorcycles",
     userId: "1",
     city: "Tranemo",
     phone: "700555444",

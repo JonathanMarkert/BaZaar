@@ -40,7 +40,7 @@ export default function CategorySidebar({ onPress, onSelect }: Props) {
           ></View>
           <ScrollView>
             <Pressable
-              onPress={() => onSelect}
+              onPress={() => onSelect("")}
               // onPress={() => navigation.push('ProductScreen', {category: category})}
               style={({ pressed }) => [
                 {

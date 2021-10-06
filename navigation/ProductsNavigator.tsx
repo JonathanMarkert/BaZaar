@@ -39,7 +39,7 @@ const Stack = createNativeStackNavigator<ProductsStackParamList>();
 
 export default function ProductsNavigator() {
   const [open, setOpen] = useState(false);
-  const { setCategory } = useProductContext();
+  const { category, setCategory } = useProductContext();
 
   function onSelect(category: string) {
     setCategory(category);
@@ -67,6 +67,7 @@ export default function ProductsNavigator() {
         name="Products"
         component={ProductsScreen}
         options={{
+          title: category ? `${category}` : "Products",
           headerRight: () => (
             <View style={styles.menu}>
               <IonIcons
