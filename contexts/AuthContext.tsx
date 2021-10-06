@@ -1,29 +1,50 @@
-import React, { createContext, FC, useEffect, useState } from "react";
+import React, { createContext, FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import mockData from "../assets/DummyData/UserData";
 import * as SecureStore from "expo-secure-store";
 import { ILoginData } from "../Interfaces/ILoginData";
-
+import uuid from 'react-native-uuid';
+import { IUser } from "../Interfaces/IUser";
 interface IContextValue {
   isLoggedIn: boolean;
   isLoading: boolean | undefined;
   userToken: string | null;
   authLogin: (userFormData: ILoginData) => void;
   signOut: () => void;
+  user: IUser;
 }
+
+const defaultUser:IUser = {
+        id: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password:"",
+        phone: "",
+        street: "",
+        city: "",
+        postalCode: 0,
+        country: "",
+        latitude: 0,
+        longitude: 0,
+}
+
+
+let currentToken = "";
 
 const TokenProvider: FC = (props) => {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [isWaitingForToken, setIsWaitingForToken] = useState<boolean>();
+  const [userState,setUserState] = useState<IUser>(defaultUser);
 
   async function addToken(key: string, value: string) {
     await SecureStore.setItemAsync(key, value);
   }
 
-  async function getToken() {
+  async function getToken(currentToken:string) {
     let userToken;
     try {
-      userToken = await SecureStore.getItemAsync("token");
+      userToken = await SecureStore.getItemAsync(currentToken );
       if (!userToken) {
         setToken(null);
       } else {
@@ -48,34 +69,46 @@ const TokenProvider: FC = (props) => {
       setToken(null);
       setIsWaitingForToken(false);
     } else {
-      await addToken("token", acceptedUser.id.toString());
-      await getToken();
+      currentToken = uuid.v4().toString();
+      await addToken(currentToken, acceptedUser.id.toString());
+      await getToken(currentToken);
       setLoggedInStatus(true);
       setTimeout(() => setIsWaitingForToken(false), 2000);
+ 
     }
   };
 
   const signOut = async () => {
     try {
       console.log("trying to delete " + token);
-      await SecureStore.deleteItemAsync("token");
+      await SecureStore.deleteItemAsync(currentToken);
     } catch (error) {
       console.log(error);
     }
 
-    if ((await SecureStore.getItemAsync("token")) == null) {
+    if ((await SecureStore.getItemAsync(currentToken)) == null) {
       setToken(null);
       setLoggedInStatus(false);
     }
   };
 
+  const getUser = async () => {
+     const existingUser = mockData.find(u => u.id === token);
+     if (!existingUser) throw new Error('Missing user...');
+     setUserState(existingUser);
+  }
+
   useEffect(() => {
-    //console.log("token is: " + token);
+    if(token != null) {
+      getUser();
+    }
   }, [token]);
 
   useEffect(() => {
-    //console.log("isloggedin = " + loggedInStatus);
   }, [loggedInStatus]);
+
+    useEffect(() => {
+  }, [userState]);
 
   return (
     <AuthContext.Provider
@@ -85,6 +118,7 @@ const TokenProvider: FC = (props) => {
         userToken: token,
         isLoading: isWaitingForToken,
         signOut,
+        user: userState,
       }}
     >
       {props.children}
@@ -99,4 +133,5 @@ export const AuthContext = createContext<IContextValue>({
   userToken: null,
   isLoading: true,
   signOut: () => {},
+  user: defaultUser,
 });
