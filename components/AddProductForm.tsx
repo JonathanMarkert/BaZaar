@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import { categories } from "../assets/DummyData/Category";
-import mockUsers from "../assets/DummyData/UserData";
 import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import Theme from "./Theme";
@@ -37,10 +36,7 @@ const addProductValidation = yup.object().shape<validationSchema>({
 
 export default function AddProductForm() {
   const { dispatch } = useProductContext();
-  // const { userToken, getUser } = useContext(AuthContext);
-  const { userToken } = useContext(AuthContext);
-  const user = mockUsers.find(user => user.id === userToken);
-  if (!user) throw new Error('Missing user...');
+  const {  user } = useContext(AuthContext);
   
   const defaultFormData: IProduct = {
     id: "",
@@ -69,6 +65,7 @@ export default function AddProductForm() {
       setFieldValue('imageUri', result.uri);
     }
   };
+
 
   return (
     <>
