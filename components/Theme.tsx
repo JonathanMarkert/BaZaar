@@ -16,6 +16,7 @@ const MyTheme = {
     defaultMapBg: "#808080",
     shadowColor: "#000",
     borderButtonColor: "#000",
+    filterModal: "#C5BED0",
   },
 };
 
