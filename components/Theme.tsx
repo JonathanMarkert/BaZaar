@@ -17,6 +17,7 @@ const MyTheme = {
     shadowColor: "#000",
     borderButtonColor: "#000",
     filterModal: "#C5BED0",
+    pickerDropDownColor: "#808080",
   },
 };
 

@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import AddProductForm from "../components/AddProductForm";
-import Header from "../components/Header";
+import Theme from "../components/Theme";
 
 export default function AddProductScreen() {
   return (
@@ -12,7 +12,6 @@ export default function AddProductScreen() {
         source={require("../assets/bkg1.png")}
         style={styles.backgroundImg}
       >
-        {/* <Header title="Add" /> */}
         <View style={styles.containerContent}>
           <AddProductForm />
         </View>
@@ -24,7 +23,7 @@ export default function AddProductScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Theme.colors.defaultBg,
   },
   backgroundImg: {
     flex: 1,

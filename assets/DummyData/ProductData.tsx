@@ -2,7 +2,7 @@ const mockData = [
   {
     id: "1",
     name: "Thomas HD",
-    price: 1500,
+    price: "1500",
     description:
       "Låter för mycket för min smak, funderar på att skaffa en honda istället",
     imageUri:
@@ -18,7 +18,7 @@ const mockData = [
   {
     id: "2",
     name: "Begagnad öl",
-    price: 10,
+    price: "10",
     description: "Halvdrucken då jag måste tänka på figuren",
     imageUri:
       "https://c8.alamy.com/comp/XB44P9/half-full-beer-glass-with-beer-XB44P9.jpg",
@@ -33,7 +33,7 @@ const mockData = [
   {
     id: "3",
     name: "Kalle Anka tidningar",
-    price: 200,
+    price: "200",
     description: "Min samling av Kalle Anka tidningar",
     imageUri:
       "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4310115.jpg",
@@ -48,7 +48,7 @@ const mockData = [
   {
     id: "4",
     name: "Acer Laptop",
-    price: 3500,
+    price: "3500",
     description:
       "Bytte till Apple och säljer nu windows spyware packeterat i ett aluminium skal. VS Code finns förinstallerat",
     imageUri:
@@ -64,7 +64,7 @@ const mockData = [
   {
     id: "5",
     name: "Jaktgevär",
-    price: 3.5,
+    price: "3.5",
     description:
       "säljer nu min gala pangare. Bra skick om man bortser från att Polisen pluggat den",
     imageUri:

@@ -1,4 +1,5 @@
 import { IProduct } from "../contexts/ProductContext";
+import uuid from 'react-native-uuid';
 
 
 interface createListing {
@@ -19,8 +20,9 @@ export type ProductAction = createListing | removeListing | editListing;
 function productReducer (state: IProduct[], action: ProductAction) {
     switch (action.type) {
         case "create-listing":{
-            const newProducts = [...state];                              
-            const updatedProducts = [...newProducts, action.payload];
+            const id = uuid.v4().toString();
+            const newProduct = {  ...action.payload, id: id }
+            const updatedProducts = [...state, newProduct];
             return updatedProducts
         }
         case "remove-listing": {
