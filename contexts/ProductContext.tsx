@@ -28,6 +28,8 @@ interface IContextValue {
   dispatch: React.Dispatch<ProductAction>;
   category?: string;
   setCategory: (category: string) => void;
+  productSuccess: boolean;
+  setProductSuccess: (isSuccessfull: boolean) => void;
 }
 
 const productData: IProduct[] = mockData;
@@ -37,6 +39,7 @@ const ProductContext = createContext<IContextValue>({} as IContextValue);
 const ProductProvider: FC = ({ children }) => {
   const [products, dispatch] = useReducer(productReducer, productData);
   const [category, setCategory] = useState<string>();
+  const [productSuccess, setProductSuccess] = useState<boolean>(false);
 
   return (
     <ProductContext.Provider
@@ -45,6 +48,8 @@ const ProductProvider: FC = ({ children }) => {
         dispatch,
         category,
         setCategory,
+        productSuccess,
+        setProductSuccess,
       }}
     >
       {children}
