@@ -99,5 +99,6 @@ const styles = StyleSheet.create({
   flatListContent: {
     height: 100,
     paddingHorizontal: 15,
+    marginBottom: 80,
   },
 });
