@@ -55,6 +55,7 @@ export default function ProductCard({
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Theme.colors.lightBg,
     width: "100%",
     height: 150,
