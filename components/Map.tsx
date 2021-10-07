@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dimensions, ImageBackground, StyleSheet, View, Text } from "react-native";
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import mockData from "../assets/DummyData/ProductData";
 import { useProductContext } from "../contexts/ProductContext";
 
@@ -40,7 +40,9 @@ export default function Map({ productId }: Props) {
       style={styles.map}
       initialRegion={region}
       zoomTapEnabled={false}
-    />
+    >
+    <Marker coordinate={region} title='Marker' />
+    </MapView>
   );
 }
 
