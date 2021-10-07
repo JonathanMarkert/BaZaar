@@ -30,14 +30,11 @@ export default function ProductsScreen({
         product={item}
         index={index}
         arrayLength={filteredProducts.length}
+        hasButtonUnder={false}
         onPress={() => navigation.navigate("Details", { productId: item.id })}
       />
     );
   };
-
-  // useEffect(() => {
-  //   console.log("in renderProduct");
-  // }, [filteredProducts]);
 
   return (
     <View style={styles.container}>
@@ -49,7 +46,6 @@ export default function ProductsScreen({
         <View style={styles.containerContent}>
           <FlatList
             style={styles.flatListContent}
-            contentContainerStyle={{ paddingHorizontal: 10 }}
             data={filteredProducts}
             renderItem={renderProduct}
             keyExtractor={(item: IProduct) => item.id}
@@ -74,9 +70,9 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    // justifyContent: "center",
   },
   flatListContent: {
     height: 100,
+    paddingHorizontal: 15,
   },
 });

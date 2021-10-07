@@ -2,9 +2,9 @@ import { CompositeScreenProps } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
 import {
-  Button, FlatList,
+  FlatList,
   ImageBackground,
-  StyleSheet, Text, TouchableOpacity, View
+  StyleSheet, Text, View
 } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
@@ -17,7 +17,6 @@ type Props = CompositeScreenProps<
   ScreenTabNavigationProp<"ProfileTab">,
   ProductsStackScreenProps<"Details">
 >;
-// man får ut alla skärmar från ProductStackScreenProps nu. kanske inte vill det?
 
 export default function MyScreen({ navigation }: Props) {
   const { userToken } = useContext(AuthContext);
@@ -54,19 +53,9 @@ export default function MyScreen({ navigation }: Props) {
           product={item}
           index={index}
           arrayLength={products.length}
+          hasButtonUnder={true}
           onPress={() => navigation.navigate("Details", { productId: item.id })}
-        
         />
-        <TouchableOpacity
-                style={styles.button}
-                
-                onPress={() =>
-                  dispatch({ type: 'remove-listing', payload: item })
-                }>
-                  <Text style={styles.buttonText}>
-                    Ta bort annons
-                  </Text>
-                </TouchableOpacity>
       </View>
     );
   };
@@ -80,6 +69,7 @@ export default function MyScreen({ navigation }: Props) {
       >
         <View style={styles.containerContent}>
           <FlatList
+            style={styles.flatListContent}
             data={selectedProducts}
             renderItem={renderProduct}
             keyExtractor={(item: IProduct) => item.id}
@@ -105,18 +95,9 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
-  button: {
-    alignItems: "center",   
-    backgroundColor: Theme.colors.bazaarBlue,
-    borderRadius:10,
-    padding: 15
-  },
-  buttonText: {
-  fontSize: 20,
-  color: Theme.colors.buttonText,
-  fontWeight: "bold",
+  flatListContent: {
+    height: 100,
+    paddingHorizontal: 15,
   },
 });
