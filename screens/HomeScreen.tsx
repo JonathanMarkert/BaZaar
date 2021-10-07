@@ -1,10 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import React, { useContext } from "react";
+import { Image, ImageBackground, StyleSheet, View, Text } from "react-native";
+import CoinLottie from "../components/CoinLottie";
 import Header from "../components/Header";
 import Theme from "../components/Theme";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function HomeScreen() {
+  const { user } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -12,9 +15,12 @@ export default function HomeScreen() {
         source={require("../assets/bkg1.png")}
         style={styles.backgroundImg}
       >
-        {/* <Header title="Home" /> */}
         <View style={styles.containerContent}>
           <Image source={require("../assets/logo.png")} />
+          <View style={styles.textContainer}>
+            <Text style={styles.textStyle}>Welcome {user.firstName}!</Text>
+          </View>
+          <CoinLottie />
         </View>
       </ImageBackground>
     </View>
@@ -38,5 +44,17 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     marginTop: 120,
+  },
+  textContainer: {
+    width: "100%",
+  },
+  textStyle: {
+    fontWeight: "bold",
+    fontSize: 24,
+    color: "#AA92F2",
+    textAlign: "center",
+    textShadowColor: Theme.colors.shadowColor,
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
 });
