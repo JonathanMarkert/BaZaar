@@ -1,5 +1,5 @@
 import { Picker } from "@react-native-picker/picker";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
 import React, { useContext } from "react";
 import {
@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import * as yup from "yup";
 import { categories } from "../assets/DummyData/Category";
@@ -23,7 +23,7 @@ type validationSchema = Record<
   keyof Omit<IProduct, "id" | "userId" | "city" | "latitude" | "longitude">,
   yup.AnySchema
 >;
-  
+
 const addProductValidation = yup.object().shape<validationSchema>({
   name: yup.string().required(),
   price: yup.number().required(),
@@ -34,10 +34,14 @@ const addProductValidation = yup.object().shape<validationSchema>({
   email: yup.string().email().required(),
 });
 
-export default function AddProductForm() {
+interface Props {
+  onSubmitSuccess: () => void;
+}
+
+export default function AddProductForm({ onSubmitSuccess }: Props) {
   const { dispatch } = useProductContext();
-  const {  user } = useContext(AuthContext);
-  
+  const { user } = useContext(AuthContext);
+
   const defaultFormData: IProduct = {
     id: "",
     name: "",
@@ -53,19 +57,20 @@ export default function AddProductForm() {
     longitude: user.longitude,
   };
 
-  const pickImage = async (setFieldValue: (field: keyof IProduct, value: string) => void) => {
+  const pickImage = async (
+    setFieldValue: (field: keyof IProduct, value: string) => void
+  ) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-  
+
     if (!result.cancelled) {
-      setFieldValue('imageUri', result.uri);
+      setFieldValue("imageUri", result.uri);
     }
   };
-
 
   return (
     <>
@@ -91,7 +96,7 @@ export default function AddProductForm() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.root}
           >
-            <ScrollView bounces={false} style={styles.scrollView} >
+            <ScrollView bounces={false} style={styles.scrollView}>
               <View style={styles.formContainer}>
                 <View style={styles.formInputContainer}>
                   <View style={styles.formInputInnerContainer}>
@@ -106,7 +111,7 @@ export default function AddProductForm() {
                   </View>
                   {errors.name && touched.name && (
                     <Text style={styles.errors}>{errors.name}</Text>
-                    )}
+                  )}
                 </View>
                 <View style={styles.formInputContainer}>
                   <View style={styles.formInputInnerContainer}>
@@ -122,7 +127,7 @@ export default function AddProductForm() {
                   </View>
                   {errors.price && touched.price && (
                     <Text style={styles.errors}>{errors.price}</Text>
-                    )}
+                  )}
                 </View>
                 <View style={styles.formInputContainer}>
                   <View style={styles.formInputInnerContainer}>
@@ -134,14 +139,14 @@ export default function AddProductForm() {
                       value={values.description}
                       returnKeyType="next"
                       multiline={true}
-                      ></TextInput>
+                    ></TextInput>
                   </View>
                   {errors.description && touched.description && (
                     <Text style={styles.errors}>{errors.description}</Text>
-                    )}
+                  )}
                 </View>
                 <View style={styles.pickerContainer}>
-                  <View >
+                  <View>
                     <Picker
                       enabled={true}
                       mode="dialog"
@@ -163,7 +168,7 @@ export default function AddProductForm() {
                   </View>
                   {errors.category && touched.category && (
                     <Text style={styles.errors}>{errors.category}</Text>
-                    )}
+                  )}
                 </View>
                 <View style={styles.formInputContainer}>
                   <View style={styles.formInputInnerContainer}>
@@ -179,7 +184,7 @@ export default function AddProductForm() {
                   </View>
                   {errors.phone && touched.phone && (
                     <Text style={styles.errors}>{errors.phone}</Text>
-                    )}
+                  )}
                 </View>
                 <View style={styles.formInputContainer}>
                   <View style={styles.formInputInnerContainer}>
@@ -194,34 +199,32 @@ export default function AddProductForm() {
                   </View>
                   {errors.email && touched.email && (
                     <Text style={styles.errors}>{errors.email}</Text>
-                    )}  
+                  )}
                 </View>
                 <View style={styles.formInputContainer}>
-                    <View style={styles.formInputInnerContainer}>
-                      {values.imageUri !== '' && 
-                        <TextInput
-                          style={styles.formInput}
-                          placeholder="Image"
-                          onChangeText={handleChange("imageUri")}
-                          onBlur={handleBlur("imageUri")}
-                          value={values.imageUri}
-                          editable={false}
-                          returnKeyType="next"
-                          multiline={true}
-                        />
-                      }
-                    </View>
-                      <TouchableOpacity 
-                        style={[styles.ImgButton, styles.buttonColor]}
-                        onPress={() => pickImage(setFieldValue)}
-                        >
-                        <Text style={styles.buttonText}>
-                          Pick a image
-                        </Text>
-                      </TouchableOpacity>
+                  <View style={styles.formInputInnerContainer}>
+                    {values.imageUri !== "" && (
+                      <TextInput
+                        style={styles.formInput}
+                        placeholder="Image"
+                        onChangeText={handleChange("imageUri")}
+                        onBlur={handleBlur("imageUri")}
+                        value={values.imageUri}
+                        editable={false}
+                        returnKeyType="next"
+                        multiline={true}
+                      />
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={[styles.ImgButton, styles.buttonColor]}
+                    onPress={() => pickImage(setFieldValue)}
+                  >
+                    <Text style={styles.buttonText}>Pick a image</Text>
+                  </TouchableOpacity>
                   {errors.imageUri && touched.imageUri && (
                     <Text style={styles.errors}>{errors.imageUri}</Text>
-                    )}
+                  )}
                 </View>
               </View>
             </ScrollView>
@@ -238,7 +241,10 @@ export default function AddProductForm() {
                         : Theme.colors.secondary,
                     },
                   ]}
-                  onPress={handleSubmit as (values: any) => void}
+                  onPress={() => {
+                    handleSubmit() as any;
+                    onSubmitSuccess();
+                  }}
                 >
                   <Text style={styles.buttonText}>Confirm</Text>
                 </TouchableOpacity>
@@ -247,7 +253,10 @@ export default function AddProductForm() {
                 <Button
                   color={Theme.colors.bazaarBlue}
                   title="Confirm"
-                  onPress={handleSubmit as (values: any) => void}
+                  onPress={() => {
+                    handleSubmit() as any;
+                    onSubmitSuccess();
+                  }}
                 />
               )}
             </View>
@@ -308,7 +317,7 @@ const styles = StyleSheet.create({
     // padding: 15,
   },
   buttonColor: {
-    backgroundColor: Theme.colors.bazaarBlue
+    backgroundColor: Theme.colors.bazaarBlue,
   },
   ImgButton: {
     width: "auto",
@@ -317,7 +326,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     padding: 15,
-    marginVertical: 10
+    marginVertical: 10,
   },
   buttonText: {
     fontSize: 20,
