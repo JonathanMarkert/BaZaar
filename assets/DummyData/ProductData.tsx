@@ -128,8 +128,7 @@ const mockData = [
     id: "9",
     name: "Båtgrej",
     price: "35",
-    description:
-      "denna kan man använda som en omvänd båthake",
+    description: "denna kan man använda som en omvänd båthake",
     imageUri:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk3OjFVKpykXc3c84WgKHmbaBU7eVG1IRvqg&usqp=CAU",
     category: "Boat Parts",

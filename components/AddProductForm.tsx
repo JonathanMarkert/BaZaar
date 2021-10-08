@@ -226,7 +226,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
               </View>
             </ScrollView>
 
-            {/* ButtonSection for Android or IOS */}
             <View style={styles.center}>
               {Platform.OS === "android" && (
                 <TouchableOpacity
@@ -309,7 +308,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    // padding: 15,
   },
   buttonColor: {
     backgroundColor: Theme.colors.bazaarBlue,

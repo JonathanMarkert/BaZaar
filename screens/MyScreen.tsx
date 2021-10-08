@@ -4,7 +4,9 @@ import React, { useContext } from "react";
 import {
   FlatList,
   ImageBackground,
-  StyleSheet, Text, View
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
@@ -20,26 +22,26 @@ type Props = CompositeScreenProps<
 
 export default function MyScreen({ navigation }: Props) {
   const { userToken } = useContext(AuthContext);
-  const { products, dispatch } =useProductContext();
-  
-    const selectedProducts: IProduct[] = products.filter(
+  const { products } = useProductContext();
+
+  const selectedProducts: IProduct[] = products.filter(
     (product) => product.userId == userToken
   );
 
   if (!products)
-  return (
-    <View>
-      <Text>No Products found</Text>
-    </View>
-  );
-  const emptyList = () =>{
-    return(
+    return (
       <View>
-      <Text>No Products found</Text>
-    </View>
-    )
-  }
-  
+        <Text>No Products found</Text>
+      </View>
+    );
+  const emptyList = () => {
+    return (
+      <View>
+        <Text>No Products found</Text>
+      </View>
+    );
+  };
+
   const renderProduct = ({
     item,
     index,

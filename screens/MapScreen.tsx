@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
-import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";

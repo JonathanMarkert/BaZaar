@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
-import { Image, ImageBackground, StyleSheet, View, Text } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import CoinLottie from "../components/CoinLottie";
-import Header from "../components/Header";
 import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
 

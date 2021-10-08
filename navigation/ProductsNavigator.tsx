@@ -1,40 +1,27 @@
+import IonIcons from "@expo/vector-icons/Ionicons";
 import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import CategorySidebar from "../components/CategorySidebar";
 import Theme from "../components/Theme";
+import { useProductContext } from "../contexts/ProductContext";
 import DetailsScreen from "../screens/DetailsScreen";
 import MapScreen from "../screens/MapScreen";
 import ProductsScreen from "../screens/ProductsScreen";
-import IonIcons from "@expo/vector-icons/Ionicons";
-import {
-  Modal,
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  ScrollView,
-  Pressable,
-} from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { categories } from "../assets/DummyData/Category";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import CategorySidebar from "../components/CategorySidebar";
-import { useProductContext } from "../contexts/ProductContext";
 
 type ProductsStackParamList = {
   Details: { productId: string };
   Products: { category: string } | undefined;
   Map: { productId: string };
-  // Home: undefined; // behövs denna???
 };
 
 export type ProductsStackScreenProps<
   Screen extends keyof ProductsStackParamList
 > = NativeStackScreenProps<ProductsStackParamList, Screen>;
 
-// export type ProductsStackAllScreenProps = NativeStackScreenProps<ProductsStackParamList>;
 const Stack = createNativeStackNavigator<ProductsStackParamList>();
 
 export default function ProductsNavigator() {
@@ -44,15 +31,9 @@ export default function ProductsNavigator() {
   function onSelect(category: string) {
     setCategory(category);
     setOpen(false);
-    console.log("onSelect: " + category);
   }
 
-  // useEffect(() => {
-  //   //console.log("useEffect hit");
-  // }, [category]);
-
   return (
-    // TODOHEADER sätt header center och färg, inte false om vi använder inbygda headern
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
@@ -86,7 +67,7 @@ export default function ProductsNavigator() {
           ),
         }}
       />
-      <Stack.Screen name="Details" component={DetailsScreen}  />
+      <Stack.Screen name="Details" component={DetailsScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
   );

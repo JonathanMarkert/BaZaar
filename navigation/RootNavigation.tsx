@@ -27,8 +27,6 @@ export default function RootNavigation() {
             headerStyle: {
               backgroundColor: Theme.colors.primary95,
             },
-            // animationTypeForReplace: isSignout ? "pop" : "push",
-            // if we want to add isSignout function
           }}
         />
       ) : (

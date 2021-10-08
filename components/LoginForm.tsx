@@ -2,6 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import IonIcons from "@expo/vector-icons/Ionicons";
 import { Formik } from "formik";
 import * as React from "react";
+import { useContext } from "react";
 import {
   Button,
   Platform,
@@ -12,10 +13,9 @@ import {
   View,
 } from "react-native";
 import * as yup from "yup";
-import Theme from "./Theme";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext } from "react";
 import { ILoginData } from "../Interfaces/ILoginData";
+import Theme from "./Theme";
 
 const defaultData: ILoginData = { email: "", password: "" };
 

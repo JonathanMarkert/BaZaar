@@ -3,9 +3,8 @@ import {
   BottomTabScreenProps,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import React from "react";
-import { useContext } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import AddProductScreen from "../screens/AddProductSreen";
@@ -18,7 +17,6 @@ import ProductsNavigator, {
 type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
-  // ProductsTab: ProductsStackAllScreenProps;
   ProductsTab: undefined;
   ProfileTab: ProductsStackScreenProps<"Details">;
 };
