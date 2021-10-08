@@ -4,6 +4,9 @@
   <img src="https://cdn.discordapp.com/attachments/797112544682573886/887682768371339274/SkrikPanik1.png" />
 </p>
 
+### Github: 
+https://github.com/JonathanMarkert/BaZaar
+
 ## Installation
 
 - Run `npm install` in terminal to get node_modules and package.json.
