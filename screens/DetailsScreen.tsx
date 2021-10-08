@@ -48,7 +48,7 @@ export default function DetailsScreen({
     if (isAvailable) {
       await MailComposer.composeAsync({
         recipients: [product.email],
-        subject: "Intresst in " + product.name,
+        subject: "I'm interested in " + product.name,
         body: "",
       });
     } else {

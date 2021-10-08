@@ -153,7 +153,7 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       dropdownIconColor={Theme.colors.pickerDropDownColor}
                       onValueChange={handleChange("category")}
                       selectedValue={values.category}
-                      prompt="Category"
+                      prompt="Choose a Category"                      
                     >
                       {categories.map((item) => {
                         return (
