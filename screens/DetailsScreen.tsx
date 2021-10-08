@@ -125,7 +125,7 @@ export default function DetailsScreen({
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={sendSMS}>
                   <Text style={[styles.baseText, styles.buttonText]}>
-                    0{product.phone}
+                    {product.phone}
                   </Text>
                 </TouchableOpacity>
               </View>
