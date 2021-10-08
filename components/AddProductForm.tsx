@@ -122,7 +122,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       onBlur={handleBlur("price")}
                       value={values.price}
                       returnKeyType="next"
-                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.price && touched.price && (
@@ -153,7 +152,7 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       dropdownIconColor={Theme.colors.pickerDropDownColor}
                       onValueChange={handleChange("category")}
                       selectedValue={values.category}
-                      prompt="Choose a Category"                      
+                      prompt="Choose a Category"
                     >
                       {categories.map((item) => {
                         return (
@@ -179,7 +178,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       onBlur={handleBlur("phone")}
                       value={values.phone}
                       returnKeyType="next"
-                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.phone && touched.phone && (
