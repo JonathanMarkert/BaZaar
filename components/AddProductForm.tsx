@@ -77,9 +77,10 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
       <Formik
         initialValues={defaultFormData}
         validationSchema={addProductValidation}
-        onSubmit={(values) =>
-          dispatch({ type: "create-listing", payload: values })
-        }
+        onSubmit={(values) => {
+          dispatch({ type: "create-listing", payload: values });
+          onSubmitSuccess();
+        }}
       >
         {({
           setFieldValue,
@@ -241,7 +242,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   ]}
                   onPress={() => {
                     handleSubmit() as any;
-                    onSubmitSuccess();
                   }}
                 >
                   <Text style={styles.buttonText}>Confirm</Text>
@@ -253,7 +253,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   title="Confirm"
                   onPress={() => {
                     handleSubmit() as any;
-                    onSubmitSuccess();
                   }}
                 />
               )}
