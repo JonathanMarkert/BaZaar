@@ -51,7 +51,7 @@ Requirements:
 7. SMS
 8. MailComposer
 
-#### Third party Components
+#### Third party Components:
 1. Picker
 2. Formik
 3. Yup
