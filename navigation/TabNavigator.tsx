@@ -30,10 +30,6 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
   const { signOut } = useContext(AuthContext);
-  // const onLogOut = () => {
-  //   signOut();
-
-  // }
 
   return (
     <Tab.Navigator
