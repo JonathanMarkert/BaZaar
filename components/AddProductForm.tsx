@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import {
   Button,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -201,20 +202,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   )}
                 </View>
                 <View style={styles.formInputContainer}>
-                  <View style={styles.formInputInnerContainer}>
-                    {values.imageUri !== "" && (
-                      <TextInput
-                        style={styles.formInput}
-                        placeholder="Image"
-                        onChangeText={handleChange("imageUri")}
-                        onBlur={handleBlur("imageUri")}
-                        value={values.imageUri}
-                        editable={false}
-                        returnKeyType="next"
-                        multiline={true}
-                      />
-                    )}
-                  </View>
                   <TouchableOpacity
                     style={[styles.ImgButton, styles.buttonColor]}
                     onPress={() => pickImage(setFieldValue)}
@@ -223,6 +210,17 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   </TouchableOpacity>
                   {errors.imageUri && touched.imageUri && (
                     <Text style={styles.errors}>{errors.imageUri}</Text>
+                  )}
+                  {values.imageUri == "" ? (
+                    <></>
+                  ) : (
+                    <Image
+                      style={{
+                        height: 150,
+                        width: "auto",
+                      }}
+                      source={{ uri: values.imageUri }}
+                    />
                   )}
                 </View>
               </View>
