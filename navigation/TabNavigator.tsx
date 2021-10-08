@@ -4,8 +4,10 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { useContext } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Theme from "../components/Theme";
+import { AuthContext } from "../contexts/AuthContext";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
@@ -27,6 +29,12 @@ export type ScreenTabNavigationProp<Screen extends keyof ScreenTabParamList> =
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+  const { signOut } = useContext(AuthContext);
+  // const onLogOut = () => {
+  //   signOut();
+
+  // }
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -104,6 +112,11 @@ export default function TabNavigator() {
         component={MyScreen}
         options={{
           headerTitle: "Profile",
+          headerRight: () => (
+            <TouchableOpacity style={styles.menu} onPress={signOut}>
+              <Text>Logout</Text>
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused }) => {
             return (
               <IonIcons
@@ -132,5 +145,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     elevation: 0,
+  },
+  menu: {
+    paddingRight: 15,
   },
 });

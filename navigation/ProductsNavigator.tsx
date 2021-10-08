@@ -86,7 +86,7 @@ export default function ProductsNavigator() {
           ),
         }}
       />
-      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen}  />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
   );
