@@ -38,7 +38,7 @@ Due to the narrow time frame and some issues testing on iOS we decided to mainly
 1. &#9745; All tasks for a passable grade have been met.
 2. &#9745; React Navigation used for tab navigation.
 3. &#9745; Atleast an extra modul is used in project.
-4. &#9745; Prototype for application is made before production. Pictures are included with assignement. ( Pictures can be found in the projet under Prototype map ).
+4. &#9745; Prototype for application is made before production. Pictures are included with assignement. ( Pictures can be found in the project under Prototype map ).
 
 #### React Native Components:
 
