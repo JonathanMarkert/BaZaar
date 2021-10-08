@@ -16,6 +16,9 @@ We have made the app inspired by Blocket.se mobile app. We have not developed a 
 5. View details about products and where their located.
 6. Send mail/sms to seller using the phones built-in mail/sms services.
 
+
+
+
 Requirements:
 #### Pass
 1. &#9745; Project is using atleast 6 RN-components and atleast 6 Expo components.
@@ -32,22 +35,15 @@ Requirements:
 4. &#9745; Prototype for application is made before production. Pictures are included with assignement. ( See pictures below).
 
 #### React Native Components:
-1. View
-2. StyleSheet
-3. Button
-4. Platform
-5. Text
-6. TextInput
-7. TouchableOpasity
-8. KeyboardAvoidingView
-9. ScrollView
-10. Modal
-11. Pressable
-12. Dimensions
-13. ImageBackground
-14. Image
-15. Alert
-16. FlatList
+1. View                           9. ScrollView
+2. StyleSheet                     10. Modal
+3. Button                         11. Pressable
+4. Platform                       12. Dimensions
+5. Text                           13. ImageBackground
+6. TextInput                      14. Image
+7. TouchableOpasity               15. Alert
+8. KeyboardAvoidingView						16. FlatList
+
 
 #### Expo Components:
 1. ImagePicker
