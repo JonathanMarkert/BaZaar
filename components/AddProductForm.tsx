@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import {
   Button,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -25,10 +26,10 @@ type validationSchema = Record<
 >;
 
 const addProductValidation = yup.object().shape<validationSchema>({
-  name: yup.string().required(),
+  name: yup.string().required("a name is required"),
   price: yup.number().required(),
   description: yup.string().notRequired().max(250, "keep it simple..."),
-  imageUri: yup.string().notRequired(),
+  imageUri: yup.string().required("a picture helps quicker sales"),
   category: yup.string().required("pick one"),
   phone: yup.number().min(10, "to short").required(),
   email: yup.string().email().required(),
@@ -77,9 +78,10 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
       <Formik
         initialValues={defaultFormData}
         validationSchema={addProductValidation}
-        onSubmit={(values) =>
-          dispatch({ type: "create-listing", payload: values })
-        }
+        onSubmit={(values) => {
+          dispatch({ type: "create-listing", payload: values });
+          onSubmitSuccess();
+        }}
       >
         {({
           setFieldValue,
@@ -122,7 +124,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       onBlur={handleBlur("price")}
                       value={values.price}
                       returnKeyType="next"
-                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.price && touched.price && (
@@ -153,7 +154,7 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       dropdownIconColor={Theme.colors.pickerDropDownColor}
                       onValueChange={handleChange("category")}
                       selectedValue={values.category}
-                      prompt="Choose a Category"                      
+                      prompt="Choose a Category"
                     >
                       {categories.map((item) => {
                         return (
@@ -179,7 +180,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                       onBlur={handleBlur("phone")}
                       value={values.phone}
                       returnKeyType="next"
-                      keyboardType="numeric"
                     ></TextInput>
                   </View>
                   {errors.phone && touched.phone && (
@@ -202,20 +202,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   )}
                 </View>
                 <View style={styles.formInputContainer}>
-                  <View style={styles.formInputInnerContainer}>
-                    {values.imageUri !== "" && (
-                      <TextInput
-                        style={styles.formInput}
-                        placeholder="Image"
-                        onChangeText={handleChange("imageUri")}
-                        onBlur={handleBlur("imageUri")}
-                        value={values.imageUri}
-                        editable={false}
-                        returnKeyType="next"
-                        multiline={true}
-                      />
-                    )}
-                  </View>
                   <TouchableOpacity
                     style={[styles.ImgButton, styles.buttonColor]}
                     onPress={() => pickImage(setFieldValue)}
@@ -224,6 +210,17 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   </TouchableOpacity>
                   {errors.imageUri && touched.imageUri && (
                     <Text style={styles.errors}>{errors.imageUri}</Text>
+                  )}
+                  {values.imageUri == "" ? (
+                    <></>
+                  ) : (
+                    <Image
+                      style={{
+                        height: 150,
+                        width: "auto",
+                      }}
+                      source={{ uri: values.imageUri }}
+                    />
                   )}
                 </View>
               </View>
@@ -243,7 +240,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   ]}
                   onPress={() => {
                     handleSubmit() as any;
-                    onSubmitSuccess();
                   }}
                 >
                   <Text style={styles.buttonText}>Confirm</Text>
@@ -255,7 +251,6 @@ export default function AddProductForm({ onSubmitSuccess }: Props) {
                   title="Confirm"
                   onPress={() => {
                     handleSubmit() as any;
-                    onSubmitSuccess();
                   }}
                 />
               )}
