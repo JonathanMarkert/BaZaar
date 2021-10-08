@@ -25,10 +25,10 @@ type validationSchema = Record<
 >;
 
 const addProductValidation = yup.object().shape<validationSchema>({
-  name: yup.string().required(),
+  name: yup.string().required("a name is required"),
   price: yup.number().required(),
   description: yup.string().notRequired().max(250, "keep it simple..."),
-  imageUri: yup.string().notRequired(),
+  imageUri: yup.string().required("a picture helps quicker sales"),
   category: yup.string().required("pick one"),
   phone: yup.number().min(10, "to short").required(),
   email: yup.string().email().required(),
