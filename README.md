@@ -5,23 +5,31 @@
 
 ## Installation
 - Run `npm install` in terminal to get node_modules and package.json.
-- Run `npm start` in terminal to launch the app that will open on localhost port 19000.
+- Run `npm start` in terminal to launch app that will open on localhost port 19000.
+
+### About the project
+We have made the app inspired by Blocket.se mobile app. We have not developed a fully functional marketplace app as this just to showcase how we use some selected components out of the React Native and Expo libraries. Right now the app allows you to: 
+1. Log in with mock users.
+2. View and sort mock products from all mock users under the Products tab.
+3. View current users products for sale and delete items from that list.
+4. Add new product to sell under Add product tab.
+5. View details about products and where their located.
+6. Send mail/sms to seller using the phones built-in mail/sms services.
 
 Requirements:
 #### Pass
-1. &#9745; Project is using atleast 6 RN-components and atleast 6 Expo components 
-2. &#9745; Used components listed in README.md (see below for full list)
-3. &#9745; Git & Github has been used
-4. &#9745; Your project map has a README.md file
-5. &#9745; Assignment is handed in on time
+1. &#9745; Project is using atleast 6 RN-components and atleast 6 Expo components.
+2. &#9745; Used components listed in README.md (see below for full list).
+3. &#9745; Git & Github has been used.
+4. &#9745; Your project map has a README.md file.
+5. &#9745; Assignment is handed in on time.
 6. &#9745; App presented for class.
 
-
 #### Extra credit
-1. &#9745; All tasks for a passable grade have been met
-2. &#9745; React Navigation used for tab navigation
-3. &#9745; Atleast an extra modul is used in project
-4. &#9745; Prototype for application is made before production. Pictures are included with assignement.
+1. &#9745; All tasks for a passable grade have been met.
+2. &#9745; React Navigation used for tab navigation.
+3. &#9745; Atleast an extra modul is used in project.
+4. &#9745; Prototype for application is made before production. Pictures are included with assignement. ( See pictures below).
 
 #### React Native Components:
 1. View
