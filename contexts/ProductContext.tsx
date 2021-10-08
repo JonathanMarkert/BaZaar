@@ -1,12 +1,12 @@
 import React, {
-  useContext,
   createContext,
-  useReducer,
   FC,
+  useContext,
+  useReducer,
   useState,
 } from "react";
-import productReducer, { ProductAction } from "../reducers/ProductReducer";
 import mockData from "../assets/DummyData/ProductData";
+import productReducer, { ProductAction } from "../reducers/ProductReducer";
 
 export interface IProduct {
   id: string;

@@ -1,38 +1,36 @@
+import * as MailComposer from "expo-mail-composer";
+import * as SMS from "expo-sms";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  ScrollView,
-  Button,
   Alert,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import Header from "../components/Header";
 import Map from "../components/Map";
 import Theme from "../components/Theme";
-import * as SMS from "expo-sms";
-import * as MailComposer from "expo-mail-composer";
-import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import { useProductContext } from "../contexts/ProductContext";
+import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 
 export default function DetailsScreen({
   navigation,
   route,
 }: ProductsStackScreenProps<"Details">) {
   const { productId } = route.params;
-  const {products, dispatch} =useProductContext();
-  const product = products.find(product => product.id === productId);
+  const { products, dispatch } = useProductContext();
+  const product = products.find((product) => product.id === productId);
 
   if (!product)
     return (
       <View>
         <Text>No Product found</Text>
       </View>
-    ); //returnera error not found
+    );
 
   const sendSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
@@ -136,7 +134,6 @@ export default function DetailsScreen({
                 <Map productId={productId} />
               </TouchableOpacity>
             </View>
-            
           </View>
         </ScrollView>
       </ImageBackground>

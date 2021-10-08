@@ -1,15 +1,15 @@
+import IonIcons from "@expo/vector-icons/Ionicons";
 import React from "react";
 import {
   Modal,
-  View,
-  Text,
   Pressable,
   ScrollView,
   StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { categories } from "../assets/DummyData/Category";
 import Theme from "./Theme";
-import IonIcons from "@expo/vector-icons/Ionicons";
 
 interface Props {
   onPress: () => void;
@@ -41,7 +41,6 @@ export default function CategorySidebar({ onPress, onSelect }: Props) {
           <ScrollView>
             <Pressable
               onPress={() => onSelect("")}
-              // onPress={() => navigation.push('ProductScreen', {category: category})}
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed
@@ -57,7 +56,6 @@ export default function CategorySidebar({ onPress, onSelect }: Props) {
                 <Pressable
                   key={item.id.toString()}
                   onPress={() => onSelect(item.name.toString())}
-                  // onPress={() => navigation.push('ProductScreen', {category: category})}
                   style={({ pressed }) => [
                     {
                       backgroundColor: pressed
@@ -95,9 +93,6 @@ const styles = StyleSheet.create({
   closeIcon: {
     alignItems: "flex-end",
   },
-  // menu: {
-  //   paddingRight: 8,
-  // },
   invisibleView: {
     flex: 2,
   },
@@ -113,7 +108,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Theme.colors.secondary,
     fontSize: 25,
-    // borderBottomWidth: 5,
-    // borderBottomColor: Theme.colors.bazaarRed,
   },
 });

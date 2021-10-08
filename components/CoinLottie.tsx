@@ -1,7 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
 import LottieView from "lottie-react-native";
-import Theme from "../components/Theme";
+import React from "react";
 
 export default function CoinLottie() {
   return (
@@ -13,5 +11,3 @@ export default function CoinLottie() {
     />
   );
 }
-
-const styles = StyleSheet.create({});

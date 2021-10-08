@@ -18,7 +18,7 @@ export default function ProductCard({
   hasButtonUnder,
   onPress,
 }: Props) {
-  const { products, dispatch } =useProductContext();
+  const { products, dispatch } = useProductContext();
   return (
     <View
       style={[
@@ -26,10 +26,7 @@ export default function ProductCard({
         { marginBottom: index === arrayLength - 1 ? 90 : 4 },
       ]}
     >
-      <TouchableOpacity
-        style={styles.container}
-        onPress={onPress}
-      >
+      <TouchableOpacity style={styles.container} onPress={onPress}>
         <Image source={{ uri: product.imageUri }} style={styles.cover} />
         <View style={styles.infoContainer}>
           <Text style={[styles.baseText, styles.boldText]}>{product.name}</Text>
@@ -40,13 +37,9 @@ export default function ProductCard({
       {hasButtonUnder && (
         <TouchableOpacity
           style={styles.button}
-          onPress={() =>
-            dispatch({ type: 'remove-listing', payload: product })
-          }
+          onPress={() => dispatch({ type: "remove-listing", payload: product })}
         >
-          <Text style={styles.buttonText}>
-            Remove
-          </Text>
+          <Text style={styles.buttonText}>Remove</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -82,15 +75,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    alignItems: "center",   
+    alignItems: "center",
     backgroundColor: Theme.colors.bazaarBlue,
-    borderRadius:10,
+    borderRadius: 10,
     padding: 15,
-    marginTop: 5
+    marginTop: 5,
   },
   buttonText: {
     fontSize: 20,
     color: Theme.colors.buttonText,
     fontWeight: "bold",
-    },
+  },
 });

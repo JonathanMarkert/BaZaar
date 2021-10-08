@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FlatList, ImageBackground, StyleSheet, View } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";

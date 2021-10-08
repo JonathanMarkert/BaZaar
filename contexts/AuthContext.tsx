@@ -1,8 +1,8 @@
-import React, { createContext, FC, useEffect, useLayoutEffect, useRef, useState } from "react";
-import mockData from "../assets/DummyData/UserData";
 import * as SecureStore from "expo-secure-store";
+import React, { createContext, FC, useEffect, useState } from "react";
+import uuid from "react-native-uuid";
+import mockData from "../assets/DummyData/UserData";
 import { ILoginData } from "../Interfaces/ILoginData";
-import uuid from 'react-native-uuid';
 import { IUser } from "../Interfaces/IUser";
 interface IContextValue {
   isLoggedIn: boolean;
@@ -13,21 +13,20 @@ interface IContextValue {
   user: IUser;
 }
 
-const defaultUser:IUser = {
-        id: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        password:"",
-        phone: "",
-        street: "",
-        city: "",
-        postalCode: 0,
-        country: "",
-        latitude: 0,
-        longitude: 0,
-}
-
+const defaultUser: IUser = {
+  id: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  phone: "",
+  street: "",
+  city: "",
+  postalCode: 0,
+  country: "",
+  latitude: 0,
+  longitude: 0,
+};
 
 let currentToken = "";
 
@@ -35,16 +34,16 @@ const TokenProvider: FC = (props) => {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [isWaitingForToken, setIsWaitingForToken] = useState<boolean>();
-  const [userState,setUserState] = useState<IUser>(defaultUser);
+  const [userState, setUserState] = useState<IUser>(defaultUser);
 
   async function addToken(key: string, value: string) {
     await SecureStore.setItemAsync(key, value);
   }
 
-  async function getToken(currentToken:string) {
+  async function getToken(currentToken: string) {
     let userToken;
     try {
-      userToken = await SecureStore.getItemAsync(currentToken );
+      userToken = await SecureStore.getItemAsync(currentToken);
       if (!userToken) {
         setToken(null);
       } else {
@@ -74,13 +73,11 @@ const TokenProvider: FC = (props) => {
       await getToken(currentToken);
       setLoggedInStatus(true);
       setTimeout(() => setIsWaitingForToken(false), 2000);
- 
     }
   };
 
   const signOut = async () => {
     try {
-      console.log("trying to delete " + token);
       await SecureStore.deleteItemAsync(currentToken);
     } catch (error) {
       console.log(error);
@@ -93,22 +90,20 @@ const TokenProvider: FC = (props) => {
   };
 
   const getUser = async () => {
-     const existingUser = mockData.find(u => u.id === token);
-     if (!existingUser) throw new Error('Missing user...');
-     setUserState(existingUser);
-  }
+    const existingUser = mockData.find((u) => u.id === token);
+    if (!existingUser) throw new Error("Missing user...");
+    setUserState(existingUser);
+  };
 
   useEffect(() => {
-    if(token != null) {
+    if (token != null) {
       getUser();
     }
   }, [token]);
 
-  useEffect(() => {
-  }, [loggedInStatus]);
+  useEffect(() => {}, [loggedInStatus]);
 
-    useEffect(() => {
-  }, [userState]);
+  useEffect(() => {}, [userState]);
 
   return (
     <AuthContext.Provider

@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
+  Modal,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
-  Text,
-  Modal,
 } from "react-native";
-import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 import Theme from "../components/Theme";
 

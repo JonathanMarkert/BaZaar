@@ -9,9 +9,6 @@ export default function App() {
     <TokenProvider>
       <ProductProvider>
         <NavigationContainer>
-          {/* Note: Add specific page you want to work on,
-          and comment out RootNavigation
-          if you dont want to login everytime while developing */}
           <RootNavigation />
         </NavigationContainer>
       </ProductProvider>
