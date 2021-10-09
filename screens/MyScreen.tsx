@@ -1,4 +1,3 @@
-import { CompositeScreenProps } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
 import {
@@ -6,20 +5,13 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import { MyScreenStackScreenProps } from "../navigation/MyScreenNavigatior";
-import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
-import { ScreenTabNavigationProp } from "../navigation/TabNavigator";
-
-// type Props = CompositeScreenProps<
-//   ScreenTabNavigationProp<"ProfileTab">,
-//   ProductsStackScreenProps<"Details">
-// >;
 
 export default function MyScreen({ navigation }: MyScreenStackScreenProps<"MyScreen">) {
   const { userToken } = useContext(AuthContext);
