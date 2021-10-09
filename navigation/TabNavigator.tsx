@@ -10,6 +10,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import AddProductScreen from "../screens/AddProductSreen";
 import HomeScreen from "../screens/HomeScreen";
 import MyScreen from "../screens/MyScreen";
+import MyScreenNavigator from "./MyScreenNavigatior";
 import ProductsNavigator, {
   ProductsStackScreenProps,
 } from "./ProductsNavigator";
@@ -18,7 +19,7 @@ type ScreenTabParamList = {
   HomeTab: undefined;
   AddProductTab: undefined;
   ProductsTab: undefined;
-  ProfileTab: ProductsStackScreenProps<"Details">;
+  ProfileTab: undefined;
 };
 
 export type ScreenTabNavigationProp<Screen extends keyof ScreenTabParamList> =
@@ -103,7 +104,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="ProfileTab"
-        component={MyScreen}
+        component={MyScreenNavigator}
         options={{
           headerTitle: "Profile",
           headerRight: () => (

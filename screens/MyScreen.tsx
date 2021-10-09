@@ -12,15 +12,16 @@ import ProductCard from "../components/ProductCard";
 import Theme from "../components/Theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
+import { MyScreenStackScreenProps } from "../navigation/MyScreenNavigatior";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 import { ScreenTabNavigationProp } from "../navigation/TabNavigator";
 
-type Props = CompositeScreenProps<
-  ScreenTabNavigationProp<"ProfileTab">,
-  ProductsStackScreenProps<"Details">
->;
+// type Props = CompositeScreenProps<
+//   ScreenTabNavigationProp<"ProfileTab">,
+//   ProductsStackScreenProps<"Details">
+// >;
 
-export default function MyScreen({ navigation }: Props) {
+export default function MyScreen({ navigation }: MyScreenStackScreenProps<"MyScreen">) {
   const { userToken } = useContext(AuthContext);
   const { products } = useProductContext();
 
