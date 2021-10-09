@@ -13,7 +13,9 @@ import { AuthContext } from "../contexts/AuthContext";
 import { IProduct, useProductContext } from "../contexts/ProductContext";
 import { MyScreenStackScreenProps } from "../navigation/MyScreenNavigatior";
 
-export default function MyScreen({ navigation }: MyScreenStackScreenProps<"Profile">) {
+export default function MyScreen({ 
+  navigation
+}: MyScreenStackScreenProps<"Profile">) {
   const { userToken } = useContext(AuthContext);
   const { products } = useProductContext();
 
