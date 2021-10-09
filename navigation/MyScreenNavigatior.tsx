@@ -10,6 +10,7 @@ import Theme from "../components/Theme";
 import { useProductContext } from "../contexts/ProductContext";
 import DetailsScreen from "../screens/DetailsScreen";
 import MapScreen from "../screens/MapScreen";
+import MyScreen from "../screens/MyScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 
 type MyScreenStackParamList = {
@@ -37,7 +38,7 @@ export default function MyScreenNavigator() {
         },
       }}
     >
-      <Stack.Screen name="MyScreen" component={ProductsScreen}/>
+      <Stack.Screen name="MyScreen" component={MyScreen}/>
       <Stack.Screen name="Details" component={DetailsScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
