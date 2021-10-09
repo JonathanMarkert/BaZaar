@@ -1,17 +1,12 @@
-import IonIcons from "@expo/vector-icons/Ionicons";
 import {
   createNativeStackNavigator,
-  NativeStackScreenProps,
+  NativeStackScreenProps
 } from "@react-navigation/native-stack";
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import CategorySidebar from "../components/CategorySidebar";
+import React from "react";
 import Theme from "../components/Theme";
-import { useProductContext } from "../contexts/ProductContext";
 import DetailsScreen from "../screens/DetailsScreen";
 import MapScreen from "../screens/MapScreen";
 import MyScreen from "../screens/MyScreen";
-import ProductsScreen from "../screens/ProductsScreen";
 
 type MyScreenStackParamList = {
   Details: { productId: string };
