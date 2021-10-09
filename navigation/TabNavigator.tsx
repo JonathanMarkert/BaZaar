@@ -106,7 +106,8 @@ export default function TabNavigator() {
         name="ProfileTab"
         component={MyScreenNavigator}
         options={{
-          headerTitle: "Profile",
+          // headerTitle: "Profile",
+          headerShown: false,
           headerRight: () => (
             <TouchableOpacity style={styles.menu} onPress={signOut}>
               <Text>Logout</Text>
