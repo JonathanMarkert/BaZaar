@@ -7,7 +7,7 @@ import { IProduct, useProductContext } from "../contexts/ProductContext";
 import { ProductsStackScreenProps } from "../navigation/ProductsNavigator";
 
 export default function ProductsScreen({
-  navigation,
+  navigation
 }: ProductsStackScreenProps<"Products">) {
   const { products, category } = useProductContext();
 
